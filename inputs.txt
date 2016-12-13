@@ -1,0 +1,4 @@
+PLAYER1
+horizontal - P1Horizontal
+jump - P1Jump
+triggers - P1Left/RightTrigger

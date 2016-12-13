@@ -5,6 +5,7 @@ using System.Collections;
 public class ControllerPlayer : MonoBehaviour
 {
     //Public vars
+    public int m_PlayerNum = 1;
     public float m_Speed = 10.0f;
     public float m_JumpForce = 10.0f;
     public bool m_IsAirMovement = false;
@@ -13,34 +14,56 @@ public class ControllerPlayer : MonoBehaviour
     public float m_TravelToHookSpeed = 10.0f;
     public float m_HookBreakDistance = 1.0f;
     public float m_HookCooldown = 0.5f;
+    public float m_AttackTime = 0.3f;
+    public float m_AttackCooldown = 0.5f;
+    public float m_AttackRange = 1.0f;
+    public float m_AttackStartDegree = 60.0f;
 
     //Component vars
-    Rigidbody2D m_Rigidbody;
-    SpriteRenderer m_Renderer;
-    Collider2D m_Collider;
+    private Rigidbody2D m_Rigidbody;
+    private SpriteRenderer m_Renderer;
+    private Collider2D m_Collider;
 
     //Ground vars
-    bool m_IsOnGround = false;
-    public bool m_IsInAir = true;
+    private bool m_IsOnGround = false;
+    private bool m_IsInAir = true;
 
     //Air vars
-    float m_AirTime = 0.0f;
+    private float m_AirTime = 0.0f;
 
     //Movement vars
-    float m_Horizontal = 0.0f;
+    private float m_Horizontal = 0.0f;
 
     //Raycast vars
-    string m_Tag;
+    private string m_Tag;
 
     //Grappling hook vars
-    bool m_IsGrapple = false;
-    bool m_GrappleHit = false;
-    bool m_HasSetGrappleDir = false;
-    bool m_IsGrappleCD = false;
-    float m_HookTimer = 0.0f;
-    Vector3 m_HitPosition = Vector3.zero;
-    GameObject m_Hook;
-    Transform m_HookRotation;
+    private bool m_IsGrapple = false;
+    private bool m_GrappleHit = false;
+    private bool m_HasSetGrappleDir = false;
+    private Vector3 m_GrappleDir = Vector3.zero;
+    private bool m_IsGrappleCD = false;
+    private float m_HookTimer = 0.0f;
+    private Vector3 m_HitPosition = Vector3.zero;
+    private GameObject m_Hook;
+    private Transform m_HookRotation;
+
+    //Attack vars
+    private bool m_CanAttack = true;
+    private bool m_IsAttacking = false;
+    private float m_AttackTimer = 0.0f;
+    private float m_AttackCDTimer = 0.0f;
+    private float m_AttackDegree = 0.0f;
+    private float m_AttackDirection = 1.0f;
+    private float m_AttackOffset = 0.0f;
+    private Transform m_AttackRotation;
+    private AttackHitbox m_HitBox;
+
+    //Input string vars
+    private string m_JumpInput;
+    private string m_HorizontalInput;
+    private string m_AttackInput;
+    private string m_GrappleInput;
 
     void Start()
     {
@@ -61,16 +84,47 @@ public class ControllerPlayer : MonoBehaviour
         }
         else
             Debug.Log(gameObject.name + " could not find hook!");
-    }
-	
-	void Update ()
-    {
-        MovementUpdate();
-        GrappleUpdate();
-        WallCheck();
 
-        Debug.DrawRay(transform.position, m_Rigidbody.velocity.normalized * 1.5f);
-	}
+        if (transform.FindChild("AttackRot"))
+        {
+            m_AttackRotation = transform.FindChild("AttackRot");
+            m_AttackOffset = m_AttackRotation.FindChild("StartPoint").localPosition.x;
+            m_HitBox = m_AttackRotation.FindChild("StartPoint").GetComponentInChildren<AttackHitbox>();
+            if (m_HitBox)
+            {
+                m_HitBox.SetPlayer(this);
+                m_HitBox.transform.localScale = new Vector3(m_AttackRange, m_HitBox.transform.localScale.y, m_HitBox.transform.localScale.z);
+                m_HitBox.gameObject.SetActive(false);
+            }
+        }
+        else
+            Debug.Log(gameObject.name + " could not find attack!");
+
+        //Assign input variables
+        m_JumpInput = "P" + m_PlayerNum + "Jump";
+        m_HorizontalInput = "P" + m_PlayerNum + "Horizontal";
+        m_AttackInput = "P" + m_PlayerNum + "RightTrigger";
+        m_GrappleInput = "P" + m_PlayerNum + "LeftTrigger";
+    }
+
+    void Update()
+    {
+        if (ControllerScene.GetRoundStart())
+            m_Rigidbody.isKinematic = true;
+        else
+            m_Rigidbody.isKinematic = false;
+
+        if (!ControllerScene.GetPaused())
+        {
+            MovementUpdate();
+            GrappleUpdate();
+            AttackUpdate();
+        }
+        else
+            m_Rigidbody.gravityScale = 0.0f;
+
+        Debug.DrawRay(transform.position, m_Rigidbody.velocity.normalized * 1.5f, Color.blue);
+    }
 
     void MovementUpdate()
     {
@@ -79,7 +133,8 @@ public class ControllerPlayer : MonoBehaviour
 
         m_IsInAir = m_Rigidbody.velocity.y != 0;
 
-        m_Horizontal = Input.GetAxis("Horizontal");
+        if (!WallCheck())
+            m_Horizontal = Input.GetAxis(m_HorizontalInput);
 
         if (!m_IsAirMovement)
         {
@@ -102,7 +157,7 @@ public class ControllerPlayer : MonoBehaviour
             }
         }
 
-        if (Input.GetAxis("Fire1") != 0.0f)
+        if (Input.GetAxis(m_JumpInput) != 0.0f)
         {
             if (GroundCheck() && !m_IsInAir)
                 m_Rigidbody.AddForce(Vector2.up * m_JumpForce, ForceMode2D.Impulse);
@@ -126,13 +181,13 @@ public class ControllerPlayer : MonoBehaviour
         {
             if (!m_IsGrappleCD)
             {
-                m_IsGrapple = Input.GetAxis("LeftTrigger") != 0;
+                m_IsGrapple = Input.GetAxis(m_GrappleInput) != 0;
 
                 if (m_IsGrapple && !m_GrappleHit)
                 {
                     if (!m_HasSetGrappleDir)
                     {
-                        Vector2 dir = m_Rigidbody.velocity;
+                        Vector2 dir = m_Rigidbody.velocity.normalized;
                         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                         m_HookRotation.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
@@ -142,9 +197,10 @@ public class ControllerPlayer : MonoBehaviour
                     m_Hook.transform.localScale += new Vector3(m_HookTravelSpeed, 0, 0) * Time.deltaTime;
                     m_Hook.transform.localPosition = new Vector3(m_Hook.transform.localScale.x / 2.0f, 0, 0);
 
-                    Debug.DrawRay(m_Hook.transform.Find("Endpoint").position, (m_Hook.transform.FindChild("Endpoint").position - transform.position).normalized * 0.3f, Color.red);
+                    Debug.DrawRay(m_Hook.transform.FindChild("Endpoint").position, (m_Hook.transform.FindChild("Endpoint").position - transform.position).normalized * 0.3f, Color.red);
+                    m_GrappleDir = (m_Hook.transform.FindChild("Endpoint").position - transform.position).normalized;
 
-                    RaycastHit2D hit = Physics2D.Raycast(m_Hook.transform.Find("Endpoint").position, (m_Hook.transform.FindChild("Endpoint").position - transform.position).normalized, 0.3f);
+                    RaycastHit2D hit = Physics2D.Raycast(m_Hook.transform.FindChild("Endpoint").position, (m_Hook.transform.FindChild("Endpoint").position - transform.position).normalized, 0.3f);
                     if (hit)
                     {
                         if (hit.collider.tag != m_Tag)
@@ -169,7 +225,7 @@ public class ControllerPlayer : MonoBehaviour
                     else
                     {
                         m_Rigidbody.gravityScale = 1.0f;
-                        m_IsGrappleCD = true;
+                        InterruptGrapple();
                     }
                 }
                 else
@@ -197,19 +253,70 @@ public class ControllerPlayer : MonoBehaviour
         }
     }
 
+    void AttackUpdate()
+    {
+        if (m_CanAttack)
+        {
+            m_IsAttacking = Input.GetAxis(m_AttackInput) != 0.0f;
+
+            if (m_Rigidbody.velocity.x != 0.0f)
+            {
+                if (m_Rigidbody.velocity.x > 0)
+                    m_AttackDirection = 1.0f;
+                else
+                    m_AttackDirection = -1.0f;
+            }
+
+            if (m_IsAttacking)
+            {
+                m_AttackDegree = m_AttackStartDegree;
+                m_AttackRotation.FindChild("StartPoint").localPosition = new Vector3(m_AttackOffset * m_AttackDirection, 0f, 0f);
+                m_AttackRotation.localEulerAngles = new Vector3(0, 0, m_AttackDegree * m_AttackDirection);
+                m_HitBox.gameObject.SetActive(true);
+                m_HitBox.transform.localPosition = new Vector3(m_HitBox.transform.localScale.x / 2.0f * m_AttackDirection, 0f, 0f);
+                m_AttackTimer = 0.0f;
+                m_CanAttack = false;
+            }
+        }
+        else
+        {
+            if (m_AttackCDTimer < m_AttackCooldown)
+                m_AttackCDTimer += Time.deltaTime;
+            else
+            {
+                m_AttackCDTimer = 0.0f;
+                m_CanAttack = true;
+            }
+
+            if (m_AttackTimer < m_AttackTime)
+            {
+                m_AttackTimer += Time.deltaTime;
+                m_AttackDegree -= 1.0f / m_AttackTime;
+                m_AttackRotation.localEulerAngles = new Vector3(0, 0, m_AttackDegree * m_AttackDirection);
+
+
+                //Debug.DrawRay(m_AttackRotation.FindChild("StartPoint").position, (m_AttackRotation.FindChild("StartPoint").position - transform.position).normalized * m_AttackRange, Color.red);
+                //Quaternion rot = Quaternion.AngleAxis(m_AttackDegree * m_AttackDirection, Vector3.forward);
+                //Debug.DrawRay(transform.position, rot * transform.right * m_AttackDirection * m_AttackRange, Color.red);
+            }
+            else
+                m_HitBox.gameObject.SetActive(false);
+        }
+    }
+
     bool GroundCheck()
     {
-        Debug.DrawRay(transform.position - new Vector3(m_Collider.bounds.size.x / 4.0f, m_Collider.bounds.size.y / 2 * 1.1f, 0), Vector2.right * 0.5f, Color.red);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(m_Collider.bounds.size.x / 4, m_Collider.bounds.size.y / 2 * 1.1f, 0), Vector2.right, 0.5f);
+        Color col = Color.green;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(m_Collider.bounds.size.x / 4, m_Collider.bounds.size.y / 2 * 1.2f, 0), Vector2.right, 0.5f);
         if (hit)
         {
-            if (hit.collider.tag != m_Tag)
-                m_IsOnGround = true;
-            else
-                m_IsOnGround = false;
+            m_IsOnGround = true;
+            col = Color.red;
         }
         else
             m_IsOnGround = false;
+
+        Debug.DrawRay(transform.position - new Vector3(m_Collider.bounds.size.x / 4.0f, m_Collider.bounds.size.y / 2 * 1.2f, 0), Vector2.right * 0.5f, col);
 
         return m_IsOnGround;
     }
@@ -224,7 +331,7 @@ public class ControllerPlayer : MonoBehaviour
 
         for (int i = 0; i < 2; i++)
         {
-            switch(i)
+            switch (i)
             {
                 case 0:
                     x = transform.position.x + m_Collider.bounds.size.x / 2.0f * 1.2f;
@@ -238,11 +345,21 @@ public class ControllerPlayer : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(x, transform.position.y + (-m_Collider.bounds.size.y / 2.0f) * 0.8f), Vector2.up, m_Collider.bounds.size.y * 0.8f);
             if (hit)
             {
-                if (hit.collider.tag == "Wall")
+                if (i == 1)
+                    m_Horizontal = Mathf.Clamp(Input.GetAxis(m_HorizontalInput), 0.0f, 1.0f);
+                else
+                    m_Horizontal = Mathf.Clamp(Input.GetAxis(m_HorizontalInput), -1.0f, 0.0f);
+
+                if (m_GrappleHit)
                 {
-                    col = Color.red;
-                    wallhit = true;
+                    if (i == 1 && m_GrappleDir.x < 0)
+                        InterruptGrapple();
+                    else if (i == 0 && m_GrappleDir.x > 0)
+                        InterruptGrapple();
                 }
+
+                col = Color.red;
+                wallhit = true;
             }
             Debug.DrawRay(new Vector3(x, transform.position.y + (-m_Collider.bounds.size.y / 2.0f) * 0.8f, 0.0f), Vector3.up * m_Collider.bounds.size.y * 0.8f, col);
         }
@@ -257,6 +374,37 @@ public class ControllerPlayer : MonoBehaviour
         Debug.Log("Grapple interrupt!");
     }
 
+    public void ResetValues()
+    {
+        m_Rigidbody.velocity = Vector2.zero;
+        //Grappling hook vars
+        m_IsGrapple = false;
+        m_GrappleHit = false;
+        m_HasSetGrappleDir = false;
+        m_GrappleDir = Vector3.zero;
+        m_IsGrappleCD = false;
+        m_HookTimer = 0.0f;
+        m_HitPosition = Vector3.zero;
+        m_Hook.transform.localPosition = Vector3.zero;
+        m_Hook.transform.localScale = new Vector3(0, m_Hook.transform.localScale.y, m_Hook.transform.localScale.z);
+
+        //Attack vars
+        m_CanAttack = true;
+        m_IsAttacking = false;
+        m_AttackTimer = 0.0f;
+        m_AttackCDTimer = 0.0f;
+        m_AttackDegree = 0.0f;
+        m_AttackDirection = 1.0f;
+        m_AttackOffset = 0.0f;
+        m_HitBox.gameObject.SetActive(false);
+    }
+
+    public void Kill()
+    {
+        ControllerScene.ReducePlayerCount();
+        gameObject.SetActive(false);
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (m_GrappleHit)
@@ -264,13 +412,4 @@ public class ControllerPlayer : MonoBehaviour
             InterruptGrapple();
         }
     }
-
-    //void OnCollisionStay2D(Collision2D col)
-    //{
-    //    if (m_GrappleHit)
-    //    {
-    //        Debug.Log("Grapple interrupt!");
-    //        m_IsGrappleCD = true;
-    //    }
-    //}
 }
