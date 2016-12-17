@@ -23,9 +23,10 @@ public class AttackHitbox : MonoBehaviour
                 if (col.gameObject.GetComponent<ControllerPlayer>())
                 {
                     col.gameObject.GetComponent<ControllerPlayer>().Kill();
+                    m_Player.AddScore(1);
                     Debug.Log("KILL!");
                 }
-                Debug.Log("Hit " + col.gameObject.name);
+                //Debug.Log("Hit " + col.gameObject.name);
             }
         }
     }

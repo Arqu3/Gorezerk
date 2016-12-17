@@ -21,10 +21,18 @@ public class ControllerScene : MonoBehaviour
     private float m_CountdownTimer = 0.0f;
     private static bool m_IsRoundStart = true;
 
+    //Score vars
+    private Text m_ScoreText;
+    private string[] m_ScoreStrings;
+
 	void Start()
     {
         m_CountdownText = GameObject.Find("CountdownText").GetComponent<Text>();
         m_CountdownTimer = m_CountdownTime;
+
+        m_ScoreText = GameObject.Find("ScoreText").GetComponent<Text>();
+        if (m_ScoreText)
+            m_ScoreText.text = "";
 
         var spawnpoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
         if (spawnpoints.Length > 0)
@@ -38,11 +46,33 @@ public class ControllerScene : MonoBehaviour
         var players = GameObject.FindGameObjectsWithTag("Player");
         if (players.Length > 0)
         {
+            m_ScoreStrings = new string[players.Length];
             for (int i = 0; i < players.Length; i++)
             {
                 if (players[i].GetComponent<ControllerPlayer>())
                     m_Players.Add(players[i].GetComponent<ControllerPlayer>());
             }
+
+            for (int write = 0; write < m_Players.Count; write++)
+            {
+                for (int sort = 0; sort  < m_Players.Count - 1; sort++)
+                {
+                    if (m_Players[sort].GetPlayerNum() > m_Players[sort + 1].GetPlayerNum())
+                    {
+                        ControllerPlayer temp = m_Players[sort + 1];
+                        m_Players[sort + 1] = m_Players[sort];
+                        m_Players[sort] = temp;
+                    }
+                }
+            }
+
+            //Debug.Log(Input.GetJoystickNames()[0]);
+            for (int i = 0; i < Input.GetJoystickNames().Length; i++)
+            {
+                if (i < m_Players.Count)
+                    m_Players[i].SetKeyboardInput(false);
+            }
+
             SpawnPlayers();
         }
 	}
@@ -52,12 +82,17 @@ public class ControllerScene : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             TogglePaused();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Return))
             StartRound();
+
+        if (Input.GetKeyDown(KeyCode.End))
+            Application.Quit();
 
         CountdownUpdate();
         if (m_PlayerCount <= 1)
             StartRound();
+
+        TextUpdate();
 	}
 
     void CountdownUpdate()
@@ -82,7 +117,11 @@ public class ControllerScene : MonoBehaviour
 
     void TextUpdate()
     {
-
+        for (int i = 0; i < m_Players.Count; i++)
+        {
+            m_ScoreStrings[i] = "Player" + (m_Players[i].GetPlayerNum() + 1) + ": " + m_Players[i].GetScore() + "                        ";
+        }
+        m_ScoreText.text = m_ScoreStrings[0] + m_ScoreStrings[1];
     }
 
     void SpawnPlayers()

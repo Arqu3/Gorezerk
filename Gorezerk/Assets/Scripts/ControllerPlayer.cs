@@ -18,6 +18,7 @@ public class ControllerPlayer : MonoBehaviour
     public float m_AttackCooldown = 0.5f;
     public float m_AttackRange = 1.0f;
     public float m_AttackStartDegree = 60.0f;
+    public bool m_IsKeyboardInput = false;
 
     //Component vars
     private Rigidbody2D m_Rigidbody;
@@ -36,6 +37,9 @@ public class ControllerPlayer : MonoBehaviour
 
     //Raycast vars
     private string m_Tag;
+
+    //Score vars
+    private int m_Score = 0;
 
     //Grappling hook vars
     private bool m_IsGrapple = false;
@@ -65,6 +69,12 @@ public class ControllerPlayer : MonoBehaviour
     private string m_AttackInput;
     private string m_GrappleInput;
 
+    private string m_JumpInputK;
+    private string m_HorizontalInputK1;
+    private string m_HorizontalInputK2;
+    private string m_AttackInputK;
+    private string m_GrappleInputK;
+
     void Start()
     {
         m_Renderer = GetComponent<SpriteRenderer>();
@@ -72,7 +82,6 @@ public class ControllerPlayer : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Tag = gameObject.tag;
         m_HookTimer = m_HookCooldown;
-        //Debug.Log(Input.GetJoystickNames()[0]);
 
         if (transform.FindChild("HookRot"))
             m_HookRotation = transform.FindChild("HookRot");
@@ -105,6 +114,16 @@ public class ControllerPlayer : MonoBehaviour
         m_HorizontalInput = "P" + m_PlayerNum + "Horizontal";
         m_AttackInput = "P" + m_PlayerNum + "RightTrigger";
         m_GrappleInput = "P" + m_PlayerNum + "LeftTrigger";
+
+        //Bad case, remove later
+        if (m_IsKeyboardInput)
+        {
+            m_JumpInputK = "space";
+            m_HorizontalInputK1 = "a";
+            m_HorizontalInputK2 = "d";
+            m_AttackInputK = "l";
+            m_GrappleInputK = "p";
+        }
     }
 
     void Update()
@@ -134,7 +153,21 @@ public class ControllerPlayer : MonoBehaviour
         m_IsInAir = m_Rigidbody.velocity.y != 0;
 
         if (!WallCheck())
-            m_Horizontal = Input.GetAxis(m_HorizontalInput);
+        {
+            if (!m_IsKeyboardInput)
+            {
+                m_Horizontal = Input.GetAxis(m_HorizontalInput);
+            }
+            else
+            {
+                if (Input.GetKey(m_HorizontalInputK1))
+                    m_Horizontal = -1.0f;
+                else if (Input.GetKey(m_HorizontalInputK2))
+                    m_Horizontal = 1.0f;
+                else
+                    m_Horizontal = 0.0f;
+            }
+        }
 
         if (!m_IsAirMovement)
         {
@@ -157,10 +190,21 @@ public class ControllerPlayer : MonoBehaviour
             }
         }
 
-        if (Input.GetAxis(m_JumpInput) != 0.0f)
+        if (!m_IsKeyboardInput)
         {
-            if (GroundCheck() && !m_IsInAir)
-                m_Rigidbody.AddForce(Vector2.up * m_JumpForce, ForceMode2D.Impulse);
+            if (Input.GetAxis(m_JumpInput) != 0.0f)
+            {
+                if (GroundCheck() && !m_IsInAir)
+                    m_Rigidbody.AddForce(Vector2.up * m_JumpForce, ForceMode2D.Impulse);
+            }
+        }
+        else
+        {
+            if (Input.GetKey(m_JumpInputK))
+            {
+                if (GroundCheck() && !m_IsInAir)
+                    m_Rigidbody.AddForce(Vector2.up * m_JumpForce, ForceMode2D.Impulse);
+            }
         }
 
         if (GroundCheck())
@@ -179,9 +223,13 @@ public class ControllerPlayer : MonoBehaviour
     {
         if (m_Hook)
         {
+            m_Hook.transform.localScale = new Vector3(Mathf.Clamp(m_Hook.transform.localScale.x, 0.0f, 1000.0f), m_Hook.transform.localScale.y, m_Hook.transform.localScale.z);
             if (!m_IsGrappleCD)
             {
-                m_IsGrapple = Input.GetAxis(m_GrappleInput) != 0;
+                if (!m_IsKeyboardInput)
+                    m_IsGrapple = Input.GetAxis(m_GrappleInput) != 0.0f;
+                else
+                    m_IsGrapple = Input.GetKey(m_GrappleInputK);
 
                 if (m_IsGrapple && !m_GrappleHit)
                 {
@@ -257,9 +305,12 @@ public class ControllerPlayer : MonoBehaviour
     {
         if (m_CanAttack)
         {
-            m_IsAttacking = Input.GetAxis(m_AttackInput) != 0.0f;
+            if (!m_IsKeyboardInput)
+                m_IsAttacking = Input.GetAxis(m_AttackInput) != 0.0f;
+            else
+                m_IsAttacking = Input.GetKey(m_AttackInputK);
 
-            if (m_Rigidbody.velocity.x != 0.0f)
+            if (m_Rigidbody.velocity.x != 0.0f && !WallCheck())
             {
                 if (m_Rigidbody.velocity.x > 0)
                     m_AttackDirection = 1.0f;
@@ -345,21 +396,44 @@ public class ControllerPlayer : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(x, transform.position.y + (-m_Collider.bounds.size.y / 2.0f) * 0.8f), Vector2.up, m_Collider.bounds.size.y * 0.8f);
             if (hit)
             {
-                if (i == 1)
-                    m_Horizontal = Mathf.Clamp(Input.GetAxis(m_HorizontalInput), 0.0f, 1.0f);
-                else
-                    m_Horizontal = Mathf.Clamp(Input.GetAxis(m_HorizontalInput), -1.0f, 0.0f);
-
-                if (m_GrappleHit)
+                if (hit.collider.tag != "AttackBox")
                 {
-                    if (i == 1 && m_GrappleDir.x < 0)
-                        InterruptGrapple();
-                    else if (i == 0 && m_GrappleDir.x > 0)
-                        InterruptGrapple();
-                }
+                    if (!m_IsKeyboardInput)
+                    {
+                        if (i == 1)
+                            m_Horizontal = Mathf.Clamp(Input.GetAxis(m_HorizontalInput), 0.0f, 1.0f);
+                        else
+                            m_Horizontal = Mathf.Clamp(Input.GetAxis(m_HorizontalInput), -1.0f, 0.0f);
+                    }
+                    else
+                    {
+                        if (i == 0)
+                        {
+                            if (Input.GetKey(m_HorizontalInputK1))
+                                m_Horizontal = -1.0f;
+                            else
+                                m_Horizontal = 0.0f;
+                        }
+                        else
+                        {
+                            if (Input.GetKey(m_HorizontalInputK2))
+                                m_Horizontal = 1.0f;
+                            else
+                                m_Horizontal = 0.0f;
+                        }
+                    }
 
-                col = Color.red;
-                wallhit = true;
+                    if (m_GrappleHit)
+                    {
+                        if (i == 1 && m_GrappleDir.x < 0)
+                            InterruptGrapple();
+                        else if (i == 0 && m_GrappleDir.x > 0)
+                            InterruptGrapple();
+                    }
+
+                    col = Color.red;
+                    wallhit = true;
+                }
             }
             Debug.DrawRay(new Vector3(x, transform.position.y + (-m_Collider.bounds.size.y / 2.0f) * 0.8f, 0.0f), Vector3.up * m_Collider.bounds.size.y * 0.8f, col);
         }
@@ -411,5 +485,25 @@ public class ControllerPlayer : MonoBehaviour
         {
             InterruptGrapple();
         }
+    }
+
+    public int GetPlayerNum()
+    {
+        return m_PlayerNum;
+    }
+
+    public void AddScore(int score)
+    {
+        m_Score += score;
+    }
+
+    public int GetScore()
+    {
+        return m_Score;
+    }
+
+    public void SetKeyboardInput(bool state)
+    {
+        m_IsKeyboardInput = state;
     }
 }

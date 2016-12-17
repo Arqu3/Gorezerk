@@ -39,7 +39,7 @@ GameObject:
   - 114: {fileID: 114000010971384096}
   m_Layer: 0
   m_Name: AttackBox
-  m_TagString: Untagged
+  m_TagString: AttackBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c9b853f3cf0da4aa0953a4c919a561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlayerNum: 1
+  m_PlayerNum: 0
   m_Speed: 10
   m_JumpForce: 15
   m_IsAirMovement: 1
