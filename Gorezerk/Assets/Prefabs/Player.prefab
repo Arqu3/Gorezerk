@@ -290,18 +290,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerNum: 0
-  m_Speed: 10
-  m_JumpForce: 15
+  m_Speed: 14
+  m_JumpForce: 16
   m_IsAirMovement: 1
   m_DampXAmount: 0.8
-  m_HookTravelSpeed: 50
-  m_TravelToHookSpeed: 30
+  m_HookTravelSpeed: 75
+  m_TravelToHookSpeed: 40
   m_HookBreakDistance: 1
   m_HookCooldown: 0.5
   m_AttackTime: 0.3
   m_AttackCooldown: 0.5
   m_AttackRange: 1.5
   m_AttackStartDegree: 60
+  m_IsKeyboardInput: 1
 --- !u!212 &212000010484412684
 SpriteRenderer:
   m_ObjectHideFlags: 1

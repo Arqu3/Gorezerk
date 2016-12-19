@@ -51,6 +51,7 @@ public class ControllerPlayer : MonoBehaviour
     private Vector3 m_HitPosition = Vector3.zero;
     private GameObject m_Hook;
     private Transform m_HookRotation;
+    private Transform m_HookEndpoint;
 
     //Attack vars
     private bool m_CanAttack = true;
@@ -69,6 +70,7 @@ public class ControllerPlayer : MonoBehaviour
     private string m_AttackInput;
     private string m_GrappleInput;
 
+    //Keyboard
     private string m_JumpInputK;
     private string m_HorizontalInputK1;
     private string m_HorizontalInputK2;
@@ -89,6 +91,7 @@ public class ControllerPlayer : MonoBehaviour
         if (m_HookRotation.FindChild("GrapplingHook"))
         {
             m_Hook = m_HookRotation.FindChild("GrapplingHook").gameObject;
+            m_HookEndpoint = m_Hook.transform.FindChild("Endpoint");
             m_Hook.transform.localScale = new Vector3(0, m_Hook.transform.localScale.y, m_Hook.transform.localScale.z);
         }
         else
@@ -147,7 +150,7 @@ public class ControllerPlayer : MonoBehaviour
 
     void MovementUpdate()
     {
-        if (transform.position.y < -10.0f)
+        if (transform.position.y < -40.0f)
             transform.position = Vector3.zero;
 
         m_IsInAir = m_Rigidbody.velocity.y != 0;
@@ -245,10 +248,10 @@ public class ControllerPlayer : MonoBehaviour
                     m_Hook.transform.localScale += new Vector3(m_HookTravelSpeed, 0, 0) * Time.deltaTime;
                     m_Hook.transform.localPosition = new Vector3(m_Hook.transform.localScale.x / 2.0f, 0, 0);
 
-                    Debug.DrawRay(m_Hook.transform.FindChild("Endpoint").position, (m_Hook.transform.FindChild("Endpoint").position - transform.position).normalized * 0.3f, Color.red);
-                    m_GrappleDir = (m_Hook.transform.FindChild("Endpoint").position - transform.position).normalized;
+                    Debug.DrawRay(m_HookEndpoint.position, (m_HookEndpoint.position - transform.position).normalized * 0.3f, Color.red);
+                    m_GrappleDir = (m_HookEndpoint.position - transform.position).normalized;
 
-                    RaycastHit2D hit = Physics2D.Raycast(m_Hook.transform.FindChild("Endpoint").position, (m_Hook.transform.FindChild("Endpoint").position - transform.position).normalized, 0.3f);
+                    RaycastHit2D hit = Physics2D.Raycast(m_HookEndpoint.position, (m_HookEndpoint.position - transform.position).normalized, 0.3f);
                     if (hit)
                     {
                         if (hit.collider.tag != m_Tag)

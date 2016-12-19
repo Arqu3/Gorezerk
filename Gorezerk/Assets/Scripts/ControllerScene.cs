@@ -25,6 +25,9 @@ public class ControllerScene : MonoBehaviour
     private Text m_ScoreText;
     private string[] m_ScoreStrings;
 
+    //Pause vars
+    GameObject m_PausePanel;
+
 	void Start()
     {
         m_CountdownText = GameObject.Find("CountdownText").GetComponent<Text>();
@@ -42,6 +45,8 @@ public class ControllerScene : MonoBehaviour
                 m_SpawnPoints.Add(spawnpoints[i].transform);
             }
         }
+
+        m_PausePanel = GameObject.Find("PausePanel");
 
         var players = GameObject.FindGameObjectsWithTag("Player");
         if (players.Length > 0)
@@ -85,15 +90,23 @@ public class ControllerScene : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
             StartRound();
 
-        if (Input.GetKeyDown(KeyCode.End))
-            Application.Quit();
-
         CountdownUpdate();
         if (m_PlayerCount <= 1)
             StartRound();
 
         TextUpdate();
-	}
+
+        if (!m_IsRoundStart)
+        {
+            Cursor.visible = m_IsPaused;
+            m_PausePanel.SetActive(m_IsPaused);
+        }
+        else
+        {
+            Cursor.visible = false;
+            m_PausePanel.SetActive(false);
+        }
+    }
 
     void CountdownUpdate()
     {
@@ -152,7 +165,12 @@ public class ControllerScene : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
-    void TogglePaused()
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void TogglePaused()
     {
         m_IsPaused = !m_IsPaused;
 
