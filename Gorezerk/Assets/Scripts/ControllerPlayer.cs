@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum ControllerType
+{
+    Xbox,
+    PS
+}
+
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D), typeof(SpriteRenderer))]
 public class ControllerPlayer : MonoBehaviour
 {
@@ -17,8 +23,8 @@ public class ControllerPlayer : MonoBehaviour
     public float m_AttackTime = 0.3f;
     public float m_AttackCooldown = 0.5f;
     public float m_AttackRange = 1.0f;
-    public float m_AttackStartDegree = 60.0f;
-    public bool m_IsKeyboardInput = false;
+    public float m_ParryTime = 0.3f;
+    public float m_ParryForce = 20.0f;
 
     //Component vars
     private Rigidbody2D m_Rigidbody;
@@ -63,12 +69,22 @@ public class ControllerPlayer : MonoBehaviour
     private float m_AttackOffset = 0.0f;
     private Transform m_AttackRotation;
     private AttackHitbox m_HitBox;
+    private const float m_AttackStartDegree = 60.0f;
+
+    //Parry vars
+    private bool m_IsParry = false;
+    private float m_ParryTimer = 0.0f;
+
+    //Input vars
+    private bool m_IsKeyboardInput = true;
+    private ControllerType m_ControllerType = ControllerType.Xbox;
 
     //Input string vars
     private string m_JumpInput;
     private string m_HorizontalInput;
     private string m_AttackInput;
     private string m_GrappleInput;
+    private float m_InputValue = 0.0f;
 
     //Keyboard
     private string m_JumpInputK;
@@ -118,6 +134,14 @@ public class ControllerPlayer : MonoBehaviour
         m_AttackInput = "P" + m_PlayerNum + "RightTrigger";
         m_GrappleInput = "P" + m_PlayerNum + "LeftTrigger";
 
+        if (GetControllerType().Equals(ControllerType.PS))
+        {
+            m_JumpInput += "PS";
+            m_AttackInput += "PS";
+            m_GrappleInput += "PS";
+            m_InputValue = -1.0f;
+        }
+
         //Bad case, remove later
         if (m_IsKeyboardInput)
         {
@@ -158,9 +182,7 @@ public class ControllerPlayer : MonoBehaviour
         if (!WallCheck())
         {
             if (!m_IsKeyboardInput)
-            {
                 m_Horizontal = Input.GetAxis(m_HorizontalInput);
-            }
             else
             {
                 if (Input.GetKey(m_HorizontalInputK1))
@@ -174,22 +196,28 @@ public class ControllerPlayer : MonoBehaviour
 
         if (!m_IsAirMovement)
         {
-            if (Mathf.Approximately(m_Rigidbody.velocity.y, 0.0f))
-                m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed, m_Rigidbody.velocity.y);
+            if (!m_IsParry)
+            {
+                if (Mathf.Approximately(m_Rigidbody.velocity.y, 0.0f))
+                    m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed, m_Rigidbody.velocity.y);
+            }
         }
         else
         {
-            if (Mathf.Approximately(m_Rigidbody.velocity.y, 0.0f))
-                m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed, m_Rigidbody.velocity.y);
-            else
+            if (!m_IsParry)
             {
-                if (!GroundCheck())
-                {
-                    if (m_Horizontal > 0.5f || m_Horizontal < -0.5f)
-                        m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed * m_DampXAmount, m_Rigidbody.velocity.y);
-                }
-                else
+                if (Mathf.Approximately(m_Rigidbody.velocity.y, 0.0f))
                     m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed, m_Rigidbody.velocity.y);
+                else
+                {
+                    if (!GroundCheck())
+                    {
+                        if (m_Horizontal > 0.5f || m_Horizontal < -0.5f)
+                            m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed * m_DampXAmount, m_Rigidbody.velocity.y);
+                    }
+                    else
+                        m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed, m_Rigidbody.velocity.y);
+                }
             }
         }
 
@@ -230,7 +258,7 @@ public class ControllerPlayer : MonoBehaviour
             if (!m_IsGrappleCD)
             {
                 if (!m_IsKeyboardInput)
-                    m_IsGrapple = Input.GetAxis(m_GrappleInput) != 0.0f;
+                    m_IsGrapple = Input.GetAxis(m_GrappleInput) != m_InputValue;
                 else
                     m_IsGrapple = Input.GetKey(m_GrappleInputK);
 
@@ -251,13 +279,25 @@ public class ControllerPlayer : MonoBehaviour
                     Debug.DrawRay(m_HookEndpoint.position, (m_HookEndpoint.position - transform.position).normalized * 0.3f, Color.red);
                     m_GrappleDir = (m_HookEndpoint.position - transform.position).normalized;
 
-                    RaycastHit2D hit = Physics2D.Raycast(m_HookEndpoint.position, (m_HookEndpoint.position - transform.position).normalized, 0.3f);
+                    RaycastHit2D hit = Physics2D.Raycast(m_HookEndpoint.position, (m_HookEndpoint.position - transform.position).normalized, 1.5f);
                     if (hit)
                     {
-                        if (hit.collider.tag != m_Tag)
+                        if (hit.collider.gameObject != this.gameObject)
                         {
-                            m_HitPosition = hit.point;
-                            m_GrappleHit = true;
+                            if (hit.collider.tag != m_Tag)
+                            {
+                                m_HitPosition = hit.point;
+                                m_GrappleHit = true;
+                            }
+                            else
+                            {
+                                if (hit.collider.gameObject.GetComponent<ControllerPlayer>())
+                                {
+                                    hit.collider.gameObject.GetComponent<ControllerPlayer>().Kill();
+                                    AddScore(1);
+                                    InterruptGrapple();
+                                }
+                            }
                         }
                     }
                 }
@@ -306,10 +346,21 @@ public class ControllerPlayer : MonoBehaviour
 
     void AttackUpdate()
     {
+        if (m_IsParry)
+        {
+            if (m_ParryTimer < m_ParryTime)
+                m_ParryTimer += Time.deltaTime;
+            else
+            {
+                m_ParryTimer = 0.0f;
+                m_IsParry = false;
+            }
+        }
+
         if (m_CanAttack)
         {
             if (!m_IsKeyboardInput)
-                m_IsAttacking = Input.GetAxis(m_AttackInput) != 0.0f;
+                m_IsAttacking = Input.GetAxis(m_AttackInput) != m_InputValue;
             else
                 m_IsAttacking = Input.GetKey(m_AttackInputK);
 
@@ -345,7 +396,8 @@ public class ControllerPlayer : MonoBehaviour
             if (m_AttackTimer < m_AttackTime)
             {
                 m_AttackTimer += Time.deltaTime;
-                m_AttackDegree -= 1.0f / m_AttackTime;
+                m_AttackDegree -= m_AttackStartDegree * 2 / m_AttackTime * Time.deltaTime;
+                m_AttackDegree = Mathf.Clamp(m_AttackDegree, -m_AttackStartDegree, m_AttackStartDegree);
                 m_AttackRotation.localEulerAngles = new Vector3(0, 0, m_AttackDegree * m_AttackDirection);
 
 
@@ -366,6 +418,15 @@ public class ControllerPlayer : MonoBehaviour
         {
             m_IsOnGround = true;
             col = Color.red;
+
+            if (hit.collider.tag == "HeadCollider")
+            {
+                if (hit.collider.transform.parent.GetComponent<ControllerPlayer>())
+                {
+                    hit.collider.transform.parent.GetComponent<ControllerPlayer>().Kill();
+                    AddScore(1);
+                }
+            }
         }
         else
             m_IsOnGround = false;
@@ -497,6 +558,9 @@ public class ControllerPlayer : MonoBehaviour
 
     public void AddScore(int score)
     {
+        if (score > 0)
+            ControllerScene.SetScoreBark("Player" + (m_PlayerNum + 1));
+
         m_Score += score;
     }
 
@@ -508,5 +572,32 @@ public class ControllerPlayer : MonoBehaviour
     public void SetKeyboardInput(bool state)
     {
         m_IsKeyboardInput = state;
+    }
+
+    public void SetControllerType(ControllerType newType)
+    {
+        m_ControllerType = newType;
+    }
+
+    public ControllerType GetControllerType()
+    {
+        return m_ControllerType;
+    }
+
+    public void InterruptAttack()
+    {
+        m_CanAttack = false;
+        m_AttackTimer = 0.0f;
+        m_HitBox.gameObject.SetActive(false);
+    }
+
+    public void SetParry(bool state)
+    {
+        m_IsParry = state;
+    }
+
+    public Rigidbody2D GetRigidbody()
+    {
+        return m_Rigidbody;
     }
 }

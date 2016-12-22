@@ -94,6 +94,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000012116486652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000010381396952}
+  - 61: {fileID: 61000011135118864}
+  m_Layer: 0
+  m_Name: HeadCollider
+  m_TagString: HeadCollider
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000012900673274
 GameObject:
   m_ObjectHideFlags: 1
@@ -125,6 +141,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4000010381396952
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012116486652}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.646, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000013391235890}
+  m_RootOrder: 2
 --- !u!4 &4000010999002284
 Transform:
   m_ObjectHideFlags: 1
@@ -214,12 +243,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010691250554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.25, y: -3.12, z: 0}
+  m_LocalPosition: {x: -10.61722, y: 1.3343003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000011503935824}
   - {fileID: 4000010999002284}
+  - {fileID: 4000010381396952}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!50 &50000011685357858
@@ -253,6 +283,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!61 &61000011135118864
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012116486652}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.55, y: 0.22}
 --- !u!61 &61000012433836508
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -289,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c9b853f3cf0da4aa0953a4c919a561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlayerNum: 0
+  m_PlayerNum: 2
   m_Speed: 14
   m_JumpForce: 16
   m_IsAirMovement: 1
@@ -300,9 +344,9 @@ MonoBehaviour:
   m_HookCooldown: 0.5
   m_AttackTime: 0.3
   m_AttackCooldown: 0.5
-  m_AttackRange: 1.5
-  m_AttackStartDegree: 60
-  m_IsKeyboardInput: 1
+  m_AttackRange: 1.7
+  m_ParryTime: 0.15
+  m_ParryForce: 20
 --- !u!212 &212000010484412684
 SpriteRenderer:
   m_ObjectHideFlags: 1

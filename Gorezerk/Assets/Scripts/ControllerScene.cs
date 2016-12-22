@@ -8,6 +8,7 @@ public class ControllerScene : MonoBehaviour
     //Public vars
     public float m_CountdownTime = 3.0f;
     public float m_CountdownSpeed = 2.0f;
+    public float m_BarkTime = 1.0f;
 
     public List<Transform> m_SpawnPoints;
     public List<ControllerPlayer> m_Players;
@@ -25,13 +26,62 @@ public class ControllerScene : MonoBehaviour
     private Text m_ScoreText;
     private string[] m_ScoreStrings;
 
+    //Bark vars
+    private static string m_ScoreBark = "";
+    private Text m_BarkText;
+    private float m_BarkTimer = 0.0f;
+    private static bool m_IsBark = false;
+
     //Pause vars
     GameObject m_PausePanel;
 
-	void Start()
+    void Awake()
+    {
+        var players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length > 0)
+        {
+            m_ScoreStrings = new string[players.Length];
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i].GetComponent<ControllerPlayer>())
+                    m_Players.Add(players[i].GetComponent<ControllerPlayer>());
+            }
+
+            for (int write = 0; write < m_Players.Count; write++)
+            {
+                for (int sort = 0; sort < m_Players.Count - 1; sort++)
+                {
+                    if (m_Players[sort].GetPlayerNum() > m_Players[sort + 1].GetPlayerNum())
+                    {
+                        ControllerPlayer temp = m_Players[sort + 1];
+                        m_Players[sort + 1] = m_Players[sort];
+                        m_Players[sort] = temp;
+                    }
+                }
+            }
+
+            for (int i = 0; i < Input.GetJoystickNames().Length; i++)
+            {
+                Debug.Log(Input.GetJoystickNames()[i]);
+                if (i < m_Players.Count)
+                {
+                    m_Players[i].SetKeyboardInput(false);
+                    if (Input.GetJoystickNames()[i].Contains("XBOX") || Input.GetJoystickNames()[i].Contains("xbox") || Input.GetJoystickNames()[i].Contains("Xbox"))
+                        m_Players[i].SetControllerType(ControllerType.Xbox);
+                    else
+                        m_Players[i].SetControllerType(ControllerType.PS);
+                }
+            }
+
+        }
+    }
+
+    void Start()
     {
         m_CountdownText = GameObject.Find("CountdownText").GetComponent<Text>();
         m_CountdownTimer = m_CountdownTime;
+
+        m_BarkText = GameObject.Find("ScoreBarkText").GetComponent<Text>();
 
         m_ScoreText = GameObject.Find("ScoreText").GetComponent<Text>();
         if (m_ScoreText)
@@ -48,41 +98,11 @@ public class ControllerScene : MonoBehaviour
 
         m_PausePanel = GameObject.Find("PausePanel");
 
-        var players = GameObject.FindGameObjectsWithTag("Player");
-        if (players.Length > 0)
-        {
-            m_ScoreStrings = new string[players.Length];
-            for (int i = 0; i < players.Length; i++)
-            {
-                if (players[i].GetComponent<ControllerPlayer>())
-                    m_Players.Add(players[i].GetComponent<ControllerPlayer>());
-            }
+        UpdateText();
+        SpawnPlayers();
+    }
 
-            for (int write = 0; write < m_Players.Count; write++)
-            {
-                for (int sort = 0; sort  < m_Players.Count - 1; sort++)
-                {
-                    if (m_Players[sort].GetPlayerNum() > m_Players[sort + 1].GetPlayerNum())
-                    {
-                        ControllerPlayer temp = m_Players[sort + 1];
-                        m_Players[sort + 1] = m_Players[sort];
-                        m_Players[sort] = temp;
-                    }
-                }
-            }
-
-            //Debug.Log(Input.GetJoystickNames()[0]);
-            for (int i = 0; i < Input.GetJoystickNames().Length; i++)
-            {
-                if (i < m_Players.Count)
-                    m_Players[i].SetKeyboardInput(false);
-            }
-
-            SpawnPlayers();
-        }
-	}
-	
-	void Update ()
+    void Update ()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             TogglePaused();
@@ -92,9 +112,10 @@ public class ControllerScene : MonoBehaviour
 
         CountdownUpdate();
         if (m_PlayerCount <= 1)
+        {
+            UpdateText();
             StartRound();
-
-        TextUpdate();
+        }
 
         if (!m_IsRoundStart)
         {
@@ -106,6 +127,8 @@ public class ControllerScene : MonoBehaviour
             Cursor.visible = false;
             m_PausePanel.SetActive(false);
         }
+
+        ScoreBarkUpdate();
     }
 
     void CountdownUpdate()
@@ -128,13 +151,33 @@ public class ControllerScene : MonoBehaviour
             m_CountdownText.text = "";
     }
 
-    void TextUpdate()
+    void ScoreBarkUpdate()
     {
+        if (m_IsBark)
+        {
+            if (m_BarkText)
+                m_BarkText.text = m_ScoreBark + " score!";
+
+            if (m_BarkTimer < m_BarkTime)
+                m_BarkTimer += Time.deltaTime;
+            else
+            {
+                m_BarkTimer = 0.0f;
+                SetScoreBark("");
+            }
+        }
+        else
+            m_BarkText.text = "";
+    }
+
+    void UpdateText()
+    {
+        m_ScoreText.text = "";
         for (int i = 0; i < m_Players.Count; i++)
         {
             m_ScoreStrings[i] = "Player" + (m_Players[i].GetPlayerNum() + 1) + ": " + m_Players[i].GetScore() + "                        ";
+            m_ScoreText.text += m_ScoreStrings[i];
         }
-        m_ScoreText.text = m_ScoreStrings[0] + m_ScoreStrings[1];
     }
 
     void SpawnPlayers()
@@ -203,5 +246,11 @@ public class ControllerScene : MonoBehaviour
     public static void ReducePlayerCount()
     {
         m_PlayerCount--;
+    }
+
+    public static void SetScoreBark(string s)
+    {
+        m_ScoreBark = s;
+        m_IsBark = m_ScoreBark != "";
     }
 }

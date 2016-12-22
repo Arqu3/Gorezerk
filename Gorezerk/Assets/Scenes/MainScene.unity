@@ -211,6 +211,11 @@ Prefab:
       propertyPath: m_IsKeyboardInput
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012012105704, guid: ed09a0441c5241e4e8927059f2c95405,
+        type: 2}
+      propertyPath: m_PlayerNum
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed09a0441c5241e4e8927059f2c95405, type: 2}
   m_IsPrefabParent: 0
@@ -301,6 +306,80 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012757416958, guid: b5053ca99228e804e9098827af759430,
     type: 2}
   m_PrefabInternal: {fileID: 1930807523}
+--- !u!1 &237857705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 237857706}
+  - 222: {fileID: 237857708}
+  - 114: {fileID: 237857707}
+  m_Layer: 5
+  m_Name: ScoreBarkText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &237857706
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 237857705}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1638194012}
+  m_RootOrder: 2
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000030517578, y: 369}
+  m_SizeDelta: {x: 456, y: 351}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &237857707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 237857705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 70
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 5
+    m_MaxSize: 70
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: score bark here
+--- !u!222 &237857708
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 237857705}
 --- !u!1 &272321764
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,7 +821,7 @@ RectTransform:
   - {fileID: 1358837790}
   - {fileID: 487212002}
   m_Father: {fileID: 1638194012}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1396,7 +1475,7 @@ Transform:
   - {fileID: 203060019}
   - {fileID: 223636857}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!1 &1351774574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1706,7 +1785,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Prototype v0.0.1a
+  m_Text: Prototype v0.0.1b
 --- !u!222 &1419591994
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1904,7 +1983,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013391235890, guid: ed09a0441c5241e4e8927059f2c95405, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1000010691250554, guid: ed09a0441c5241e4e8927059f2c95405, type: 2}
       propertyPath: m_Name
@@ -2009,6 +2088,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CountdownTime: 3
   m_CountdownSpeed: 2
+  m_BarkTime: 1
   m_SpawnPoints: []
   m_Players: []
 --- !u!4 &1570051525
@@ -2053,7 +2133,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1638194012}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -490}
@@ -2091,7 +2171,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: score here
 --- !u!222 &1608490653
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2185,6 +2265,7 @@ RectTransform:
   m_Children:
   - {fileID: 1419591992}
   - {fileID: 437113481}
+  - {fileID: 237857706}
   - {fileID: 1608490651}
   - {fileID: 524821975}
   m_Father: {fileID: 0}

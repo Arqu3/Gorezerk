@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - SpawnPoint
   - AttackBox
+  - HeadCollider
   layers:
   - Default
   - TransparentFX
