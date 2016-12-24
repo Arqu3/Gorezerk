@@ -12,8 +12,14 @@ public class Toolbox : Singleton<Toolbox>
         DontDestroyOnLoad(this);
     }
 
-    public List<PlayerInformation> m_Information;
-    public List<Color> m_Colors;
+    public List<PlayerInformation> m_Information = new List<PlayerInformation>();
+    public List<Color> m_Colors = new List<Color>();
+
+    public void ClearInformation()
+    {
+        m_Information.Clear();
+        m_Colors.Clear();
+    }
 
     static public T RegisterComponent<T>() where T : Component
     {

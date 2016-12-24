@@ -56,6 +56,9 @@ public class ControllerMenu : MonoBehaviour
 
 	void Start()
     {
+        //Reset toolbox variables whenever main menu is loaded
+        Toolbox.Instance.ClearInformation();
+
         //Set countdown vars
         m_CountdownTimer = m_CountdownTime;
         m_CountdownText = GameObject.Find("CountdownText").GetComponent<Text>();
