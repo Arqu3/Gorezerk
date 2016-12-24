@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class ControllerScene : MonoBehaviour
 {
@@ -10,12 +11,12 @@ public class ControllerScene : MonoBehaviour
     public float m_CountdownSpeed = 2.0f;
     public float m_BarkTime = 1.0f;
 
-    public List<Transform> m_SpawnPoints;
-    public List<ControllerPlayer> m_Players;
+    private List<Transform> m_SpawnPoints = new List<Transform>();
+    private List<ControllerPlayer> m_Players = new List<ControllerPlayer>();
 
     //Static vars
     private static bool m_IsPaused = true;
-    private static int m_PlayerCount;
+    private static int m_PlayerCount = 0;
 
     //Round start vars
     private Text m_CountdownText;
@@ -60,18 +61,18 @@ public class ControllerScene : MonoBehaviour
                 }
             }
 
-            for (int i = 0; i < Input.GetJoystickNames().Length; i++)
-            {
-                Debug.Log(Input.GetJoystickNames()[i]);
-                if (i < m_Players.Count)
-                {
-                    m_Players[i].SetKeyboardInput(false);
-                    if (Input.GetJoystickNames()[i].Contains("XBOX") || Input.GetJoystickNames()[i].Contains("xbox") || Input.GetJoystickNames()[i].Contains("Xbox"))
-                        m_Players[i].SetControllerType(ControllerType.Xbox);
-                    else
-                        m_Players[i].SetControllerType(ControllerType.PS);
-                }
-            }
+            //for (int i = 0; i < Input.GetJoystickNames().Length; i++)
+            //{
+            //    Debug.Log(Input.GetJoystickNames()[i]);
+            //    if (i < m_Players.Count)
+            //    {
+            //        m_Players[i].SetKeyboardInput(false);
+            //        if (Input.GetJoystickNames()[i].Contains("XBOX") || Input.GetJoystickNames()[i].Contains("xbox") || Input.GetJoystickNames()[i].Contains("Xbox"))
+            //            m_Players[i].SetControllerType(ControllerType.Xbox);
+            //        else
+            //            m_Players[i].SetControllerType(ControllerType.PS);
+            //    }
+            //}
 
         }
     }
@@ -211,6 +212,10 @@ public class ControllerScene : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void TogglePaused()
