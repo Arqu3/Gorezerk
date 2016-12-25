@@ -7,6 +7,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     private static object m_Lock = new object();
     private static bool m_IsQuitting = false;
 
+    /// <summary>
+    /// This is the static instance of any given singleton,
+    /// any declared public-variables can be accessed through this instance
+    /// </summary>
     public static T Instance
     {
         get

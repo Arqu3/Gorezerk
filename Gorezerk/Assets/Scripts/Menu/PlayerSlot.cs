@@ -180,6 +180,10 @@ public class PlayerSlot : MonoBehaviour
     public void ToggleReady()
     {
         m_IsReady = !m_IsReady;
+        if (m_IsReady)
+            Toolbox.Instance.m_PlayerCount++;
+        else
+            Toolbox.Instance.m_PlayerCount--;
     }
     public bool GetReady()
     {

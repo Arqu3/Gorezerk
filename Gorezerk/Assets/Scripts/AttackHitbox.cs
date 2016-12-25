@@ -29,7 +29,6 @@ public class AttackHitbox : MonoBehaviour
                 {
                     col.gameObject.GetComponent<ControllerPlayer>().Kill();
                     m_Player.AddScore(1);
-                    //Debug.Log("KILL!");
                 }
                 else if (col.gameObject.GetComponent<AttackHitbox>())
                 {
@@ -38,7 +37,6 @@ public class AttackHitbox : MonoBehaviour
                     m_Player.InterruptAttack();
                     m_Player.GetRigidbody().AddForce(dir * m_Player.m_ParryForce, ForceMode2D.Impulse);
                 }
-                //Debug.Log("Hit " + col.gameObject.name);
             }
         }
     }

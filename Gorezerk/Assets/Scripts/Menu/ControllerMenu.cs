@@ -37,6 +37,9 @@ public struct PlayerInformation
     }
 }
 
+/// <summary>
+/// This is the complete controller for the main-menu of the game, it handles menu-state logic, player lobby logic etc
+/// </summary>
 public class ControllerMenu : MonoBehaviour
 {
     //Public vars
@@ -200,13 +203,25 @@ public class ControllerMenu : MonoBehaviour
     bool ReadyCheck()
     {
         bool ready = true;
+        bool exists = false;
+        int num = 0;
 
         for (int i = 0; i < m_PlayerSlots.Count; i++)
         {
-            if (!m_PlayerSlots[i].GetReady())
+            if (!m_PlayerSlots[i].GetOpen())
             {
-                ready = false;
-                break;
+                exists = true;
+                num++;
+                if (!m_PlayerSlots[i].GetReady())
+                {
+                    ready = false;
+                    break;
+                }
+            }
+            else
+            {
+                if (i == m_PlayerSlots.Count - 1 && (!exists || num <= 1))
+                    ready = false;
             }
         }
 

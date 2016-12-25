@@ -4,19 +4,25 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// This class is made in such a way that no more than one instance of it should be present at any time,
+/// This class handles all game-state logic (such as pausing etc) and how/when to spawn players in a scene (think god-class-ish)
+/// </summary>
 public class ControllerScene : MonoBehaviour
 {
     //Public vars
     public float m_CountdownTime = 3.0f;
     public float m_CountdownSpeed = 2.0f;
     public float m_BarkTime = 1.0f;
+    public GameObject m_PlayerPrefab;
 
     private List<Transform> m_SpawnPoints = new List<Transform>();
-    private List<ControllerPlayer> m_Players = new List<ControllerPlayer>();
+    public List<ControllerPlayer> m_Players = new List<ControllerPlayer>();
 
     //Static vars
     private static bool m_IsPaused = true;
     private static int m_PlayerCount = 0;
+    private static bool m_UpdateText = false;
 
     //Round start vars
     private Text m_CountdownText;
@@ -38,6 +44,20 @@ public class ControllerScene : MonoBehaviour
 
     void Awake()
     {
+        if (m_PlayerPrefab)
+        {
+            for (int i = 0; i < Toolbox.Instance.m_PlayerCount; i++)
+            {
+                GameObject clone = (GameObject)Instantiate(m_PlayerPrefab, Vector3.zero, Quaternion.identity);
+                if (clone.GetComponent<ControllerPlayer>())
+                    clone.GetComponent<ControllerPlayer>().m_PlayerNum = i;
+                else
+                    Debug.Log("Player clone " + i + " is missing a controllerplayer script!");
+            }
+        }
+        else
+            Debug.Log(gameObject.name + " does not have a player prefab to instantiate!");
+
         var players = GameObject.FindGameObjectsWithTag("Player");
         if (players.Length > 0)
         {
@@ -100,7 +120,7 @@ public class ControllerScene : MonoBehaviour
         m_PausePanel = GameObject.Find("PausePanel");
 
         UpdateText();
-        SpawnPlayers();
+        StartRound();
     }
 
     void Update ()
@@ -130,6 +150,12 @@ public class ControllerScene : MonoBehaviour
         }
 
         ScoreBarkUpdate();
+
+        if (m_UpdateText)
+        {
+            UpdateText();
+            m_UpdateText = false;
+        }
     }
 
     void CountdownUpdate()
@@ -176,7 +202,7 @@ public class ControllerScene : MonoBehaviour
         m_ScoreText.text = "";
         for (int i = 0; i < m_Players.Count; i++)
         {
-            m_ScoreStrings[i] = "Player" + (m_Players[i].GetPlayerNum() + 1) + ": " + m_Players[i].GetScore() + "                        ";
+            m_ScoreStrings[i] = "Player " + (m_Players[i].GetPlayerNum() + 1) + ": " + m_Players[i].GetScore() + "    ";
             m_ScoreText.text += m_ScoreStrings[i];
         }
     }
@@ -215,6 +241,7 @@ public class ControllerScene : MonoBehaviour
     }
     public void LoadMenu()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene(0);
     }
 
@@ -257,5 +284,10 @@ public class ControllerScene : MonoBehaviour
     {
         m_ScoreBark = s;
         m_IsBark = m_ScoreBark != "";
+    }
+
+    public static void ToggleUpdateText()
+    {
+        m_UpdateText = true;
     }
 }

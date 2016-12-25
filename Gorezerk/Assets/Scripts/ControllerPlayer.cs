@@ -8,6 +8,9 @@ public enum ControllerType
     Keyboard
 }
 
+/// <summary>
+/// This is the complete controller for any player, it handles all input that the players recieve when the game is active
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D), typeof(SpriteRenderer))]
 public class ControllerPlayer : MonoBehaviour
 {
@@ -95,7 +98,7 @@ public class ControllerPlayer : MonoBehaviour
     private KeyCode m_AttackInputK;
     private KeyCode m_GrappleInputK;
 
-    void Start()
+    void Awake()
     {
         m_Renderer = GetComponent<SpriteRenderer>();
         m_Collider = GetComponent<Collider2D>();
@@ -129,7 +132,10 @@ public class ControllerPlayer : MonoBehaviour
         }
         else
             Debug.Log(gameObject.name + " could not find attack!");
+    }
 
+    void Start()
+    {
         //Assign input variable values from toolbox
         m_ControllerNum = Toolbox.Instance.m_Information[m_PlayerNum].GetControllerNum();
         m_Renderer.color = Toolbox.Instance.m_Colors[m_PlayerNum];
@@ -266,16 +272,20 @@ public class ControllerPlayer : MonoBehaviour
     {
         if (m_Hook)
         {
+            //Clamp scale to never be negative
             m_Hook.transform.localScale = new Vector3(Mathf.Clamp(m_Hook.transform.localScale.x, 0.0f, 1000.0f), m_Hook.transform.localScale.y, m_Hook.transform.localScale.z);
             if (!m_IsGrappleCD)
             {
+                //Get input
                 if (!m_ControllerType.Equals(ControllerType.Keyboard))
                     m_IsGrapple = Input.GetAxis(m_GrappleInput) != m_InputValue;
                 else
                     m_IsGrapple = Input.GetKey(m_GrappleInputK);
 
+                //If input & nothing has been hit
                 if (m_IsGrapple && !m_GrappleHit)
                 {
+                    //Set direction only once
                     if (!m_HasSetGrappleDir && m_Rigidbody.velocity.magnitude > 0.1f)
                     {
                         Vector2 dir = m_Rigidbody.velocity.normalized;
@@ -286,17 +296,24 @@ public class ControllerPlayer : MonoBehaviour
                         m_HasSetGrappleDir = true;
                     }
 
+                    //Shoot the grapple in given direction
                     m_Hook.transform.localScale += new Vector3(m_HookTravelSpeed, 0, 0) * Time.deltaTime;
                     m_Hook.transform.localPosition = new Vector3(m_Hook.transform.localScale.x / 2.0f, 0, 0);
 
+                    //Set current direction of grapple (used later in wallcheck etc)
                     Debug.DrawRay(m_HookEndpoint.position, (m_HookEndpoint.position - transform.position).normalized * 0.3f, Color.red);
                     m_GrappleDir = (m_HookEndpoint.position - transform.position).normalized;
 
-                    RaycastHit2D hit = Physics2D.Raycast(m_HookEndpoint.position, (m_HookEndpoint.position - transform.position).normalized, 1.5f);
+                    //Currently using circlecast, gives slightly better results than regular raycasting
+                    //RaycastHit2D hit = Physics2D.Raycast(m_HookEndpoint.position, (m_HookEndpoint.position - transform.position).normalized, 1.5f);
+                    RaycastHit2D hit = Physics2D.CircleCast(m_HookEndpoint.position, 0.5f, Vector2.right * 0);
+                    //If something is hit
                     if (hit)
                     {
-                        if (hit.collider.gameObject != this.gameObject)
+                        //Check hit isn't self & not a headcollider
+                        if (hit.collider.gameObject != this.gameObject && hit.collider.gameObject.tag != "HeadCollider")
                         {
+                            //Set grapple-point
                             if (hit.collider.tag != m_Tag)
                             {
                                 m_HitPosition = hit.point;
@@ -304,6 +321,7 @@ public class ControllerPlayer : MonoBehaviour
                             }
                             else
                             {
+                                //Kill player if hit
                                 if (hit.collider.gameObject.GetComponent<ControllerPlayer>())
                                 {
                                     hit.collider.gameObject.GetComponent<ControllerPlayer>().Kill();
@@ -314,8 +332,13 @@ public class ControllerPlayer : MonoBehaviour
                         }
                     }
                 }
+                //Interrupt the hook if button is released and hook hasn't hit anything
+                else if (!m_GrappleHit && m_HasSetGrappleDir)
+                    InterruptGrappleNoP();
+                //If something was hit
                 else if (m_GrappleHit)
                 {
+                    //Travel to hook
                     if (Vector3.Distance(transform.position, m_HitPosition) > m_HookBreakDistance)
                     {
                         m_Rigidbody.gravityScale = 0.0f;
@@ -323,9 +346,11 @@ public class ControllerPlayer : MonoBehaviour
                         m_Hook.transform.localPosition = new Vector3(m_Hook.transform.localScale.x / 2.0f, 0, 0);
                         m_Rigidbody.velocity = (m_HitPosition - transform.position).normalized * m_TravelToHookSpeed;
 
+                        //Interrupt if button is released
                         if (!m_IsGrapple)
                             InterruptGrapple();
 
+                        //Mid-hook jump
                         if (!m_ControllerType.Equals(ControllerType.Keyboard))
                         {
                             if (Input.GetAxis(m_JumpInput) != 0.0f)
@@ -343,12 +368,14 @@ public class ControllerPlayer : MonoBehaviour
                             }
                         }
                     }
+                    //Grapple-point is reached
                     else
                     {
                         m_Rigidbody.gravityScale = 1.0f;
                         InterruptGrapple();
                     }
                 }
+                //Base-state, button isn't used etc etc
                 else
                 {
                     m_Hook.transform.localPosition = Vector3.zero;
@@ -356,6 +383,7 @@ public class ControllerPlayer : MonoBehaviour
                     m_HasSetGrappleDir = false;
                 }
             }
+            //What happens when grapple is on cd
             else
             {
                 m_Hook.transform.localPosition = Vector3.zero;
@@ -535,11 +563,22 @@ public class ControllerPlayer : MonoBehaviour
         return wallhit;
     }
 
+    /// <summary>
+    /// Regular grapple interrupt, this sets grapple on cooldown and multiplies the players velocity
+    /// </summary>
     void InterruptGrapple()
     {
         m_IsGrappleCD = true;
         m_Rigidbody.velocity *= 0.4f;
         //Debug.Log("Grapple interrupt!");
+    }
+
+    /// <summary>
+    /// No-physics interrupt, sets grapple on cooldown but does not change the players velocity
+    /// </summary>
+    void InterruptGrappleNoP()
+    {
+        m_IsGrappleCD = true;
     }
 
     public void ResetValues()
@@ -589,7 +628,10 @@ public class ControllerPlayer : MonoBehaviour
     public void AddScore(int score)
     {
         if (score > 0)
+        {
             ControllerScene.SetScoreBark("Player" + (m_PlayerNum + 1));
+            ControllerScene.ToggleUpdateText();
+        }
 
         m_Score += score;
     }
