@@ -12,7 +12,7 @@ public class PlayerSlot : MonoBehaviour
     private Text m_NumText;
     private Text m_ReadyText;
     private Text m_SlotText;
-    private Image m_ColorImage;
+    private Image m_Image;
     private bool m_IsOpen = true;
     private bool m_IsReady = false;
 
@@ -26,7 +26,6 @@ public class PlayerSlot : MonoBehaviour
 
     //Color vars
     private int m_ColorCounter = 0;
-    private List<Color> m_Colors = new List<Color>();
 
     void Awake()
     {
@@ -36,9 +35,9 @@ public class PlayerSlot : MonoBehaviour
             m_ReadyText.gameObject.SetActive(false);
 
         m_SlotText = transform.FindChild("SlotText").GetComponent<Text>();
-        m_ColorImage = transform.FindChild("ColorImage").GetComponent<Image>();
-        if (m_ColorImage)
-            m_ColorImage.gameObject.SetActive(false);
+        m_Image = transform.FindChild("ColorImage").GetComponent<Image>();
+        if (m_Image)
+            m_Image.gameObject.SetActive(false);
     }
 	
 	void Update ()
@@ -56,8 +55,8 @@ public class PlayerSlot : MonoBehaviour
         if (m_SlotText)
             m_SlotText.gameObject.SetActive(m_IsOpen);
 
-        if (m_ColorImage)
-            m_ColorImage.gameObject.SetActive(!m_IsOpen);
+        if (m_Image)
+            m_Image.gameObject.SetActive(!m_IsOpen);
 
         if (m_NumText)
             m_NumText.text = "Player" + (m_PlayerNum + 1);
@@ -80,23 +79,29 @@ public class PlayerSlot : MonoBehaviour
                         //Getkeydown functionality for axis-input
                         if (!m_IsAxisInUse)
                         {
+                            ControllerMenu.InsertColor(m_ColorCounter, m_Image.color);
                             //Switch between colors
                             float horizontal = Input.GetAxisRaw("P" + m_ControllerNum + "Horizontal");
                             if (horizontal > 0)
                             {
                                 m_ColorCounter++;
-                                if (m_ColorCounter > m_Colors.Count - 1)
+                                if (m_ColorCounter >= ControllerMenu.GetColorAmount())
                                     m_ColorCounter = 0;
                             }
                             else if (horizontal < 0)
                             {
                                 m_ColorCounter--;
-                                if (m_ColorCounter < 0)
-                                    m_ColorCounter = m_Colors.Count - 1;
+                                if (m_ColorCounter < 0 || m_ColorCounter >= ControllerMenu.GetColorAmount())
+                                    m_ColorCounter = ControllerMenu.GetColorAmount() - 1;
                             }
 
-                            m_ColorImage.color = m_Colors[m_ColorCounter];
-                            Toolbox.Instance.m_Colors[m_PlayerNum] = m_Colors[m_ColorCounter];
+                            //m_ColorImage.color = m_Colors[m_ColorCounter];
+                            //Toolbox.Instance.m_Colors[m_PlayerNum] = m_Colors[m_ColorCounter];
+
+                            m_Image.color = ControllerMenu.GetColor(m_ColorCounter);
+                            Toolbox.Instance.m_Colors[m_PlayerNum] = ControllerMenu.GetColor(m_ColorCounter);
+
+                            ControllerMenu.RemoveColor(m_Image.color);
 
                             m_IsAxisInUse = true;
                         }
@@ -130,21 +135,27 @@ public class PlayerSlot : MonoBehaviour
                     bool input = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
                     if (input)
                     {
-                        if (Input.GetKeyDown(KeyCode.A))
+                        ControllerMenu.InsertColor(m_ColorCounter, m_Image.color);
+                        if (Input.GetKeyDown(KeyCode.D))
                         {
                             m_ColorCounter++;
-                            if (m_ColorCounter > m_Colors.Count - 1)
+                            if (m_ColorCounter >= ControllerMenu.GetColorAmount())
                                 m_ColorCounter = 0;
                         }
-                        else if (Input.GetKeyDown(KeyCode.D))
+                        else if (Input.GetKeyDown(KeyCode.A))
                         {
                             m_ColorCounter--;
-                            if (m_ColorCounter < 0)
-                                m_ColorCounter = m_Colors.Count - 1;
+                            if (m_ColorCounter < 0 || m_ColorCounter >= ControllerMenu.GetColorAmount())
+                                m_ColorCounter = ControllerMenu.GetColorAmount() - 1;
                         }
 
-                        m_ColorImage.color = m_Colors[m_ColorCounter];
-                        Toolbox.Instance.m_Colors[m_PlayerNum] = m_Colors[m_ColorCounter];
+                        //m_ColorImage.color = m_Colors[m_ColorCounter];
+                        //Toolbox.Instance.m_Colors[m_PlayerNum] = m_Colors[m_ColorCounter];
+
+                        m_Image.color = ControllerMenu.GetColor(m_ColorCounter);
+                        Toolbox.Instance.m_Colors[m_PlayerNum] = ControllerMenu.GetColor(m_ColorCounter);
+
+                        ControllerMenu.RemoveColor(m_Image.color);
                     }
                 }
 
@@ -197,13 +208,5 @@ public class PlayerSlot : MonoBehaviour
     public bool GetKeyboard()
     {
         return m_IsKeyboardInput;
-    }
-
-    public void SetColors(List<Color> colors)
-    {
-        for (int i = 0; i < colors.Count; i++)
-        {
-            m_Colors.Add(colors[i]);
-        }
     }
 }

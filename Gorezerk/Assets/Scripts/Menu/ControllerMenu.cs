@@ -46,6 +46,8 @@ public class ControllerMenu : MonoBehaviour
     public float m_CountdownTime = 10.0f;
     public List<Color> m_Colors;
 
+    private static List<Color> m_StaticColors = new List<Color>();
+
     //Player slot vars
     private List<PlayerSlot> m_PlayerSlots = new List<PlayerSlot>();
     private List<bool> m_ControllerSlots = new List<bool>();
@@ -101,10 +103,9 @@ public class ControllerMenu : MonoBehaviour
         {
             m_ControllerSlots.Add(false);
         }
-
-        for (int i = 0; i < m_PlayerSlots.Count; i++)
+        for (int i = 0; i < m_Colors.Count; i++)
         {
-            m_PlayerSlots[i].SetColors(m_Colors);
+            m_StaticColors.Add(m_Colors[i]);
         }
 	}
 	
@@ -204,14 +205,14 @@ public class ControllerMenu : MonoBehaviour
     {
         bool ready = true;
         bool exists = false;
-        int num = 0;
+        //int num = 0;
 
         for (int i = 0; i < m_PlayerSlots.Count; i++)
         {
             if (!m_PlayerSlots[i].GetOpen())
             {
                 exists = true;
-                num++;
+                //num++;
                 if (!m_PlayerSlots[i].GetReady())
                 {
                     ready = false;
@@ -220,11 +221,39 @@ public class ControllerMenu : MonoBehaviour
             }
             else
             {
-                if (i == m_PlayerSlots.Count - 1 && (!exists || num <= 1))
+                if (i == m_PlayerSlots.Count - 1 && (!exists))// || num <= 1))
                     ready = false;
             }
         }
 
         return ready;
+    }
+
+    public static void RemoveColor(Color col)
+    {
+        if (m_StaticColors.Contains(col))
+        {
+            //Debug.Log("Removed color: " + col);
+            m_StaticColors.Remove(col);
+        }
+    }
+
+    public static void InsertColor(int index, Color col)
+    {
+        if (!m_StaticColors.Contains(col))
+        {
+            //Debug.Log("Inserted color at: " + index);
+            m_StaticColors.Insert(index, col);
+        }
+    }
+
+    public static Color GetColor(int index)
+    {
+        return m_StaticColors[index];
+    }
+
+    public static int GetColorAmount()
+    {
+        return m_StaticColors.Count;
     }
 }

@@ -28,6 +28,7 @@ public class ControllerScene : MonoBehaviour
     private Text m_CountdownText;
     private float m_CountdownTimer = 0.0f;
     private static bool m_IsRoundStart = true;
+    private int m_RestartNum = 0;
 
     //Score vars
     private Text m_ScoreText;
@@ -81,6 +82,11 @@ public class ControllerScene : MonoBehaviour
                 }
             }
 
+            if (m_Players.Count > 1)
+                m_RestartNum = 1;
+            else
+                m_RestartNum = 0;
+
             //for (int i = 0; i < Input.GetJoystickNames().Length; i++)
             //{
             //    Debug.Log(Input.GetJoystickNames()[i]);
@@ -132,7 +138,7 @@ public class ControllerScene : MonoBehaviour
             StartRound();
 
         CountdownUpdate();
-        if (m_PlayerCount <= 1)
+        if (m_PlayerCount <= m_RestartNum)
         {
             UpdateText();
             StartRound();
