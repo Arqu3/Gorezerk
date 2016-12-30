@@ -51,7 +51,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 8
+    axis: 2
     joyNum: 1
   - serializedVersion: 3
     m_Name: P0RightTrigger
@@ -67,7 +67,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 9
+    axis: 2
     joyNum: 1
   - serializedVersion: 3
     m_Name: Submit
@@ -179,7 +179,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 8
+    axis: 2
     joyNum: 2
   - serializedVersion: 3
     m_Name: P1RightTrigger
@@ -195,7 +195,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 9
+    axis: 2
     joyNum: 2
   - serializedVersion: 3
     m_Name: P1RightTriggerPS
@@ -269,9 +269,9 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
-    dead: 0.001
-    sensitivity: 1000
+    gravity: 0
+    dead: 0.19
+    sensitivity: 1
     snap: 0
     invert: 0
     type: 2
@@ -293,3 +293,35 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 1
+  - serializedVersion: 3
+    m_Name: P0LeftTriggerXOne
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 2
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: P1LeftTriggerXOne
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 2
+    joyNum: 2

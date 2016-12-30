@@ -143,7 +143,12 @@ public class ControllerMenu : MonoBehaviour
                         m_ControllerSlots[i] = true;
 
                         if (xbox)
-                            type = ControllerType.Xbox;
+                        {
+                            if (Input.GetJoystickNames()[i].Contains("One"))
+                                type = ControllerType.XboxOne;
+                            else
+                                type = ControllerType.Xbox;
+                        }
                         else if (PS)
                             type = ControllerType.PS;
 

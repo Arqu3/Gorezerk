@@ -4,6 +4,7 @@ using System.Collections;
 public enum ControllerType
 {
     Xbox,
+    XboxOne,
     PS,
     Keyboard
 }
@@ -89,7 +90,6 @@ public class ControllerPlayer : MonoBehaviour
     private string m_HorizontalInput;
     private string m_AttackInput;
     private string m_GrappleInput;
-    private float m_InputValue = 0.0f;
 
     //Keyboard
     private KeyCode m_JumpInputK;
@@ -152,7 +152,11 @@ public class ControllerPlayer : MonoBehaviour
             m_JumpInput += "PS";
             m_AttackInput += "PS";
             m_GrappleInput += "PS";
-            m_InputValue = -1.0f;
+        }
+        else if (GetControllerType().Equals(ControllerType.XboxOne))
+        {
+            m_AttackInput = "P" + m_ControllerNum + "LeftTriggerXOne";
+            m_GrappleInput += "XOne";
         }
 
         //Bad case, remove later
@@ -183,6 +187,8 @@ public class ControllerPlayer : MonoBehaviour
             m_Rigidbody.gravityScale = 0.0f;
 
         Debug.DrawRay(transform.position, m_Rigidbody.velocity.normalized * 1.5f, Color.blue);
+
+        Debug.Log(Input.GetAxis(m_GrappleInput) + " " + Input.GetAxis(m_AttackInput));
     }
 
     void MovementUpdate()
@@ -278,7 +284,7 @@ public class ControllerPlayer : MonoBehaviour
             {
                 //Get input
                 if (!m_ControllerType.Equals(ControllerType.Keyboard))
-                    m_IsGrapple = Input.GetAxis(m_GrappleInput) != m_InputValue;
+                    m_IsGrapple = CheckLeftTrigger();
                 else
                     m_IsGrapple = Input.GetKey(m_GrappleInputK);
 
@@ -418,7 +424,7 @@ public class ControllerPlayer : MonoBehaviour
         if (m_CanAttack)
         {
             if (!m_ControllerType.Equals(ControllerType.Keyboard))
-                m_IsAttacking = Input.GetAxis(m_AttackInput) != m_InputValue;
+                m_IsAttacking = CheckRightTrigger();
             else
                 m_IsAttacking = Input.GetKey(m_AttackInputK);
 
@@ -666,5 +672,52 @@ public class ControllerPlayer : MonoBehaviour
     public Rigidbody2D GetRigidbody()
     {
         return m_Rigidbody;
+    }
+
+    bool CheckAxis(string name)
+    {
+        if (Input.GetAxis(name) != 0.0f)
+        {
+            Debug.Log(name);
+            return true;
+        }
+
+        return false;
+    }
+
+    bool CheckLeftTrigger()
+    {
+        bool state = false;
+        switch (m_ControllerType)
+        {
+            case ControllerType.Xbox:
+                state = Mathf.Round(Input.GetAxis(m_GrappleInput)) == 1.0f;
+                break;
+            case ControllerType.XboxOne:
+                state = Input.GetAxis(m_GrappleInput) == 1.0f; 
+                break;
+            case ControllerType.PS:
+                state = Input.GetAxis(m_GrappleInput) != -1.0f;
+                break;
+        }
+        return state;
+    }
+
+    bool CheckRightTrigger()
+    {
+        bool state = false;
+        switch (m_ControllerType)
+        {
+            case ControllerType.Xbox:
+                state = Mathf.Round(Input.GetAxis(m_AttackInput)) == -1.0f;
+                break;
+            case ControllerType.XboxOne:
+                state = Input.GetAxis(m_GrappleInput) == -1.0f;
+                break;
+            case ControllerType.PS:
+                state = Input.GetAxis(m_AttackInput) != -1.0f;
+                break;
+        }
+        return state;
     }
 }
