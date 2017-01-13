@@ -187,8 +187,6 @@ public class ControllerPlayer : MonoBehaviour
             m_Rigidbody.gravityScale = 0.0f;
 
         Debug.DrawRay(transform.position, m_Rigidbody.velocity.normalized * 1.5f, Color.blue);
-
-        Debug.Log(Input.GetAxis(m_GrappleInput) + " " + Input.GetAxis(m_AttackInput));
     }
 
     void MovementUpdate()
