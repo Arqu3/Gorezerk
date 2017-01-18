@@ -12,7 +12,7 @@ public enum ControllerType
 /// <summary>
 /// This is the complete controller for any player, it handles all input that the players recieve when the game is active
 /// </summary>
-[RequireComponent(typeof(Rigidbody2D), typeof(Collider2D), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Collider2D), typeof(MeshRenderer))]
 public class ControllerPlayer : MonoBehaviour
 {
     //Public vars
@@ -33,7 +33,7 @@ public class ControllerPlayer : MonoBehaviour
 
     //Component vars
     private Rigidbody2D m_Rigidbody;
-    private SpriteRenderer m_Renderer;
+    private MeshRenderer m_Renderer;
     private Collider2D m_Collider;
 
     //Ground vars
@@ -45,6 +45,7 @@ public class ControllerPlayer : MonoBehaviour
 
     //Movement vars
     private float m_Horizontal = 0.0f;
+    private float m_Vertical = 0.0f;
 
     //Raycast vars
     private string m_Tag;
@@ -62,6 +63,7 @@ public class ControllerPlayer : MonoBehaviour
     private Vector3 m_HitPosition = Vector3.zero;
     private GameObject m_Hook;
     private Transform m_HookRotation;
+    private Transform m_PointerRotation;
     private Transform m_HookEndpoint;
     private Quaternion m_LocalHookRot;
 
@@ -81,6 +83,9 @@ public class ControllerPlayer : MonoBehaviour
     private bool m_IsParry = false;
     private float m_ParryTimer = 0.0f;
 
+    //Head vars
+    private GameObject m_Head;
+
     //Input vars
     private ControllerType m_ControllerType = ControllerType.Xbox;
     private int m_ControllerNum = 0;
@@ -88,6 +93,7 @@ public class ControllerPlayer : MonoBehaviour
     //Input string vars
     private string m_JumpInput;
     private string m_HorizontalInput;
+    private string m_VerticalInput;
     private string m_AttackInput;
     private string m_GrappleInput;
 
@@ -95,16 +101,24 @@ public class ControllerPlayer : MonoBehaviour
     private KeyCode m_JumpInputK;
     private KeyCode m_HorizontalInputK1;
     private KeyCode m_HorizontalInputK2;
+    private KeyCode m_VerticalInputK1;
+    private KeyCode m_VerticalInputK2;
     private KeyCode m_AttackInputK;
     private KeyCode m_GrappleInputK;
 
     void Awake()
     {
-        m_Renderer = GetComponent<SpriteRenderer>();
+        m_Renderer = GetComponent<MeshRenderer>();
         m_Collider = GetComponent<Collider2D>();
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Tag = gameObject.tag;
         m_HookTimer = m_HookCooldown;
+
+        if (transform.FindChild("HeadCollider"))
+            m_Head = transform.FindChild("HeadCollider").gameObject;
+
+        if (transform.FindChild("PointerRot"))
+            m_PointerRotation = transform.FindChild("PointerRot");
 
         if (transform.FindChild("HookRot"))
             m_HookRotation = transform.FindChild("HookRot");
@@ -138,12 +152,18 @@ public class ControllerPlayer : MonoBehaviour
     {
         //Assign input variable values from toolbox
         m_ControllerNum = Toolbox.Instance.m_Information[m_PlayerNum].GetControllerNum();
-        m_Renderer.color = Toolbox.Instance.m_Colors[m_PlayerNum];
+        m_Renderer.material.color = Toolbox.Instance.m_Colors[m_PlayerNum];
+        if (m_Head)
+        {
+            if (m_Head.GetComponent<MeshRenderer>())
+                m_Head.GetComponent<MeshRenderer>().material.color = Toolbox.Instance.m_Colors[m_PlayerNum];
+        }
         m_ControllerType = Toolbox.Instance.m_Information[m_PlayerNum].GetCType();
 
         //Assign input variables
         m_JumpInput = "P" + m_ControllerNum + "Jump";
         m_HorizontalInput = "P" + m_ControllerNum + "Horizontal";
+        m_VerticalInput = "P" + m_ControllerNum + "Vertical";
         m_AttackInput = "P" + m_ControllerNum + "RightTrigger";
         m_GrappleInput = "P" + m_ControllerNum + "LeftTrigger";
 
@@ -165,6 +185,8 @@ public class ControllerPlayer : MonoBehaviour
             m_JumpInputK = KeyCode.Space;
             m_HorizontalInputK1 = KeyCode.A;
             m_HorizontalInputK2 = KeyCode.D;
+            m_VerticalInputK1 = KeyCode.S;
+            m_VerticalInputK2 = KeyCode.W;
             m_AttackInputK = KeyCode.L;
             m_GrappleInputK = KeyCode.P;
         }
@@ -173,9 +195,15 @@ public class ControllerPlayer : MonoBehaviour
     void Update()
     {
         if (ControllerScene.GetRoundStart())
+        {
+            m_Rigidbody.simulated = false;
             m_Rigidbody.isKinematic = true;
+        }
         else
+        {
+            m_Rigidbody.simulated = true;
             m_Rigidbody.isKinematic = false;
+        }
 
         if (!ControllerScene.GetPaused())
         {
@@ -185,8 +213,6 @@ public class ControllerPlayer : MonoBehaviour
         }
         else
             m_Rigidbody.gravityScale = 0.0f;
-
-        Debug.DrawRay(transform.position, m_Rigidbody.velocity.normalized * 1.5f, Color.blue);
     }
 
     void MovementUpdate()
@@ -199,7 +225,10 @@ public class ControllerPlayer : MonoBehaviour
         if (!WallCheck())
         {
             if (!m_ControllerType.Equals(ControllerType.Keyboard))
+            {
                 m_Horizontal = Input.GetAxis(m_HorizontalInput);
+                m_Vertical = Input.GetAxis(m_VerticalInput);
+            }
             else
             {
                 if (Input.GetKey(m_HorizontalInputK1))
@@ -208,6 +237,13 @@ public class ControllerPlayer : MonoBehaviour
                     m_Horizontal = 1.0f;
                 else
                     m_Horizontal = 0.0f;
+
+                if (Input.GetKey(m_VerticalInputK1))
+                    m_Vertical = -1.0f;
+                else if (Input.GetKey(m_VerticalInputK2))
+                    m_Vertical = 1.0f;
+                else
+                    m_Vertical = 0.0f;
             }
         }
 
@@ -278,6 +314,16 @@ public class ControllerPlayer : MonoBehaviour
         {
             //Clamp scale to never be negative
             m_Hook.transform.localScale = new Vector3(Mathf.Clamp(m_Hook.transform.localScale.x, 0.0f, 1000.0f), m_Hook.transform.localScale.y, m_Hook.transform.localScale.z);
+
+            //Always rotate pointer
+            if (m_Rigidbody.velocity.magnitude > 0.1f)
+            {
+                Vector2 dir = new Vector2(m_Horizontal, m_Vertical).normalized;
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                Quaternion targetRot = Quaternion.AngleAxis(angle, Vector3.forward);
+                m_PointerRotation.localRotation = Quaternion.Slerp(m_PointerRotation.localRotation, Quaternion.Euler(targetRot.eulerAngles.x, targetRot.eulerAngles.y, Mathf.Round(targetRot.eulerAngles.z / 45f) * 45f), 100f * Time.deltaTime);
+            }
+
             if (!m_IsGrappleCD)
             {
                 //Get input
@@ -292,10 +338,11 @@ public class ControllerPlayer : MonoBehaviour
                     //Set direction only once
                     if (!m_HasSetGrappleDir && m_Rigidbody.velocity.magnitude > 0.1f)
                     {
-                        Vector2 dir = m_Rigidbody.velocity.normalized;
-                        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-                        m_LocalHookRot = Quaternion.AngleAxis(angle, Vector3.forward);
-                        m_HookRotation.transform.localRotation = m_LocalHookRot;
+                        //Vector2 dir = m_Rigidbody.velocity.normalized;
+                        //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                        //m_LocalHookRot = Quaternion.AngleAxis(angle, Vector3.forward);
+                        //m_HookRotation.localRotation = m_LocalHookRot;
+                        m_HookRotation.localRotation = m_PointerRotation.localRotation;
 
                         m_HasSetGrappleDir = true;
                     }
@@ -325,14 +372,24 @@ public class ControllerPlayer : MonoBehaviour
                             }
                             else
                             {
-                                //Kill player if hit
-                                if (hit.collider.gameObject.GetComponent<ControllerPlayer>())
-                                {
-                                    hit.collider.gameObject.GetComponent<ControllerPlayer>().Kill();
-                                    AddScore(1);
-                                    InterruptGrapple();
-                                }
+                                m_HitPosition = hit.point;
+                                m_GrappleHit = true;
+                                ////Kill player if hit
+                                //if (hit.collider.gameObject.GetComponent<ControllerPlayer>())
+                                //{
+                                //    hit.collider.gameObject.GetComponent<ControllerPlayer>().Kill();
+                                //    AddScore(1);
+                                //    InterruptGrapple();
+                                //}
                             }
+                        }
+                        else if (hit.collider.gameObject.tag == "HeadCollider" && hit.collider.gameObject != m_Head)
+                        {
+                            m_HitPosition = hit.point;
+                            m_GrappleHit = true;
+                            //hit.collider.gameObject.GetComponentInParent<ControllerPlayer>().Kill();
+                            //AddScore(1);
+                            //InterruptGrapple();
                         }
                     }
                 }
@@ -670,17 +727,6 @@ public class ControllerPlayer : MonoBehaviour
     public Rigidbody2D GetRigidbody()
     {
         return m_Rigidbody;
-    }
-
-    bool CheckAxis(string name)
-    {
-        if (Input.GetAxis(name) != 0.0f)
-        {
-            Debug.Log(name);
-            return true;
-        }
-
-        return false;
     }
 
     bool CheckLeftTrigger()

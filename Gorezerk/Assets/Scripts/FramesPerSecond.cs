@@ -47,7 +47,7 @@ public class FramesPerSecond : MonoBehaviour
             else
                 m_Text.color = Color.green;
 
-            m_Text.text = fps.ToString("F2");
+            m_Text.text = fps.ToString("F0");
 
             m_TimeLeft = m_UpdateInterval;
             m_Accum = 0.0f;
