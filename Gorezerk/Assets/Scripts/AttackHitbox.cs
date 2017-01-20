@@ -30,13 +30,6 @@ public class AttackHitbox : MonoBehaviour
                     col.gameObject.GetComponent<ControllerPlayer>().Kill();
                     m_Player.AddScore(1);
                 }
-                else if (col.gameObject.GetComponent<AttackHitbox>())
-                {
-                    Vector2 dir = (m_Player.transform.position - col.gameObject.GetComponent<AttackHitbox>().GetPlayer().transform.position).normalized;
-                    m_Player.SetParry(true);
-                    m_Player.InterruptAttack();
-                    m_Player.GetRigidbody().AddForce(dir * m_Player.m_ParryForce, ForceMode2D.Impulse);
-                }
             }
         }
     }

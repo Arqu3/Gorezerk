@@ -2392,7 +2392,7 @@ MonoBehaviour:
   m_CountdownTime: 3
   m_CountdownSpeed: 2
   m_BarkTime: 1
-  m_PlayerPrefab: {fileID: 1080090613899400, guid: ed09a0441c5241e4e8927059f2c95405,
+  m_PlayerPrefab: {fileID: 1882951712129200, guid: ed09a0441c5241e4e8927059f2c95405,
     type: 2}
   m_Players: []
 --- !u!4 &1570051525

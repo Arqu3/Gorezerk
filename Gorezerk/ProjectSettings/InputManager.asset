@@ -51,7 +51,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 2
+    axis: 8
     joyNum: 1
   - serializedVersion: 3
     m_Name: P0RightTrigger
@@ -67,7 +67,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 2
+    axis: 9
     joyNum: 1
   - serializedVersion: 3
     m_Name: Submit
@@ -179,7 +179,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 2
+    axis: 8
     joyNum: 2
   - serializedVersion: 3
     m_Name: P1RightTrigger
@@ -195,7 +195,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 2
+    axis: 9
     joyNum: 2
   - serializedVersion: 3
     m_Name: P1RightTriggerPS
@@ -371,7 +371,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 2
+    axis: 8
     joyNum: 3
   - serializedVersion: 3
     m_Name: P2RightTrigger
@@ -387,7 +387,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 2
+    axis: 9
     joyNum: 3
   - serializedVersion: 3
     m_Name: P3RightTrigger
@@ -403,7 +403,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 2
+    axis: 9
     joyNum: 4
   - serializedVersion: 3
     m_Name: P3LeftTrigger
@@ -419,7 +419,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 2
+    axis: 8
     joyNum: 4
   - serializedVersion: 3
     m_Name: P2RightTriggerPS
