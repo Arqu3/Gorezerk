@@ -21,6 +21,7 @@ public class ControllerPlayer : MonoBehaviour
     public float m_JumpForce = 10.0f;
     public bool m_IsAirMovement = false;
     public float m_DampXAmount = 0.5f;
+    public int m_HookCharges = 3;
     public float m_HookTravelSpeed = 10.0f;
     public float m_TravelToHookSpeed = 10.0f;
     public float m_HookBreakDistance = 1.0f;
@@ -41,15 +42,12 @@ public class ControllerPlayer : MonoBehaviour
     private bool m_IsOnGround = false;
     private bool m_IsInAir = true;
 
-    //Air vars
-    private float m_AirTime = 0.0f;
-
     //Movement vars
     private float m_Horizontal = 0.0f;
     private float m_Vertical = 0.0f;
 
     //Raycast vars
-    private string m_Tag;
+    private string m_Tag = "";
 
     //Score vars
     private int m_Score = 0;
@@ -58,14 +56,16 @@ public class ControllerPlayer : MonoBehaviour
     private bool m_IsGrapple = false;
     private bool m_GrappleHit = false;
     private bool m_HasSetGrappleDir = false;
+    private bool m_HasReachedHook = false;
     private Vector3 m_GrappleDir = Vector3.zero;
-    private bool m_IsGrappleCD = false;
     private float m_HookTimer = 0.0f;
     private GameObject m_HookLine;
     private Transform m_PointerRotation;
     private Transform m_Pointer;
     private bool m_CanShootHook = true;
     private GameObject m_HookClone;
+    private Vector2 m_Aim = Vector2.zero;
+    private int m_CurHookCharges = 0;
 
     //Attack vars
     private bool m_CanAttack = true;
@@ -158,6 +158,9 @@ public class ControllerPlayer : MonoBehaviour
 
     void Start()
     {
+        //Assign current amount of hook charges
+        m_CurHookCharges = m_HookCharges;
+
         //Assign input variable values from toolbox
         m_ControllerNum = Toolbox.Instance.m_Information[m_PlayerNum].GetControllerNum();
         m_Renderer.material.color = Toolbox.Instance.m_Colors[m_PlayerNum];
@@ -299,15 +302,12 @@ public class ControllerPlayer : MonoBehaviour
             }
         }
 
-        if (GroundCheck())
+        if (!m_GrappleHit)
         {
-            m_Rigidbody.gravityScale = 0.0f;
-            m_AirTime = 0.0f;
-        }
-        else
-        {
-            m_Rigidbody.gravityScale = 1.0f;
-            m_AirTime += Time.deltaTime;
+            if (GroundCheck())
+                m_Rigidbody.gravityScale = 0.0f;
+            else
+                m_Rigidbody.gravityScale = 1.0f;
         }
     }
 
@@ -320,6 +320,53 @@ public class ControllerPlayer : MonoBehaviour
     {
         if (m_HookPrefab)
         {
+            //Set aim
+            if (!m_ControllerType.Equals(ControllerType.Keyboard))
+            {
+                //Controller
+                if (Mathf.Abs(Input.GetAxis(m_HorizontalInput)) > 0.1f)
+                    m_Aim.x = Input.GetAxis(m_HorizontalInput);
+
+                if (Mathf.Abs(Input.GetAxis(m_VerticalInput)) > 0.1f)
+                    m_Aim.y = Input.GetAxis(m_VerticalInput);
+            }
+            else
+            {
+                //Keyboard
+                //X
+                if (Input.GetKey(m_HorizontalInputK1) || Input.GetKey(m_HorizontalInputK2))
+                {
+                    if (Input.GetKey(m_HorizontalInputK1))
+                        m_Aim.x = -1.0f;
+                    else if (Input.GetKey(m_HorizontalInputK2))
+                        m_Aim.x = 1.0f;
+                }
+                else if (Input.GetKey(m_VerticalInputK1) || Input.GetKey(m_VerticalInputK2))
+                    m_Aim.x = 0.0f;
+
+                //Y
+                if (Input.GetKey(m_VerticalInputK1) || Input.GetKey(m_VerticalInputK2))
+                {
+                    if (Input.GetKey(m_VerticalInputK1))
+                        m_Aim.y = -1.0f;
+                    else if (Input.GetKey(m_VerticalInputK2))
+                        m_Aim.y = 1.0f;
+                }
+                else if (Input.GetKey(m_HorizontalInputK1) || Input.GetKey(m_HorizontalInputK2))
+                    m_Aim.y = 0.0f;
+            }
+
+            //Hook charges cooldown
+            if (m_CurHookCharges < m_HookCharges)
+            {
+                m_HookTimer -= Time.deltaTime;
+                if (m_HookTimer <= 0.0f)
+                {
+                    m_CurHookCharges++;
+                    m_HookTimer = m_HookCooldown;
+                }
+            }
+
             //Clamp scale to never be negative
             m_HookLine.transform.localScale = new Vector3(Mathf.Clamp(m_HookLine.transform.localScale.x, 0.0f, 1000.0f), m_HookLine.transform.localScale.y, m_HookLine.transform.localScale.z);
             //Set line between player and hook if active, else set to 0
@@ -342,41 +389,43 @@ public class ControllerPlayer : MonoBehaviour
             //Always rotate pointer
             if (m_Rigidbody.velocity.magnitude > 0.1f)
             {
-                Vector2 dir = new Vector2(m_Horizontal, m_Vertical).normalized;
+                Vector2 dir = new Vector2(m_Aim.x, m_Aim.y).normalized;
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 Quaternion targetRot = Quaternion.AngleAxis(angle, Vector3.forward);
-                m_PointerRotation.localRotation = Quaternion.Slerp(m_PointerRotation.localRotation, Quaternion.Euler(targetRot.eulerAngles.x, targetRot.eulerAngles.y, Mathf.Round(targetRot.eulerAngles.z / 45f) * 45f), 100f * Time.deltaTime);
+                m_PointerRotation.localRotation = Quaternion.Slerp(m_PointerRotation.localRotation, Quaternion.Euler(targetRot.eulerAngles.x, targetRot.eulerAngles.y, 
+                    Mathf.Round(targetRot.eulerAngles.z / 45f) * 45f), 100f * Time.deltaTime);
             }
 
-            if (!m_IsGrappleCD)
+            //Get input
+            if (!m_ControllerType.Equals(ControllerType.Keyboard))
+                m_IsGrapple = CheckLeftTrigger();
+            else
+                m_IsGrapple = Input.GetKey(m_GrappleInputK);
+
+            //If input & nothing has been hit
+            if (m_IsGrapple && !m_GrappleHit)
             {
-                //Get input
-                if (!m_ControllerType.Equals(ControllerType.Keyboard))
-                    m_IsGrapple = CheckLeftTrigger();
-                else
-                    m_IsGrapple = Input.GetKey(m_GrappleInputK);
+                //Set direction only once
+                if (!m_HasSetGrappleDir)
+                    m_HasSetGrappleDir = true;
 
-                //If input & nothing has been hit
-                if (m_IsGrapple && !m_GrappleHit)
+                //Set initial grapple-direction
+                m_GrappleDir = m_Pointer.position - transform.position;
+                m_GrappleDir.z = 0.0f;
+
+                //Spawn hook prefab
+                if (m_HookPrefab && m_CanShootHook && m_CurHookCharges > 0)
                 {
-                    //Set direction only once
-                    if (!m_HasSetGrappleDir && m_Rigidbody.velocity.magnitude > 0.1f)
-                        m_HasSetGrappleDir = true;
+                    m_HookClone = (GameObject)Instantiate(m_HookPrefab, transform.position, Quaternion.identity);
+                    if (m_HookClone.GetComponent<Rigidbody2D>())
+                        m_HookClone.GetComponent<Rigidbody2D>().velocity = m_GrappleDir.normalized * m_HookTravelSpeed;
 
-                    //Set initial grapple-direction
-                    m_GrappleDir = m_Pointer.position - transform.position;
-                    m_GrappleDir.z = 0.0f;
+                    m_CanShootHook = false;
+                    m_CurHookCharges--;
+                }
 
-                    //Spawn hook prefab
-                    if (m_HookPrefab && m_CanShootHook)
-                    {
-                        m_HookClone = (GameObject)Instantiate(m_HookPrefab, transform.position, Quaternion.identity);
-                        if (m_HookClone.GetComponent<Rigidbody2D>())
-                            m_HookClone.GetComponent<Rigidbody2D>().velocity = m_GrappleDir.normalized * m_HookTravelSpeed;
-
-                        m_CanShootHook = false;
-                    }
-
+                if (m_HookClone)
+                {
                     //Currently using circlecast, gives slightly better results than regular raycasting
                     RaycastHit2D hit = Physics2D.CircleCast(m_HookClone.transform.position, 0.5f, Vector2.right * 0);
                     //If something is hit
@@ -393,70 +442,94 @@ public class ControllerPlayer : MonoBehaviour
                             {
                                 m_HookClone.GetComponent<Rigidbody2D>().simulated = false;
                                 m_HookClone.transform.SetParent(hit.collider.gameObject.transform);
-                                Debug.Log("parent set");
+                                //Debug.Log("parent set");
                             }
                         }
                     }
                 }
-                //Interrupt the hook if button is released and hook hasn't hit anything
-                else if (!m_GrappleHit && m_HasSetGrappleDir)
-                    InterruptGrappleNoP();
-                //If something was hit
-                else if (m_GrappleHit)
+            }
+            //Interrupt the hook if button is released and hook hasn't hit anything
+            else if (!m_GrappleHit && m_HasSetGrappleDir)
+                InterruptGrappleNoP();
+            //If something was hit
+            else if (m_GrappleHit)
+            {
+                //Travel to hook
+                if (Vector3.Distance(transform.position, m_HookClone.transform.position) > m_HookBreakDistance && !m_HasReachedHook)
                 {
-                    //Travel to hook
-                    if (Vector3.Distance(transform.position, m_HookClone.transform.position) > m_HookBreakDistance)
+                    m_Rigidbody.gravityScale = 0.0f;
+                    m_Rigidbody.velocity = (m_HookClone.transform.position - transform.position).normalized * m_TravelToHookSpeed;
+
+                    //Interrupt if button is released
+                    if (!m_IsGrapple)
+                        InterruptGrapple();
+
+                    //Mid-hook jump
+                    if (!m_ControllerType.Equals(ControllerType.Keyboard))
                     {
-                        m_Rigidbody.gravityScale = 0.0f;
-                        m_Rigidbody.velocity = (m_HookClone.transform.position - transform.position).normalized * m_TravelToHookSpeed;
-
-                        //Interrupt if button is released
-                        if (!m_IsGrapple)
+                        if (Input.GetAxis(m_JumpInput) != 0.0f)
+                        {
                             InterruptGrapple();
-
-                        //Mid-hook jump
-                        if (!m_ControllerType.Equals(ControllerType.Keyboard))
-                        {
-                            if (Input.GetAxis(m_JumpInput) != 0.0f)
-                            {
-                                InterruptGrapple();
-                                Jump();
-                            }
-                        }
-                        else
-                        {
-                            if (Input.GetKey(m_JumpInputK))
-                            {
-                                InterruptGrapple();
-                                Jump();
-                            }
+                            Jump();
                         }
                     }
-                    //Grapple-point is reached
                     else
                     {
-                        m_Rigidbody.gravityScale = 1.0f;
-                        InterruptGrapple();
+                        if (Input.GetKey(m_JumpInputK))
+                        {
+                            InterruptGrapple();
+                            Jump();
+                        }
                     }
                 }
-                //Base-state, button isn't used etc etc
-                else
-                    m_HasSetGrappleDir = false;
-            }
-            //What happens when grapple is on cd
-            else
-            {
-                m_HasSetGrappleDir = false;
-                m_GrappleHit = false;
-
-                if (m_HookTimer >= 0.0f)
-                    m_HookTimer -= Time.deltaTime;
+                //Grapple-point is reached
                 else
                 {
-                    m_IsGrappleCD = false;
-                    m_HookTimer = m_HookCooldown;
+                    //Stay on grapple point
+                    m_HasReachedHook = true;
+
+                    //Release if too far away from hit point or released grapple-button
+                    if (Vector3.Distance(transform.position, m_HookClone.transform.position) > m_HookBreakDistance)
+                        InterruptGrapple();
+                    else if (!m_IsGrapple)
+                        InterruptGrapple();
+
+                    //Release if jump
+                    if (!m_ControllerType.Equals(ControllerType.Keyboard))
+                    {
+                        if (Input.GetAxis(m_JumpInput) != 0.0f)
+                        {
+                            InterruptGrapple();
+                            Jump();
+                        }
+                    }
+                    else
+                    {
+                        if (Input.GetKey(m_JumpInputK))
+                        {
+                            InterruptGrapple();
+                            Jump();
+                        }
+                    }
                 }
             }
+            //Base-state, button isn't used etc etc
+            else
+                m_HasSetGrappleDir = false;
+            //What happens when grapple is on cd
+            //else
+            //{
+            //    m_HasSetGrappleDir = false;
+            //    m_GrappleHit = false;
+
+            //    if (m_HookTimer >= 0.0f)
+            //        m_HookTimer -= Time.deltaTime;
+            //    else
+            //    {
+            //        m_IsGrappleCD = false;
+            //        m_HookTimer = m_HookCooldown;
+            //    }
+            //}
         }
     }
 
@@ -567,9 +640,6 @@ public class ControllerPlayer : MonoBehaviour
 
     bool WallCheck()
     {
-        //Vector3 pos = new Vector3(transform.position.x + m_Collider.bounds.size.x / 2, transform.position.y + ((-m_Collider.bounds.size.y / 2.0f) * 0.8f), 0);
-        //Debug.DrawRay(pos, Vector3.up * m_Collider.bounds.size.y * 0.8f);
-
         float x = 0.0f;
         bool wallhit = false;
 
@@ -614,13 +684,13 @@ public class ControllerPlayer : MonoBehaviour
                     }
                 }
 
-                if (m_GrappleHit)
-                {
-                    if (i == 1 && m_GrappleDir.x < 0)
-                        InterruptGrapple();
-                    else if (i == 0 && m_GrappleDir.x > 0)
-                        InterruptGrapple();
-                }
+                //if (m_GrappleHit)
+                //{
+                //    if (i == 1 && m_GrappleDir.x < 0)
+                //        InterruptGrapple();
+                //    else if (i == 0 && m_GrappleDir.x > 0)
+                //        InterruptGrapple();
+                //}
 
                 col = Color.red;
                 wallhit = true;
@@ -636,12 +706,8 @@ public class ControllerPlayer : MonoBehaviour
     /// </summary>
     void InterruptGrapple()
     {
-        m_IsGrappleCD = true;
+        InterruptGrappleNoP();
         m_Rigidbody.velocity *= 0.4f;
-        if (m_HookClone)
-            Destroy(m_HookClone);
-        m_CanShootHook = true;
-        //Debug.Log("Grapple interrupt!");
     }
 
     /// <summary>
@@ -649,7 +715,10 @@ public class ControllerPlayer : MonoBehaviour
     /// </summary>
     void InterruptGrappleNoP()
     {
-        m_IsGrappleCD = true;
+        m_HasReachedHook = false;
+        m_HasSetGrappleDir = false;
+        m_GrappleHit = false;
+        m_Rigidbody.gravityScale = 1.0f;
         if (m_HookClone)
             Destroy(m_HookClone);
         m_CanShootHook = true;
@@ -663,13 +732,15 @@ public class ControllerPlayer : MonoBehaviour
         m_GrappleHit = false;
         m_HasSetGrappleDir = false;
         m_GrappleDir = Vector3.zero;
-        m_IsGrappleCD = false;
-        m_HookTimer = 0.0f;
+        m_HasReachedHook = false;
+        m_HookTimer = m_HookCooldown;
         m_HookLine.transform.localPosition = Vector3.zero;
         m_HookLine.transform.localScale = new Vector3(m_HookLine.transform.localScale.x, 0, m_HookLine.transform.localScale.z);
         if (m_HookClone)
             Destroy(m_HookClone);
         m_CanShootHook = true;
+        m_Aim = Vector2.zero;
+        m_CurHookCharges = m_HookCharges;
 
         //Attack vars
         m_CanAttack = true;
@@ -690,9 +761,10 @@ public class ControllerPlayer : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (m_GrappleHit)
+        if (m_HookClone)
         {
-            InterruptGrapple();
+            if (m_GrappleHit && Vector3.Distance(transform.position, m_HookClone.transform.position) > m_HookBreakDistance)
+                InterruptGrapple();
         }
     }
 
@@ -727,21 +799,33 @@ public class ControllerPlayer : MonoBehaviour
         return m_ControllerType;
     }
 
-    public void InterruptAttack()
-    {
-        m_CanAttack = false;
-        m_AttackTimer = 0.0f;
-        m_AttackBox.gameObject.SetActive(false);
-    }
+    //public void InterruptAttack()
+    //{
+    //    m_CanAttack = false;
+    //    m_AttackTimer = 0.0f;
+    //    m_AttackBox.gameObject.SetActive(false);
+    //}
 
     public void SetParry(bool state)
     {
         m_IsParry = state;
+        //Reset attack
+        if (m_IsParry)
+        {
+            m_AttackTimer = 0.0f;
+            m_AttackBox.gameObject.SetActive(false);
+            m_CanAttack = false;
+        }
     }
 
     public Rigidbody2D GetRigidbody()
     {
         return m_Rigidbody;
+    }
+
+    public int GetCurrentHookCharges()
+    {
+        return m_CurHookCharges;
     }
 
     bool CheckLeftTrigger()

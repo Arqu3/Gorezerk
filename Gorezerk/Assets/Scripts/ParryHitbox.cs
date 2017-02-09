@@ -28,7 +28,7 @@ public class ParryHitbox : MonoBehaviour
             {
                 Vector2 dir = (m_Player.transform.position - col.gameObject.GetComponent<ParryHitbox>().GetPlayer().transform.position).normalized;
                 m_Player.SetParry(true);
-                m_Player.InterruptAttack();
+                //m_Player.InterruptAttack();
                 m_Player.GetRigidbody().AddForce(dir * m_Player.m_ParryForce, ForceMode2D.Impulse);
             }
         }

@@ -111,6 +111,9 @@ public class ControllerMenu : MonoBehaviour
 	
 	void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+
         InputUpdate();
         CountdownUpdate();
     }

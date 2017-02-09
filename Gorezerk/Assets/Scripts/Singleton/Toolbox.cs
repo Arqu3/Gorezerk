@@ -19,6 +19,7 @@ public class Toolbox : Singleton<Toolbox>
     public int m_PlayerCount = 0;
     public List<PlayerInformation> m_Information = new List<PlayerInformation>();
     public List<Color> m_Colors = new List<Color>();
+    public float m_MusicVolume = 0.5f;
 
     //Used whenever menu is loaded *BE CAREFUL WHEN TO CALL THIS*
     public void ClearInformation()
