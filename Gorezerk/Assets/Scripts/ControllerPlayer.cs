@@ -44,7 +44,6 @@ public class ControllerPlayer : MonoBehaviour
 
     //Movement vars
     private float m_Horizontal = 0.0f;
-    private float m_Vertical = 0.0f;
 
     //Raycast vars
     private string m_Tag = "";
@@ -236,10 +235,7 @@ public class ControllerPlayer : MonoBehaviour
         if (!WallCheck())
         {
             if (!m_ControllerType.Equals(ControllerType.Keyboard))
-            {
                 m_Horizontal = Input.GetAxis(m_HorizontalInput);
-                m_Vertical = Input.GetAxis(m_VerticalInput);
-            }
             else
             {
                 if (Input.GetKey(m_HorizontalInputK1))
@@ -248,13 +244,6 @@ public class ControllerPlayer : MonoBehaviour
                     m_Horizontal = 1.0f;
                 else
                     m_Horizontal = 0.0f;
-
-                if (Input.GetKey(m_VerticalInputK1))
-                    m_Vertical = -1.0f;
-                else if (Input.GetKey(m_VerticalInputK2))
-                    m_Vertical = 1.0f;
-                else
-                    m_Vertical = 0.0f;
             }
         }
 
@@ -392,6 +381,7 @@ public class ControllerPlayer : MonoBehaviour
                 Vector2 dir = new Vector2(m_Aim.x, m_Aim.y).normalized;
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 Quaternion targetRot = Quaternion.AngleAxis(angle, Vector3.forward);
+                //Rotate in steps of 45 degrees
                 m_PointerRotation.localRotation = Quaternion.Slerp(m_PointerRotation.localRotation, Quaternion.Euler(targetRot.eulerAngles.x, targetRot.eulerAngles.y, 
                     Mathf.Round(targetRot.eulerAngles.z / 45f) * 45f), 100f * Time.deltaTime);
             }
@@ -556,11 +546,11 @@ public class ControllerPlayer : MonoBehaviour
                 m_IsAttacking = Input.GetKey(m_AttackInputK);
 
             //Set attack direction
-            if (m_Rigidbody.velocity.x != 0.0f && !WallCheck())
+            if (!WallCheck())
             {
-                if (m_Horizontal > 0)
+                if (m_Aim.x > 0)
                     m_AttackDirection = 1.0f;
-                else if (m_Horizontal < 0)
+                else if (m_Aim.x < 0)
                     m_AttackDirection = -1.0f;
             }
 

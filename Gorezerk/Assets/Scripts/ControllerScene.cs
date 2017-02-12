@@ -40,8 +40,12 @@ public class ControllerScene : MonoBehaviour
     private float m_BarkTimer = 0.0f;
     private static bool m_IsBark = false;
 
-    //Pause vars
+    //Modifier vars
+    public List<Modifier> m_Modifiers = new List<Modifier>();
+
+    //Panel vars
     GameObject m_PausePanel;
+    GameObject m_ModifierPanel;
 
     void Awake()
     {
@@ -86,20 +90,6 @@ public class ControllerScene : MonoBehaviour
                 m_RestartNum = 1;
             else
                 m_RestartNum = 0;
-
-            //for (int i = 0; i < Input.GetJoystickNames().Length; i++)
-            //{
-            //    Debug.Log(Input.GetJoystickNames()[i]);
-            //    if (i < m_Players.Count)
-            //    {
-            //        m_Players[i].SetKeyboardInput(false);
-            //        if (Input.GetJoystickNames()[i].Contains("XBOX") || Input.GetJoystickNames()[i].Contains("xbox") || Input.GetJoystickNames()[i].Contains("Xbox"))
-            //            m_Players[i].SetControllerType(ControllerType.Xbox);
-            //        else
-            //            m_Players[i].SetControllerType(ControllerType.PS);
-            //    }
-            //}
-
         }
     }
 
@@ -124,6 +114,17 @@ public class ControllerScene : MonoBehaviour
         }
 
         m_PausePanel = GameObject.Find("PausePanel");
+        m_ModifierPanel = GameObject.Find("ModifierPanel");
+
+        if (m_ModifierPanel)
+            m_ModifierPanel.SetActive(false);
+
+        //Get modifiers
+        var mods = GetComponentsInChildren<Modifier>();
+        for (int i = 0; i < mods.Length; i++)
+        {
+            m_Modifiers.Add(mods[i]);
+        }
 
         UpdateText();
         StartRound();
@@ -131,28 +132,18 @@ public class ControllerScene : MonoBehaviour
 
     void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !m_IsRoundStart)
             TogglePaused();
 
         if (Input.GetKeyDown(KeyCode.Return))
             StartRound();
 
         CountdownUpdate();
+
         if (m_PlayerCount <= m_RestartNum)
         {
             UpdateText();
             StartRound();
-        }
-
-        if (!m_IsRoundStart)
-        {
-            Cursor.visible = m_IsPaused;
-            m_PausePanel.SetActive(m_IsPaused);
-        }
-        else
-        {
-            Cursor.visible = false;
-            m_PausePanel.SetActive(false);
         }
 
         ScoreBarkUpdate();
@@ -178,6 +169,12 @@ public class ControllerScene : MonoBehaviour
                 m_CountdownTimer = m_CountdownTime;
                 SetPaused(false);
                 m_IsRoundStart = false;
+
+                //Call all modifier starting functions
+                for (int i = 0; i < m_Modifiers.Count; i++)
+                {
+                    m_Modifiers[i].OnRoundStart();
+                }
             }
         }
         else
@@ -208,8 +205,10 @@ public class ControllerScene : MonoBehaviour
         m_ScoreText.text = "";
         for (int i = 0; i < m_Players.Count; i++)
         {
-            m_ScoreStrings[i] = "Player " + (m_Players[i].GetPlayerNum() + 1) + ": " + m_Players[i].GetScore() + "    ";
+            m_ScoreStrings[i] = "Player " + (m_Players[i].GetPlayerNum() + 1) + ": " + m_Players[i].GetScore();
             m_ScoreText.text += m_ScoreStrings[i];
+            if (i < m_Players.Count - 1)
+                m_ScoreText.text += "    ";
         }
     }
 
@@ -235,6 +234,15 @@ public class ControllerScene : MonoBehaviour
 
     void StartRound()
     {
+        //Call all modifier end functions
+        for (int i = 0; i < m_Modifiers.Count; i++)
+        {
+            m_Modifiers[i].OnRoundEnd();
+        }
+
+        m_PausePanel.SetActive(false);
+        Cursor.visible = false;
+
         m_IsRoundStart = true;
         m_IsPaused = true;
         SpawnPlayers();
@@ -258,7 +266,14 @@ public class ControllerScene : MonoBehaviour
         if (GetPaused())
             Time.timeScale = 0.0f;
         else
+        {
             Time.timeScale = 1.0f;
+            if (m_ModifierPanel.activeSelf)
+                m_ModifierPanel.SetActive(m_IsPaused);
+        }
+
+        Cursor.visible = m_IsPaused;
+        m_PausePanel.SetActive(m_IsPaused);
     }
 
     void SetPaused(bool state)
@@ -281,6 +296,11 @@ public class ControllerScene : MonoBehaviour
         return m_IsRoundStart;
     }
 
+    public static int GetPlayerCount()
+    {
+        return m_PlayerCount;
+    }
+
     public static void ReducePlayerCount()
     {
         m_PlayerCount--;
@@ -295,5 +315,15 @@ public class ControllerScene : MonoBehaviour
     public static void ToggleUpdateText()
     {
         m_UpdateText = true;
+    }
+
+    public void AddModifier(Modifier mod)
+    {
+        m_Modifiers.Add(mod);
+    }
+
+    public void RemoveModifier(Modifier mod)
+    {
+        m_Modifiers.Remove(mod);
     }
 }

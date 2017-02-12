@@ -23,6 +23,9 @@ public class AttackHitbox : MonoBehaviour
     {
         if (m_Player)
         {
+            if (col.gameObject.GetComponent<HomingMissile>())
+                col.gameObject.GetComponent<HomingMissile>().Reflect(col.gameObject.transform.position - m_Player.transform.position);
+
             if (col.gameObject != m_Player.gameObject)
             {
                 if (col.gameObject.GetComponent<ControllerPlayer>())
