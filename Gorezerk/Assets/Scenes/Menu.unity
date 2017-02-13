@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19117647, g: 0.060445502, b: 0.060445502, a: 1}
+  m_Color: {r: 0.12489187, g: 0.17443025, b: 0.24264705, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 1016190606}
   - component: {fileID: 1016190605}
   m_Layer: 5
-  m_Name: TitleText
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -920,7 +920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d5ca3596421b6489894486069cde07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountdownTime: 1
+  m_CountdownTime: 5
   m_Colors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 0, g: 0.04827571, b: 1, a: 1}
@@ -929,6 +929,9 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0.8068962, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.68275857, b: 0, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
 --- !u!4 &1805035177
 Transform:
   m_ObjectHideFlags: 0
@@ -989,7 +992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

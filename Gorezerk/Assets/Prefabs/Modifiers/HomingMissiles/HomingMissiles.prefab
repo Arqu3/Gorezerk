@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4607159991095364}
-  - component: {fileID: 114289044748231900}
+  - component: {fileID: 114185645715216030}
   m_Layer: 0
   m_Name: HomingMissiles
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114289044748231900
+--- !u!114 &114185645715216030
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -53,3 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MissilePrefab: {fileID: 1405608021879260, guid: 8cf169a8205f2c14ab90a95cb663579b,
     type: 2}
+  m_SpawnpointPrefab: {fileID: 1310117954951476, guid: ed70e44ca7508774b9160c019031ec87,
+    type: 2}
+  m_Spawnpoints: []
