@@ -326,4 +326,9 @@ public class ControllerScene : MonoBehaviour
     {
         m_Modifiers.Remove(mod);
     }
+
+    public List<Transform> GetSpawnPoints()
+    {
+        return m_SpawnPoints;
+    }
 }

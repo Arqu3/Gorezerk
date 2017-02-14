@@ -24,7 +24,6 @@ public class ControllerHomingMissiles : Modifier
             return;
         }
 
-        //TODO - create missile spawnpoints
         m_Spawns = (GameObject)Instantiate(m_SpawnpointPrefab, Vector3.zero, Quaternion.identity);
         var points = m_Spawns.GetComponentsInChildren<Transform>();
         for (int i = 1; i < points.Length; i++)
@@ -43,11 +42,11 @@ public class ControllerHomingMissiles : Modifier
         m_Missiles.Clear();
     }
 
-    public override void OnRoundStart()
+    void SpawnMissiles()
     {
         //Spawn new missiles
         List<Transform> tempSpawn = new List<Transform>();
-        
+
         for (int i = 0; i < m_Spawnpoints.Count; i++)
         {
             tempSpawn.Add(m_Spawnpoints[i]);
@@ -80,6 +79,11 @@ public class ControllerHomingMissiles : Modifier
             tempSpawn.RemoveAt(random);
             tempPlayers.RemoveAt(randomPlayer);
         }
+    }
+
+    public override void OnRoundStart()
+    {
+        SpawnMissiles();
     }
 
     public override void OnRoundEnd()
