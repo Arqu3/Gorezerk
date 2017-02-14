@@ -10,10 +10,9 @@ public class ControllerAudio : MonoBehaviour
     public bool m_Shuffle = false;
     public bool m_Mute = false;
 
-    //Timer vars
-    private float m_Timer = 0.0f;
-    private float m_CurrentLength = 0.0f;
+    //Index vars
     private int m_CurrentIndex = 0;
+    private float m_CurrentTime = 0.0f;
 
     //Component vars
     AudioSource m_Source;
@@ -37,8 +36,7 @@ public class ControllerAudio : MonoBehaviour
     {
         if (!m_Mute)
         {
-            m_Timer += Time.deltaTime;
-            if (m_Timer >= m_CurrentLength)
+            if (m_Source.time >= m_CurrentTime * 0.99f)
                 PlayNextClip();
         }
 	}
@@ -49,9 +47,7 @@ public class ControllerAudio : MonoBehaviour
 
         m_Source.clip = m_AudioClips[m_CurrentIndex];
 
-        m_CurrentLength = m_AudioClips[m_CurrentIndex].length;
-
-        m_Timer = 0.0f;
+        m_CurrentTime = m_AudioClips[m_CurrentIndex].length;
 
         m_Source.Play();
     }

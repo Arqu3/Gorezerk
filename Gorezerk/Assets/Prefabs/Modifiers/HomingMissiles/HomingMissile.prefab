@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4607159991095364}
   - component: {fileID: 114185645715216030}
   m_Layer: 0
-  m_Name: HomingMissiles
+  m_Name: HomingMissile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,9 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb13d9de74bd51a43b0e5e2bc2175b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MissilePrefab: {fileID: 1405608021879260, guid: 8cf169a8205f2c14ab90a95cb663579b,
+  m_MissilePrefab: {fileID: 1405608021879260, guid: b0964bc4340176f4c949d1670d8aa3b6,
     type: 2}
   m_SpawnpointPrefab: {fileID: 1310117954951476, guid: ed70e44ca7508774b9160c019031ec87,
     type: 2}
-  m_SpawnForEachPlayer: 1
+  m_SpawnForEachPlayer: 0
   m_SpawnAmount: 1

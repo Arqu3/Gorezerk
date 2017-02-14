@@ -7,6 +7,8 @@ public class ControllerHomingMissiles : Modifier
     //Public vars
     public GameObject m_MissilePrefab;
     public GameObject m_SpawnpointPrefab;
+    public bool m_SpawnForEachPlayer = true;
+    public int m_SpawnAmount = 1;
 
     //Round start vars
     private List<GameObject> m_Missiles = new List<GameObject>();
@@ -51,17 +53,32 @@ public class ControllerHomingMissiles : Modifier
             tempSpawn.Add(m_Spawnpoints[i]);
         }
 
-        for (int i = 0; i < ControllerScene.GetPlayerCount(); i++)
+        List<Transform> tempPlayers = new List<Transform>();
+        int length = GetComponentInParent<ControllerScene>().m_Players.Count;
+        for (int i = 0; i < length; i++)
+        {
+            tempPlayers.Add(GetComponentInParent<ControllerScene>().m_Players[i].transform);
+        }
+
+        int amount = 0;
+        if (m_SpawnForEachPlayer)
+            amount = ControllerScene.GetPlayerCount();
+        else
+            amount = m_SpawnAmount;
+
+        for (int i = 0; i < amount; i++)
         {
             int random = Random.Range(0, tempSpawn.Count);
+            int randomPlayer = Random.Range(0, tempPlayers.Count);
 
             GameObject clone = (GameObject)Instantiate(m_MissilePrefab, tempSpawn[random].position, Quaternion.identity);
             if (clone.GetComponent<HomingMissile>())
-                clone.GetComponent<HomingMissile>().SetTarget(GetComponentInParent<ControllerScene>().m_Players[i].transform);
+                clone.GetComponent<HomingMissile>().SetTarget(tempPlayers[randomPlayer]);
 
             m_Missiles.Add(clone);
 
             tempSpawn.RemoveAt(random);
+            tempPlayers.RemoveAt(randomPlayer);
         }
     }
 

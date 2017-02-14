@@ -37,7 +37,7 @@ public class ControllerPlayerText : MonoBehaviour
     {
         if (m_Text)
         {
-            m_Text.text = m_Player.GetCurrentHookCharges().ToString();
+            //m_Text.text = m_Player.GetCurrentHookCharges().ToString();
         }
     }
 }

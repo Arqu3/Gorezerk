@@ -21,7 +21,6 @@ public class ControllerPlayer : MonoBehaviour
     public float m_JumpForce = 10.0f;
     public bool m_IsAirMovement = false;
     public float m_DampXAmount = 0.5f;
-    public int m_HookCharges = 3;
     public float m_HookTravelSpeed = 10.0f;
     public float m_TravelToHookSpeed = 10.0f;
     public float m_HookBreakDistance = 1.0f;
@@ -64,7 +63,7 @@ public class ControllerPlayer : MonoBehaviour
     private bool m_CanShootHook = true;
     private GameObject m_HookClone;
     private Vector2 m_Aim = Vector2.zero;
-    private int m_CurHookCharges = 0;
+    private bool m_IsHookCD = false;
 
     //Attack vars
     private bool m_CanAttack = true;
@@ -157,9 +156,6 @@ public class ControllerPlayer : MonoBehaviour
 
     void Start()
     {
-        //Assign current amount of hook charges
-        m_CurHookCharges = m_HookCharges;
-
         //Assign input variable values from toolbox
         m_ControllerNum = Toolbox.Instance.m_Information[m_PlayerNum].GetControllerNum();
         m_Renderer.material.color = Toolbox.Instance.m_Colors[m_PlayerNum];
@@ -252,7 +248,7 @@ public class ControllerPlayer : MonoBehaviour
             if (!m_IsParry)
             {
                 if (Mathf.Approximately(m_Rigidbody.velocity.y, 0.0f))
-                    m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed, m_Rigidbody.velocity.y);
+                    m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed * Toolbox.Instance.m_MovementSpeed, m_Rigidbody.velocity.y);
             }
         }
         else
@@ -260,16 +256,16 @@ public class ControllerPlayer : MonoBehaviour
             if (!m_IsParry)
             {
                 if (Mathf.Approximately(m_Rigidbody.velocity.y, 0.0f))
-                    m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed, m_Rigidbody.velocity.y);
+                    m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed * Toolbox.Instance.m_MovementSpeed, m_Rigidbody.velocity.y);
                 else
                 {
                     if (!GroundCheck())
                     {
                         if (m_Horizontal > 0.5f || m_Horizontal < -0.5f)
-                            m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed * m_DampXAmount, m_Rigidbody.velocity.y);
+                            m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed * m_DampXAmount * Toolbox.Instance.m_MovementSpeed, m_Rigidbody.velocity.y);
                     }
                     else
-                        m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed, m_Rigidbody.velocity.y);
+                        m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed * Toolbox.Instance.m_MovementSpeed, m_Rigidbody.velocity.y);
                 }
             }
         }
@@ -345,13 +341,12 @@ public class ControllerPlayer : MonoBehaviour
                     m_Aim.y = 0.0f;
             }
 
-            //Hook charges cooldown
-            if (m_CurHookCharges < m_HookCharges)
+            if (m_IsHookCD)
             {
                 m_HookTimer -= Time.deltaTime;
                 if (m_HookTimer <= 0.0f)
                 {
-                    m_CurHookCharges++;
+                    m_IsHookCD = false;
                     m_HookTimer = m_HookCooldown;
                 }
             }
@@ -404,14 +399,13 @@ public class ControllerPlayer : MonoBehaviour
                 m_GrappleDir.z = 0.0f;
 
                 //Spawn hook prefab
-                if (m_HookPrefab && m_CanShootHook && m_CurHookCharges > 0)
+                if (m_HookPrefab && m_CanShootHook && !m_IsHookCD)
                 {
                     m_HookClone = (GameObject)Instantiate(m_HookPrefab, transform.position, Quaternion.identity);
                     if (m_HookClone.GetComponent<Rigidbody2D>())
                         m_HookClone.GetComponent<Rigidbody2D>().velocity = m_GrappleDir.normalized * m_HookTravelSpeed;
 
                     m_CanShootHook = false;
-                    m_CurHookCharges--;
                 }
 
                 if (m_HookClone)
@@ -708,6 +702,7 @@ public class ControllerPlayer : MonoBehaviour
         m_HasReachedHook = false;
         m_HasSetGrappleDir = false;
         m_GrappleHit = false;
+        m_IsHookCD = true;
         m_Rigidbody.gravityScale = 1.0f;
         if (m_HookClone)
             Destroy(m_HookClone);
@@ -720,6 +715,7 @@ public class ControllerPlayer : MonoBehaviour
         //Grappling hook vars
         m_IsGrapple = false;
         m_GrappleHit = false;
+        m_IsHookCD = false;
         m_HasSetGrappleDir = false;
         m_GrappleDir = Vector3.zero;
         m_HasReachedHook = false;
@@ -730,7 +726,6 @@ public class ControllerPlayer : MonoBehaviour
             Destroy(m_HookClone);
         m_CanShootHook = true;
         m_Aim = Vector2.zero;
-        m_CurHookCharges = m_HookCharges;
 
         //Attack vars
         m_CanAttack = true;
@@ -811,11 +806,6 @@ public class ControllerPlayer : MonoBehaviour
     public Rigidbody2D GetRigidbody()
     {
         return m_Rigidbody;
-    }
-
-    public int GetCurrentHookCharges()
-    {
-        return m_CurHookCharges;
     }
 
     bool CheckLeftTrigger()

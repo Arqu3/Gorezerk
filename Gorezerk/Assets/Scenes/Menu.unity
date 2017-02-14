@@ -920,7 +920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d5ca3596421b6489894486069cde07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountdownTime: 5
+  m_CountdownTime: 1
   m_Colors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 0, g: 0.04827571, b: 1, a: 1}

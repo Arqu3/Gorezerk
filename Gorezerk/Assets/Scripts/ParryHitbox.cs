@@ -31,6 +31,8 @@ public class ParryHitbox : MonoBehaviour
                 //m_Player.InterruptAttack();
                 m_Player.GetRigidbody().AddForce(dir * m_Player.m_ParryForce, ForceMode2D.Impulse);
             }
+            else if (col.gameObject.GetComponent<HomingMissile>())
+                col.gameObject.GetComponent<HomingMissile>().Reflect(col.gameObject.transform.position - m_Player.transform.position);
         }
     }
 }

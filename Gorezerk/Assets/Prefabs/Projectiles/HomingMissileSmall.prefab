@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 61100074601988130}
   - component: {fileID: 50177429241372784}
   m_Layer: 2
-  m_Name: HomingMissile
+  m_Name: HomingMissileSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -130,3 +130,5 @@ MonoBehaviour:
   m_Speed: 10
   m_PlayerHitMultiplier: 0.1
   m_ReflectTime: 0.2
+  m_ReflectAmount: 8
+  m_TargetMode: 0

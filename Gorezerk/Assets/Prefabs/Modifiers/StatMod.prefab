@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1720926180994232}
+  m_RootGameObject: {fileID: 1159255952744862}
   m_IsPrefabParent: 1
---- !u!1 &1720926180994232
+--- !u!1 &1159255952744862
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4607159991095364}
-  - component: {fileID: 114185645715216030}
+  - component: {fileID: 4146620199175264}
+  - component: {fileID: 114624613299191060}
   m_Layer: 0
-  m_Name: HomingMissiles
+  m_Name: StatMod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4607159991095364
+--- !u!4 &4146620199175264
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1720926180994232}
+  m_GameObject: {fileID: 1159255952744862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,20 +40,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114185645715216030
+--- !u!114 &114624613299191060
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1720926180994232}
+  m_GameObject: {fileID: 1159255952744862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb13d9de74bd51a43b0e5e2bc2175b8d, type: 3}
+  m_Script: {fileID: 11500000, guid: fa9c42bf76b31fb4a8d3dbf52cfaf4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MissilePrefab: {fileID: 1405608021879260, guid: 8cf169a8205f2c14ab90a95cb663579b,
-    type: 2}
-  m_SpawnpointPrefab: {fileID: 1310117954951476, guid: ed70e44ca7508774b9160c019031ec87,
-    type: 2}
-  m_SpawnForEachPlayer: 1
-  m_SpawnAmount: 1
+  m_MoveSpeedMod: 1

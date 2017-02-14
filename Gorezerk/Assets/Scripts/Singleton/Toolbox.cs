@@ -21,6 +21,9 @@ public class Toolbox : Singleton<Toolbox>
     public List<Color> m_Colors = new List<Color>();
     public float m_MusicVolume = 0.5f;
 
+    //Modification variables
+    public float m_MovementSpeed = 1.0f;
+
     //Used whenever menu is loaded *BE CAREFUL WHEN TO CALL THIS*
     public void ClearInformation()
     {
