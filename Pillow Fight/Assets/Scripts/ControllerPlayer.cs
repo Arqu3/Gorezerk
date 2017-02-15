@@ -20,8 +20,10 @@ public class ControllerPlayer : MonoBehaviour
     public int m_PlayerNum = 1;
     public float m_Speed = 10.0f;
     public float m_JumpForce = 10.0f;
+    public float m_FallGraceTime = 0.75f;
     public bool m_IsAirMovement = false;
     public float m_DampXAmount = 0.5f;
+    public float m_Acceleration = 10.0f;
     public float m_HookTravelSpeed = 10.0f;
     public float m_TravelToHookSpeed = 10.0f;
     public float m_HookBreakDistance = 1.0f;
@@ -45,6 +47,9 @@ public class ControllerPlayer : MonoBehaviour
     //Ground vars
     private bool m_IsOnGround = false;
     private bool m_IsInAir = true;
+    private float m_FallGraceTimer = 0.0f;
+    private bool m_IsJump = false;
+    private bool m_CanAirJump = false;
 
     //Movement vars
     private float m_Horizontal = 0.0f;
@@ -243,7 +248,8 @@ public class ControllerPlayer : MonoBehaviour
         if (transform.position.y < -40.0f)
             transform.position = Vector3.zero;
 
-        m_IsInAir = m_Rigidbody.velocity.y != 0;
+        m_IsInAir = Mathf.Round(m_Rigidbody.velocity.y) != 0;
+        m_IsOnGround = GroundCheck();
 
         if (!WallCheck())
         {
@@ -272,18 +278,33 @@ public class ControllerPlayer : MonoBehaviour
         {
             if (!m_IsParry)
             {
+                float totalSpeed = Mathf.Lerp(m_Rigidbody.velocity.x, m_Horizontal * m_Speed * Toolbox.Instance.m_MovementSpeed, m_Acceleration * Time.deltaTime);
+                float totalAirSpeed = Mathf.Lerp(m_Rigidbody.velocity.x, m_Horizontal * m_Speed * Toolbox.Instance.m_MovementSpeed * m_DampXAmount, m_Acceleration * Time.deltaTime);
+
                 if (Mathf.Approximately(m_Rigidbody.velocity.y, 0.0f))
-                    m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed * Toolbox.Instance.m_MovementSpeed, m_Rigidbody.velocity.y);
+                    m_Rigidbody.velocity = new Vector2(totalSpeed, m_Rigidbody.velocity.y);
                 else
                 {
-                    if (!GroundCheck())
+                    if (!m_IsOnGround)
                     {
                         if (m_Horizontal > 0.5f || m_Horizontal < -0.5f)
-                            m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed * m_DampXAmount * Toolbox.Instance.m_MovementSpeed, m_Rigidbody.velocity.y);
+                            m_Rigidbody.velocity = new Vector2(totalAirSpeed, m_Rigidbody.velocity.y);
                     }
                     else
-                        m_Rigidbody.velocity = new Vector2(m_Horizontal * m_Speed * Toolbox.Instance.m_MovementSpeed, m_Rigidbody.velocity.y);
+                        m_Rigidbody.velocity = new Vector2(totalSpeed, m_Rigidbody.velocity.y);
                 }
+            }
+        }
+
+        if (!m_IsOnGround && !m_IsJump)
+        {
+            m_CanAirJump = true;
+            m_FallGraceTimer += Time.deltaTime;
+            if (m_FallGraceTimer >= m_FallGraceTime)
+            {
+                m_FallGraceTimer = 0.0f;
+                m_CanAirJump = false;
+                m_IsJump = true;
             }
         }
 
@@ -291,7 +312,7 @@ public class ControllerPlayer : MonoBehaviour
         {
             if (Input.GetAxis(m_JumpInput) != 0.0f)
             {
-                if (GroundCheck() && !m_IsInAir)
+                if ((m_IsOnGround && !m_IsInAir) || m_CanAirJump)
                     Jump();
             }
         }
@@ -299,14 +320,14 @@ public class ControllerPlayer : MonoBehaviour
         {
             if (Input.GetKey(m_JumpInputK))
             {
-                if (GroundCheck() && !m_IsInAir)
+                if ((m_IsOnGround && !m_IsInAir) || m_CanAirJump)
                     Jump();
             }
         }
 
         if (!m_GrappleHit)
         {
-            if (GroundCheck())
+            if (m_IsOnGround)
                 m_Rigidbody.gravityScale = 0.0f;
             else
                 m_Rigidbody.gravityScale = 1.0f;
@@ -316,6 +337,9 @@ public class ControllerPlayer : MonoBehaviour
     void Jump()
     {
         m_Rigidbody.AddForce(Vector2.up * m_JumpForce, ForceMode2D.Impulse);
+        m_IsJump = true;
+        m_FallGraceTimer = 0.0f;
+        m_CanAirJump = false;
     }
 
     void GrappleUpdate()
@@ -557,13 +581,10 @@ public class ControllerPlayer : MonoBehaviour
                 m_IsAttacking = Input.GetKey(m_AttackInputK);
 
             //Set attack direction
-            if (!WallCheck())
-            {
-                if (m_Aim.x > 0)
-                    m_AttackDirection = 1.0f;
-                else if (m_Aim.x < 0)
-                    m_AttackDirection = -1.0f;
-            }
+            if (m_Aim.x > 0)
+                m_AttackDirection = 1.0f;
+            else if (m_Aim.x < 0)
+                m_AttackDirection = -1.0f;
 
             //Attack rotation
             if (m_IsAttacking)
@@ -616,10 +637,15 @@ public class ControllerPlayer : MonoBehaviour
     bool GroundCheck()
     {
         Color col = Color.green;
+        bool onGround = false;
         RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(m_Collider.bounds.size.x / 4, m_Collider.bounds.size.y / 2 * 1.2f, 0), Vector2.right, 0.5f, m_GroundMask);
         if (hit)
         {
-            m_IsOnGround = true;
+            onGround = true;
+
+            if (m_Rigidbody.velocity.y <= 0.0f)
+                m_IsJump = false;
+
             col = Color.red;
 
             if (hit.collider.tag == "HeadCollider")
@@ -632,11 +658,11 @@ public class ControllerPlayer : MonoBehaviour
             }
         }
         else
-            m_IsOnGround = false;
+            onGround = false;
 
         Debug.DrawRay(transform.position - new Vector3(m_Collider.bounds.size.x / 4.0f, m_Collider.bounds.size.y / 2 * 1.2f, 0), Vector2.right * 0.5f, col);
 
-        return m_IsOnGround;
+        return onGround;
     }
 
     bool WallCheck()
@@ -743,6 +769,10 @@ public class ControllerPlayer : MonoBehaviour
             Destroy(m_HookClone);
         m_CanShootHook = true;
         m_Aim = Vector2.zero;
+        m_FallGraceTimer = 0.0f;
+        m_IsJump = false;
+        m_IsOnGround = false;
+        m_CanAirJump = false;
 
         //Attack vars
         m_CanAttack = true;
@@ -757,6 +787,8 @@ public class ControllerPlayer : MonoBehaviour
 
     public void Kill()
     {
+        if (m_HookClone)
+            Destroy(m_HookClone);
         ControllerScene.ReducePlayerCount();
         gameObject.SetActive(false);
     }

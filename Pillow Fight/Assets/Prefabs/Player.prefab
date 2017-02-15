@@ -602,10 +602,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerNum: 1
-  m_Speed: 11
-  m_JumpForce: 16
+  m_Speed: 14
+  m_JumpForce: 18
+  m_FallGraceTime: 0.3
   m_IsAirMovement: 1
   m_DampXAmount: 0.8
+  m_Acceleration: 6
   m_HookTravelSpeed: 75
   m_TravelToHookSpeed: 40
   m_HookBreakDistance: 1

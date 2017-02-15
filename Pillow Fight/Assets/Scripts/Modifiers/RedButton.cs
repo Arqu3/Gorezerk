@@ -16,7 +16,7 @@ public class RedButton : MonoBehaviour
     private float m_CountdownTimer = 0.0f;
     private bool m_IsCountdown = false;
 
-	void Start ()
+	void Start()
     {
         m_CountdownText = GetComponentInChildren<Text>();
         if (!m_CountdownText)
@@ -31,7 +31,7 @@ public class RedButton : MonoBehaviour
         GetComponent<MeshRenderer>().material.color = Color.red;
 	}
 	
-	void Update ()
+	void Update()
     {
 		if (m_IsCountdown)
         {
@@ -67,6 +67,17 @@ public class RedButton : MonoBehaviour
 
             m_CountdownTimer = m_CountdownTime;
             m_SafePlayer = col.gameObject.GetComponent<ParryHitbox>().GetPlayer();
+            GetComponent<MeshRenderer>().material.color = m_SafePlayer.gameObject.GetComponent<MeshRenderer>().material.color;
+            m_IsCountdown = true;
+        }
+        else if (col.gameObject.GetComponent<AttackHitbox>())
+        {
+            ControllerScene scene = FindObjectOfType<ControllerScene>();
+            int random = Random.Range(0, scene.GetSpawnPoints().Count);
+            transform.position = scene.GetSpawnPoints()[random].position;
+
+            m_CountdownTimer = m_CountdownTime;
+            m_SafePlayer = col.gameObject.GetComponent<AttackHitbox>().GetPlayer();
             GetComponent<MeshRenderer>().material.color = m_SafePlayer.gameObject.GetComponent<MeshRenderer>().material.color;
             m_IsCountdown = true;
         }
