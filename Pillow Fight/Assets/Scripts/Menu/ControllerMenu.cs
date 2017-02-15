@@ -3,16 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using XInputDotNetPure;
 
 [System.Serializable]
 public struct PlayerInformation
 {
     public int m_ControllerNum;
     public ControllerType m_ControllerType;
-    public PlayerInformation(ControllerType controllertype, int controllernum)
+    public PlayerIndex m_PlayerIndex;
+    public PlayerInformation(ControllerType controllertype, int controllernum, PlayerIndex index)
     {
         m_ControllerNum = controllernum;
         m_ControllerType = controllertype;
+        m_PlayerIndex = index;
 
         if (m_ControllerType.Equals(ControllerType.Keyboard))
             m_ControllerNum = -1;
@@ -26,6 +29,10 @@ public struct PlayerInformation
     {
         m_ControllerNum = num;
     }
+    public void SetPlayerIndex(PlayerIndex index)
+    {
+        m_PlayerIndex = index;
+    }
 
     public void SetControllerType(ControllerType newtype)
     {
@@ -34,6 +41,10 @@ public struct PlayerInformation
     public ControllerType GetCType()
     {
         return m_ControllerType;
+    }
+    public PlayerIndex GetPlayerIndex()
+    {
+        return m_PlayerIndex;
     }
 }
 
@@ -47,6 +58,8 @@ public class ControllerMenu : MonoBehaviour
     public List<Color> m_Colors;
 
     private static List<Color> m_StaticColors = new List<Color>();
+
+    public List<PlayerIndex> m_Controllers = new List<PlayerIndex>();
 
     //Player slot vars
     private List<PlayerSlot> m_PlayerSlots = new List<PlayerSlot>();
@@ -107,6 +120,14 @@ public class ControllerMenu : MonoBehaviour
         {
             m_StaticColors.Add(m_Colors[i]);
         }
+
+        for (int i = 0; i < 4; i++)
+        {
+            PlayerIndex test = (PlayerIndex)i;
+            GamePadState state = GamePad.GetState(test);
+            if (state.IsConnected)
+                m_Controllers.Add(test);
+        }
 	}
 	
 	void Update()
@@ -138,6 +159,15 @@ public class ControllerMenu : MonoBehaviour
                 {
                     bool xbox = Input.GetAxis("P" + i + "Jump") != 0.0f;
                     bool PS = Input.GetAxis("P" + i + "JumpPS") != 0.0f;
+                    PlayerIndex addIndex = PlayerIndex.One;
+                    for (int j = 0; j < m_Controllers.Count; j++)
+                    {
+                        if (GamePad.GetState(m_Controllers[j]).Buttons.A == ButtonState.Pressed)
+                        {
+                            addIndex = m_Controllers[j];
+                            break;
+                        }
+                    }
                     if (xbox || PS)
                     {
                         ControllerType type = ControllerType.Xbox;
@@ -155,7 +185,7 @@ public class ControllerMenu : MonoBehaviour
                         else if (PS)
                             type = ControllerType.PS;
 
-                        Toolbox.Instance.m_Information.Add(new PlayerInformation(type, i));
+                        Toolbox.Instance.m_Information.Add(new PlayerInformation(type, i, addIndex));
                         Toolbox.Instance.m_Colors.Add(Color.white);
                         break;
                     }
@@ -180,7 +210,7 @@ public class ControllerMenu : MonoBehaviour
                 m_PlayerSlots[m_SlotIndex].SetOpen(false);
                 m_PlayerSlots[m_SlotIndex].SetControllerNum(-1);
                 m_PlayerSlots[m_SlotIndex].SetKeyboard(true);
-                Toolbox.Instance.m_Information.Add(new PlayerInformation(ControllerType.Keyboard, -1));
+                Toolbox.Instance.m_Information.Add(new PlayerInformation(ControllerType.Keyboard, -1, PlayerIndex.One));
                 Toolbox.Instance.m_Colors.Add(Color.white);
             }
         }

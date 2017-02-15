@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 public enum ControllerType
 {
@@ -99,6 +100,8 @@ public class ControllerPlayer : MonoBehaviour
     private string m_VerticalInput;
     private string m_AttackInput;
     private string m_GrappleInput;
+    PlayerIndex m_ControllerIndex;
+    GamePadState m_GamePadState;
 
     //Keyboard
     private KeyCode m_JumpInputK;
@@ -162,6 +165,7 @@ public class ControllerPlayer : MonoBehaviour
     {
         //Assign input variable values from toolbox
         m_ControllerNum = Toolbox.Instance.m_Information[m_PlayerNum].GetControllerNum();
+        m_ControllerIndex = Toolbox.Instance.m_Information[m_PlayerNum].GetPlayerIndex();
         m_Renderer.material.color = Toolbox.Instance.m_Colors[m_PlayerNum];
         if (m_Head)
         {
@@ -169,6 +173,15 @@ public class ControllerPlayer : MonoBehaviour
                 m_Head.GetComponent<MeshRenderer>().material.color = Toolbox.Instance.m_Colors[m_PlayerNum];
         }
         m_ControllerType = Toolbox.Instance.m_Information[m_PlayerNum].GetCType();
+
+        //Setup xinput gamepad
+        //PlayerIndex testIndex = (PlayerIndex)m_ControllerNum;
+        //GamePadState testState = GamePad.GetState(testIndex);
+        //if (testState.IsConnected)
+        //{
+        //    m_ControllerIndex = testIndex;
+        //    Debug.Log(m_ControllerIndex + " " + m_ControllerNum);
+        //}
 
         //Assign input variables
         m_JumpInput = "P" + m_ControllerNum + "Jump";
@@ -811,7 +824,9 @@ public class ControllerPlayer : MonoBehaviour
         switch (m_ControllerType)
         {
             case ControllerType.Xbox:
-                state = Mathf.Round(Input.GetAxis(m_GrappleInput)) == 1.0f;
+                //state = Mathf.Round(Input.GetAxis(m_GrappleInput)) == 1.0f;
+                m_GamePadState = GamePad.GetState(m_ControllerIndex);
+                state = Mathf.Round(m_GamePadState.Triggers.Left) == 1.0f;
                 break;
             case ControllerType.XboxOne:
                 state = Mathf.Round(Input.GetAxis(m_GrappleInput)) == 1.0f; 
@@ -829,7 +844,9 @@ public class ControllerPlayer : MonoBehaviour
         switch (m_ControllerType)
         {
             case ControllerType.Xbox:
-                state = Mathf.Round(Input.GetAxis(m_AttackInput)) == 1.0f;
+                //state = Mathf.Round(Input.GetAxis(m_AttackInput)) == 1.0f;
+                m_GamePadState = GamePad.GetState(m_ControllerIndex);
+                state = Mathf.Round(m_GamePadState.Triggers.Right) == 1.0f;
                 break;
             case ControllerType.XboxOne:
                 state = Mathf.Round(Input.GetAxis(m_AttackInput)) == 1.0f;

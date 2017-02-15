@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using XInputDotNetPure;
 
 public class PlayerSlot : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class PlayerSlot : MonoBehaviour
     private bool m_IsAxisInUse = false;
     private bool m_IsButtonInput = false;
     private bool m_IsButtonInUse = true;
+    private PlayerIndex m_PlayerIndex;
 
     //Color vars
     private int m_ColorCounter = 0;
@@ -173,6 +175,15 @@ public class PlayerSlot : MonoBehaviour
     public int GetControllerNum()
     {
         return m_ControllerNum;
+    }
+
+    public void SetPlayerIndex(PlayerIndex index)
+    {
+        m_PlayerIndex = index;
+    }
+    public PlayerIndex GetPlayerIndex()
+    {
+        return m_PlayerIndex;
     }
 
     public void SetOpen(bool state)
