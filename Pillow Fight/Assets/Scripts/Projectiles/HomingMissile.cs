@@ -15,6 +15,7 @@ public class HomingMissile : Projectile
     public float m_ReflectTime = 0.3f;
     public float m_ReflectAmount = 8.0f;
     public TargetMode m_TargetMode = TargetMode.All;
+    public bool m_DestroyOnPlayerHit = true;
 
     //Speed vars
     private float m_CurSpeed = 0.0f;
@@ -36,17 +37,30 @@ public class HomingMissile : Projectile
     {
         if (m_Target)
         {
-            m_Direction = (m_Target.position - transform.position).normalized;
-            m_Rigidbody.velocity = Vector3.Lerp(m_Rigidbody.velocity, m_Direction * m_CurSpeed, 5 * Time.deltaTime);
-
-            if (m_IsReflected)
+            if (m_Target.gameObject.activeSelf)
             {
-                m_ReflectTimer += Time.deltaTime;
-                if (m_ReflectTimer >= m_ReflectTime)
+                m_Direction = (m_Target.position - transform.position).normalized;
+                m_Rigidbody.velocity = Vector3.Lerp(m_Rigidbody.velocity, m_Direction * m_CurSpeed, 5 * Time.deltaTime);
+
+                if (m_IsReflected)
                 {
-                    SetTarget(FindNearest());
-                    m_ReflectTimer = 0.0f;
-                    m_IsReflected = false;
+                    m_ReflectTimer += Time.deltaTime;
+                    if (m_ReflectTimer >= m_ReflectTime)
+                    {
+                        SetTarget(FindNearest());
+                        m_ReflectTimer = 0.0f;
+                        m_IsReflected = false;
+                    }
+                }
+            }
+            else
+            {
+                SetTarget(FindNearest());
+                if (!m_Target)
+                {
+                    Debug.Log("Homing missile does not have a target!");
+                    enabled = false;
+                    return;
                 }
             }
         }
@@ -105,7 +119,8 @@ public class HomingMissile : Projectile
         if (col.gameObject.GetComponent<ControllerPlayer>())
         {
             col.gameObject.GetComponent<ControllerPlayer>().Kill();
-            Destroy(gameObject);
+            if (m_DestroyOnPlayerHit)
+                Destroy(gameObject);
         }
 
         //This does not work, fix sometime?

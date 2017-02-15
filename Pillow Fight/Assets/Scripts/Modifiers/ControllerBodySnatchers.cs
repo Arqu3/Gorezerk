@@ -39,25 +39,41 @@ public class ControllerBodySnatchers : Modifier
 
         for (int i = 0; i < m_Players.Count; i++)
         {
-            tempSpawn.Add(m_Players[i].transform);
+            if (m_Players[i].gameObject.activeSelf)
+                tempSpawn.Add(m_Players[i].transform);
         }
+
+        //for (int i = 0; i < tempSpawn.Count; i++)
+        //{
+        //    if (tempSpawn.Count <= 1)
+        //        break;
+
+        //    int random = Random.Range(0, tempSpawn.Count);
+        //    Transform first = tempSpawn[random];
+        //    tempSpawn.RemoveAt(random);
+
+        //    random = Random.Range(0, tempSpawn.Count);
+        //    Transform second = tempSpawn[random];
+        //    tempSpawn.RemoveAt(random);
+
+        //    Vector3 temp = first.position;
+        //    first.position = second.position;
+        //    second.position = temp;
+        //}
+
+        Vector3 initial = tempSpawn[0].position;
 
         for (int i = 0; i < tempSpawn.Count; i++)
         {
-            if (tempSpawn.Count <= 1)
+            int next = i + 1;
+            if (next >= tempSpawn.Count)
+            {
+                next = 0;
+                tempSpawn[i].position = initial;
                 break;
+            }
 
-            int random = Random.Range(0, tempSpawn.Count);
-            Transform first = tempSpawn[random];
-            tempSpawn.RemoveAt(random);
-
-            random = Random.Range(0, tempSpawn.Count);
-            Transform second = tempSpawn[random];
-            tempSpawn.RemoveAt(random);
-
-            Vector3 temp = first.position;
-            first.position = second.position;
-            second.position = temp;
+            tempSpawn[i].position = tempSpawn[next].position;
         }
     }
 

@@ -142,6 +142,14 @@ public class ControllerScene : MonoBehaviour
 
         if (m_PlayerCount <= m_RestartNum)
         {
+            for (int i = 0; i < m_Players.Count; i++)
+            {
+                if (m_Players[i].gameObject.activeSelf)
+                {
+                    m_Players[i].AddScore(1);
+                    break;
+                }
+            }
             UpdateText();
             StartRound();
         }

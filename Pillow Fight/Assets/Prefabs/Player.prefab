@@ -617,6 +617,12 @@ MonoBehaviour:
   m_ParryForce: 20
   m_HookPrefab: {fileID: 1180675877472092, guid: cde91c73289686b42841444ec31e9cd8,
     type: 2}
+  m_HookMask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_GroundMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &114440534266965332
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -79,7 +79,7 @@ public class PlayerSlot : MonoBehaviour
                         //Getkeydown functionality for axis-input
                         if (!m_IsAxisInUse)
                         {
-                            ControllerMenu.InsertColor(m_ColorCounter, m_Image.color);
+                            //ControllerMenu.InsertColor(m_ColorCounter, m_Image.color);
                             //Switch between colors
                             float horizontal = Input.GetAxisRaw("P" + m_ControllerNum + "Horizontal");
                             if (horizontal > 0)
@@ -101,7 +101,7 @@ public class PlayerSlot : MonoBehaviour
                             m_Image.color = ControllerMenu.GetColor(m_ColorCounter);
                             Toolbox.Instance.m_Colors[m_PlayerNum] = ControllerMenu.GetColor(m_ColorCounter);
 
-                            ControllerMenu.RemoveColor(m_Image.color);
+                            //ControllerMenu.RemoveColor(m_Image.color);
 
                             m_IsAxisInUse = true;
                         }
@@ -135,7 +135,7 @@ public class PlayerSlot : MonoBehaviour
                     bool input = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
                     if (input)
                     {
-                        ControllerMenu.InsertColor(m_ColorCounter, m_Image.color);
+                        //ControllerMenu.InsertColor(m_ColorCounter, m_Image.color);
                         if (Input.GetKeyDown(KeyCode.D))
                         {
                             m_ColorCounter++;
@@ -155,7 +155,7 @@ public class PlayerSlot : MonoBehaviour
                         m_Image.color = ControllerMenu.GetColor(m_ColorCounter);
                         Toolbox.Instance.m_Colors[m_PlayerNum] = ControllerMenu.GetColor(m_ColorCounter);
 
-                        ControllerMenu.RemoveColor(m_Image.color);
+                        //ControllerMenu.RemoveColor(m_Image.color);
                     }
                 }
 

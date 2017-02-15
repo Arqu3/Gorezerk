@@ -32,6 +32,10 @@ public class ControllerPlayer : MonoBehaviour
     public float m_ParryForce = 20.0f;
     public GameObject m_HookPrefab;
 
+    //Layermasks
+    public LayerMask m_HookMask;
+    public LayerMask m_GroundMask;
+
     //Component vars
     private Rigidbody2D m_Rigidbody;
     private MeshRenderer m_Renderer;
@@ -599,7 +603,7 @@ public class ControllerPlayer : MonoBehaviour
     bool GroundCheck()
     {
         Color col = Color.green;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(m_Collider.bounds.size.x / 4, m_Collider.bounds.size.y / 2 * 1.2f, 0), Vector2.right, 0.5f);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(m_Collider.bounds.size.x / 4, m_Collider.bounds.size.y / 2 * 1.2f, 0), Vector2.right, 0.5f, m_GroundMask);
         if (hit)
         {
             m_IsOnGround = true;
@@ -640,7 +644,7 @@ public class ControllerPlayer : MonoBehaviour
                     break;
             }
             Color col = Color.green;
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(x, transform.position.y + (-m_Collider.bounds.size.y / 2.0f) * 0.8f), Vector2.up, m_Collider.bounds.size.y * 0.8f);
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(x, transform.position.y + (-m_Collider.bounds.size.y / 2.0f) * 0.8f), Vector2.up, m_Collider.bounds.size.y * 0.8f, m_GroundMask);
             if (hit)
             {
                 if (!m_ControllerType.Equals(ControllerType.Keyboard))
@@ -784,13 +788,6 @@ public class ControllerPlayer : MonoBehaviour
         return m_ControllerType;
     }
 
-    //public void InterruptAttack()
-    //{
-    //    m_CanAttack = false;
-    //    m_AttackTimer = 0.0f;
-    //    m_AttackBox.gameObject.SetActive(false);
-    //}
-
     public void SetParry(bool state)
     {
         m_IsParry = state;
@@ -842,5 +839,12 @@ public class ControllerPlayer : MonoBehaviour
                 break;
         }
         return state;
+    }
+
+    public string GetDebugInformation()
+    {
+        string Controllers = m_ControllerType.ToString() + " " + m_ControllerNum.ToString() + " " + m_AttackInput + " " + m_GrappleInput + " " + CheckLeftTrigger() + " " + CheckRightTrigger();
+
+        return Controllers;
     }
 }
