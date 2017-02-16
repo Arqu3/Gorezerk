@@ -21,8 +21,10 @@ GameObject:
   - component: {fileID: 4346093728370622}
   - component: {fileID: 33137561026393762}
   - component: {fileID: 23773828941973690}
+  - component: {fileID: 114914253929990394}
   - component: {fileID: 50408366898434832}
-  m_Layer: 0
+  - component: {fileID: 58959401039641572}
+  m_Layer: 9
   m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,3 +102,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &58959401039641572
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1180675877472092}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &114914253929990394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1180675877472092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afba67756d1c6b446b012a7bfd2bd614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_SkinWidth: 0.1

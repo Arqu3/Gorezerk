@@ -53,10 +53,10 @@ public class ControllerHomingMissiles : Modifier
         }
 
         List<Transform> tempPlayers = new List<Transform>();
-        int length = GetComponentInParent<ControllerScene>().m_Players.Count;
+        int length = GetComponentInParent<ControllerScene>().GetPlayers().Count;
         for (int i = 0; i < length; i++)
         {
-            tempPlayers.Add(GetComponentInParent<ControllerScene>().m_Players[i].transform);
+            tempPlayers.Add(GetComponentInParent<ControllerScene>().GetPlayers()[i].transform);
         }
 
         int amount = 0;

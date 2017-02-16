@@ -16,8 +16,9 @@ public class ControllerScene : MonoBehaviour
     public float m_BarkTime = 1.0f;
     public GameObject m_PlayerPrefab;
 
+    //Lists
     private List<Transform> m_SpawnPoints = new List<Transform>();
-    public List<ControllerPlayer> m_Players = new List<ControllerPlayer>();
+    private List<ControllerPlayer> m_Players = new List<ControllerPlayer>();
 
     //Static vars
     private static bool m_IsPaused = true;
@@ -36,12 +37,13 @@ public class ControllerScene : MonoBehaviour
 
     //Bark vars
     private static string m_ScoreBark = "";
+    private static Color m_BarkColor = Color.red;
     private Text m_BarkText;
     private float m_BarkTimer = 0.0f;
     private static bool m_IsBark = false;
 
     //Modifier vars
-    public List<Modifier> m_Modifiers = new List<Modifier>();
+    private List<Modifier> m_Modifiers = new List<Modifier>();
 
     //Panel vars
     GameObject m_PausePanel;
@@ -55,7 +57,7 @@ public class ControllerScene : MonoBehaviour
             {
                 GameObject clone = (GameObject)Instantiate(m_PlayerPrefab, Vector3.zero, Quaternion.identity);
                 if (clone.GetComponent<ControllerPlayer>())
-                    clone.GetComponent<ControllerPlayer>().m_PlayerNum = i;
+                    clone.GetComponent<ControllerPlayer>().SetPlayerNum(i);
                 else
                     Debug.Log("Player clone " + i + " is missing a controllerplayer script!");
             }
@@ -63,14 +65,13 @@ public class ControllerScene : MonoBehaviour
         else
             Debug.Log(gameObject.name + " does not have a player prefab to instantiate!");
 
-        var players = GameObject.FindGameObjectsWithTag("Player");
+        var players = FindObjectsOfType<ControllerPlayer>();
         if (players.Length > 0)
         {
             m_ScoreStrings = new string[players.Length];
             for (int i = 0; i < players.Length; i++)
             {
-                if (players[i].GetComponent<ControllerPlayer>())
-                    m_Players.Add(players[i].GetComponent<ControllerPlayer>());
+                m_Players.Add(players[i]);
             }
 
             for (int write = 0; write < m_Players.Count; write++)
@@ -194,14 +195,19 @@ public class ControllerScene : MonoBehaviour
         if (m_IsBark)
         {
             if (m_BarkText)
+            {
+                if (m_BarkText.color != m_BarkColor)
+                    m_BarkText.color = m_BarkColor;
+
                 m_BarkText.text = m_ScoreBark + " score!";
+            }
 
             if (m_BarkTimer < m_BarkTime)
                 m_BarkTimer += Time.deltaTime;
             else
             {
                 m_BarkTimer = 0.0f;
-                SetScoreBark("");
+                SetScoreBark("", Color.red);
             }
         }
         else
@@ -314,8 +320,9 @@ public class ControllerScene : MonoBehaviour
         m_PlayerCount--;
     }
 
-    public static void SetScoreBark(string s)
+    public static void SetScoreBark(string s, Color textCol)
     {
+        m_BarkColor = textCol;
         m_ScoreBark = s;
         m_IsBark = m_ScoreBark != "";
     }
@@ -338,5 +345,10 @@ public class ControllerScene : MonoBehaviour
     public List<Transform> GetSpawnPoints()
     {
         return m_SpawnPoints;
+    }
+
+    public List<ControllerPlayer> GetPlayers()
+    {
+        return m_Players;
     }
 }

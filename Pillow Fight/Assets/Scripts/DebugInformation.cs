@@ -35,10 +35,10 @@ public class DebugInformation : MonoBehaviour
         {
             string info = "";
 
-            for (int i = 0; i < m_Scene.m_Players.Count; i++)
+            for (int i = 0; i < m_Scene.GetPlayers().Count; i++)
             {
-                info += m_Scene.m_Players[i].GetDebugInformation();
-                if (i < m_Scene.m_Players.Count - 1)
+                info += m_Scene.GetPlayers()[i].GetDebugInformation();
+                if (i < m_Scene.GetPlayers().Count - 1)
                     info += "\n";
             }
 

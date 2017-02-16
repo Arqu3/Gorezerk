@@ -17,24 +17,47 @@ public enum ControllerType
 public class ControllerPlayer : MonoBehaviour
 {
     //Public vars
-    public int m_PlayerNum = 1;
+    [Header("Movement variables")]
+    [Range(1f, 100f)]
     public float m_Speed = 10.0f;
+    [Range(1f, 20f)]
+    public float m_Acceleration = 10.0f;
+
+    [Header("Jump/air variables")]
+    [Range(1f, 100f)]
     public float m_JumpForce = 10.0f;
+    [Range(0.1f, 1.0f)]
     public float m_FallGraceTime = 0.75f;
     public bool m_IsAirMovement = false;
+    [Range(0.1f, 2.0f)]
     public float m_DampXAmount = 0.5f;
-    public float m_Acceleration = 10.0f;
+
+    [Header("Hook variables")]
+    [Range(1f, 200f)]
     public float m_HookTravelSpeed = 10.0f;
+    [Range(1f, 200f)]
     public float m_TravelToHookSpeed = 10.0f;
+    [Range(0.1f, 10.0f)]
     public float m_HookBreakDistance = 1.0f;
+    [Range(0.1f, 2.0f)]
     public float m_HookCooldown = 0.5f;
+
+    [Header("Attack variables")]
+    [Range(0.1f, 2.0f)]
     public float m_AttackTime = 0.3f;
+    [Range(0.1f, 2.0f)]
     public float m_AttackCooldown = 0.5f;
+    [Range(0.1f, 5.0f)]
     public float m_AttackRange = 1.0f;
+    [Range(0.1f, 2.0f)]
     public float m_ParryTime = 0.3f;
+    [Range(1f, 100f)]
     public float m_ParryForce = 20.0f;
+
+    [Header("Spawnable prefabs")]
     public GameObject m_HookPrefab;
 
+    [Header("Layermasks")]
     //Layermasks
     public LayerMask m_HookMask;
     public LayerMask m_GroundMask;
@@ -51,11 +74,11 @@ public class ControllerPlayer : MonoBehaviour
     private bool m_IsJump = false;
     private bool m_CanAirJump = false;
 
+    //General player vars
+    private int m_PlayerNum = 1;
+
     //Movement vars
     private float m_Horizontal = 0.0f;
-
-    //Raycast vars
-    private string m_Tag = "";
 
     //Score vars
     private int m_Score = 0;
@@ -72,6 +95,7 @@ public class ControllerPlayer : MonoBehaviour
     private Transform m_Pointer;
     private bool m_CanShootHook = true;
     private GameObject m_HookClone;
+    private ControllerHook m_HookController;
     private Vector2 m_Aim = Vector2.zero;
     private bool m_IsHookCD = false;
 
@@ -122,7 +146,6 @@ public class ControllerPlayer : MonoBehaviour
         m_Renderer = GetComponent<MeshRenderer>();
         m_Collider = GetComponent<Collider2D>();
         m_Rigidbody = GetComponent<Rigidbody2D>();
-        m_Tag = gameObject.tag;
         m_HookTimer = m_HookCooldown;
 
         if (transform.FindChild("HeadCollider"))
@@ -446,31 +469,42 @@ public class ControllerPlayer : MonoBehaviour
                     if (m_HookClone.GetComponent<Rigidbody2D>())
                         m_HookClone.GetComponent<Rigidbody2D>().velocity = m_GrappleDir.normalized * m_HookTravelSpeed;
 
+                    if (m_HookClone.GetComponent<ControllerHook>())
+                    {
+                        m_HookController = m_HookClone.GetComponent<ControllerHook>();
+                        m_HookController.SetIgnores(gameObject, m_Head);
+                    }
+
                     m_CanShootHook = false;
                 }
 
-                if (m_HookClone)
+                if (m_HookClone && m_HookController)
                 {
                     //Currently using circlecast, gives slightly better results than regular raycasting
-                    RaycastHit2D hit = Physics2D.CircleCast(m_HookClone.transform.position, 0.5f, Vector2.right * 0);
+                    //RaycastHit2D hit = Physics2D.CircleCast(m_HookClone.transform.position, 0.5f, Vector2.right * 0);
+                    //RaycastHit2D hit = m_HookController.GetRayHit();
                     //If something is hit
-                    if (hit)
-                    {
-                        //Check hit isn't self & not a headcollider
-                        if (hit.collider.gameObject != gameObject && hit.collider.gameObject != m_Head)
-                        {
-                            m_HookClone.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                            m_GrappleHit = true;
+                    //if (hit)
+                    //{
+                    //    //Check hit isn't self & not a headcollider
+                    //    if (hit.collider.gameObject != gameObject && hit.collider.gameObject != m_Head)
+                    //    {
+                    //        //m_HookClone.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    //        m_GrappleHit = true;
 
-                            //If hook hit player, set hooks parent to player
-                            if (hit.collider.gameObject.tag == m_Tag || hit.collider.gameObject.tag == "HeadCollider")
-                            {
-                                m_HookClone.GetComponent<Rigidbody2D>().simulated = false;
-                                m_HookClone.transform.SetParent(hit.collider.gameObject.transform);
-                                //Debug.Log("parent set");
-                            }
-                        }
-                    }
+                    //        //If hook hit player, set hooks parent to player
+                    //        if (hit.collider.gameObject.tag == m_Tag || hit.collider.gameObject.tag == m_Head.gameObject.tag)
+                    //        {
+                    //            m_HookClone.GetComponent<Rigidbody2D>().simulated = false;
+                    //            m_HookClone.transform.SetParent(hit.collider.gameObject.transform);
+                    //            //Debug.Log("parent set");
+                    //        }
+                    //    }
+                    //}
+
+                    bool hit = m_HookController.GetHit();
+                    if (hit)
+                        m_GrappleHit = true;
                 }
             }
             //Interrupt the hook if button is released and hook hasn't hit anything
@@ -511,6 +545,8 @@ public class ControllerPlayer : MonoBehaviour
                 else
                 {
                     //Stay on grapple point
+                    if (!m_HasReachedHook)
+                        m_Rigidbody.velocity = Vector2.zero;
                     m_HasReachedHook = true;
 
                     //Release if too far away from hit point or released grapple-button
@@ -811,7 +847,7 @@ public class ControllerPlayer : MonoBehaviour
     {
         if (score > 0)
         {
-            ControllerScene.SetScoreBark("Player" + (m_PlayerNum + 1));
+            ControllerScene.SetScoreBark("Player" + (m_PlayerNum + 1), m_Renderer.material.color);
             ControllerScene.ToggleUpdateText();
         }
 
@@ -895,5 +931,10 @@ public class ControllerPlayer : MonoBehaviour
         string Controllers = m_ControllerType.ToString() + " " + m_ControllerNum.ToString() + " " + m_AttackInput + " " + m_GrappleInput + " " + CheckLeftTrigger() + " " + CheckRightTrigger();
 
         return Controllers;
+    }
+
+    public void SetPlayerNum(int num)
+    {
+        m_PlayerNum = num;
     }
 }

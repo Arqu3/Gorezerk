@@ -9,8 +9,9 @@ public class RedButton : MonoBehaviour
     //Public vars
     public float m_CountdownTime = 5.0f;
 
-    public ControllerPlayer m_SafePlayer;
-    public Text m_CountdownText;
+    //Component vars
+    private ControllerPlayer m_SafePlayer;
+    private Text m_CountdownText;
 
     //Timer vars
     private float m_CountdownTimer = 0.0f;
