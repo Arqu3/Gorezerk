@@ -7,10 +7,10 @@ public class AudioPlayerMovement : MonoBehaviour
     public int material;
     private SFXManager sfxMananger;
 
-    [FMODUnity.EventRef]
-    public string FootstepsEv;
-    FMOD.Studio.EventInstance Footsteps;
-    FMOD.Studio.ParameterInstance FMaterial;
+    //[FMODUnity.EventRef]
+    //public string FootstepsEv;
+    //FMOD.Studio.EventInstance Footsteps;
+    //FMOD.Studio.ParameterInstance FMaterial;
 
     [FMODUnity.EventRef]
     public string JumpEv;
@@ -19,36 +19,36 @@ public class AudioPlayerMovement : MonoBehaviour
     [FMODUnity.EventRef]
     public string JumpLandEv;
     FMOD.Studio.EventInstance JumpLand;
-    FMOD.Studio.ParameterInstance JMaterial;
+    //FMOD.Studio.ParameterInstance JMaterial;
 
     void Awake()
     {
-        sfxMananger = FindObjectOfType<SFXManager>();
+        sfxMananger = GetComponent<SFXManager>();
     }
 
     void Start()
     {
-        Footsteps = FMODUnity.RuntimeManager.CreateInstance(FootstepsEv);
-        JumpLand.getParameter("Material", out JMaterial);
-        Footsteps.getParameter("Material", out FMaterial);
+        //Footsteps = FMODUnity.RuntimeManager.CreateInstance(FootstepsEv);
+        //JumpLand.getParameter("Material", out JMaterial);
+        //Footsteps.getParameter("Material", out FMaterial);
     }
 
     public void PlayerJumpLand(int material)
     {
-        JMaterial.setValue(material);
+        //JMaterial.setValue(material);
         JumpLand.start();
     }
 
     public void PlayerRun(int material)
     {
         sfxMananger.PlayerRun(material);
-        FMaterial.setValue(material);
-        Footsteps.start();
+        //FMaterial.setValue(material);
+        //Footsteps.start();
     }
 
     public void PlayerStop()
     {
-        Footsteps.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        //Footsteps.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 
     public void PlayerJump()

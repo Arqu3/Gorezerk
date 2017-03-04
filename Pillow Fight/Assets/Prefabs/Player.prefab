@@ -171,6 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4428900328133886}
   - component: {fileID: 114358670697821918}
+  - component: {fileID: 114831518140541202}
   - component: {fileID: 50136557877532140}
   - component: {fileID: 58878900036951924}
   - component: {fileID: 23585852236027824}
@@ -648,6 +649,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ParticlePrefab: {fileID: 1774556136024186, guid: f2241ae1940db354a89a620dd7482290,
     type: 2}
+--- !u!114 &114831518140541202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1882951712129200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff95b9ea3e1e9204fa4054703115ed32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: 0
+  FootstepsEv: 
+  JumpEv: 
+  JumpLandEv: 
 --- !u!114 &114831599053049206
 MonoBehaviour:
   m_ObjectHideFlags: 1

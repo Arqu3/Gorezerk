@@ -2,9 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(FMODUnity.StudioEventEmitter))]
 public class MusicManager : MonoBehaviour
 {
-    public FMODUnity.StudioEventEmitter musicManager;
+    private FMODUnity.StudioEventEmitter musicManager;
+
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        musicManager = GetComponent<FMODUnity.StudioEventEmitter>();
+    }
 
     //Call these functions to change music playback
     public void MenuMusic ()

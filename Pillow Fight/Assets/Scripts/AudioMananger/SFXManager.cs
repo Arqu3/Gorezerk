@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioPlayerMovement))]
 public class SFXManager : MonoBehaviour {
-    private SFXManager sfxManager;
     int material;
     private AudioPlayerMovement audioPlayerMovement;
 
-
-    void Start ()
+    void Start()
     {
 
     }
-    void Awake ()
+    void Awake()
     {
-        sfxManager = FindObjectOfType<SFXManager> ();
+        DontDestroyOnLoad(gameObject);
+        audioPlayerMovement = GetComponent<AudioPlayerMovement>();
     }
 
     //Call these functions to play SFX
