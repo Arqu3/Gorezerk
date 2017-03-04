@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: ffcc42f1c65c0704d894417ee4dad025
-timeCreated: 1484930940
+timeCreated: 1488661319
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_ParticlePrefab: {fileID: 1774556136024186, guid: f2241ae1940db354a89a620dd7482290,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

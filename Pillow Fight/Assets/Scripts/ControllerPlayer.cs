@@ -66,6 +66,7 @@ public class ControllerPlayer : MonoBehaviour
     private Rigidbody2D m_Rigidbody;
     private MeshRenderer m_Renderer;
     private Collider2D m_Collider;
+    private SFXManager m_SfxManager;
 
     //Ground vars
     private bool m_IsOnGround = false;
@@ -147,6 +148,7 @@ public class ControllerPlayer : MonoBehaviour
         m_Collider = GetComponent<Collider2D>();
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_HookTimer = m_HookCooldown;
+        m_SfxManager = FindObjectOfType<SFXManager>();
 
         if (transform.FindChild("HeadCollider"))
             m_Head = transform.FindChild("HeadCollider").gameObject;

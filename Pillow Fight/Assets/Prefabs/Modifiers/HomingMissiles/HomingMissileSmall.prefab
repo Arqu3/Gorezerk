@@ -132,3 +132,4 @@ MonoBehaviour:
   m_ReflectTime: 0.2
   m_ReflectAmount: 8
   m_TargetMode: 0
+  m_DestroyOnPlayerHit: 1

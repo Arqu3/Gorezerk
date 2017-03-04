@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class ParryHitbox : MonoBehaviour
 {
+    [Header("On parry spawn")]
+    public GameObject m_ParticlePrefab;
 
     //Component vars
     ControllerPlayer m_Player;
@@ -30,6 +32,9 @@ public class ParryHitbox : MonoBehaviour
                 m_Player.SetParry(true);
                 //m_Player.InterruptAttack();
                 m_Player.GetRigidbody().AddForce(dir * m_Player.m_ParryForce, ForceMode2D.Impulse);
+
+                if (m_ParticlePrefab)
+                    Instantiate(m_ParticlePrefab, transform.position, Quaternion.identity);
             }
             else if (col.gameObject.GetComponent<HomingMissile>())
                 col.gameObject.GetComponent<HomingMissile>().Reflect(col.gameObject.transform.position - m_Player.transform.position);
