@@ -12,16 +12,59 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 114913312799567924}
-  - {fileID: 114747625960593166}
+  - {fileID: 114336523812897656}
+  - {fileID: 114020375388585542}
   EditorEvents:
-  - {fileID: 114244758816960234}
-  - {fileID: 114179617546939180}
-  - {fileID: 114495652072293076}
-  MasterBankRef: {fileID: 114747625960593166}
-  StringsBankRef: {fileID: 114913312799567924}
-  stringsBankWriteTime: 636242571683391372
+  - {fileID: 114943667638206774}
+  - {fileID: 114951960291538660}
+  - {fileID: 114545826155439644}
+  - {fileID: 114912497962218828}
+  - {fileID: 114250707760706394}
+  - {fileID: 114002188997585296}
+  MasterBankRef: {fileID: 114020375388585542}
+  StringsBankRef: {fileID: 114336523812897656}
+  stringsBankWriteTime: 636242637711037937
   cacheVersion: 2
+--- !u!114 &114002188997585296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: snapshot:/Pause
+  guid: aa622955bedab94ea8a3fe11a30edebb
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+--- !u!114 &114020375388585542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: F:\Programs\Unity_Projects\Pillow Fight\Pillow Fight\FMOD Pillow Fight Project\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636242637711027937
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 2647808
+  Exists: 1
 --- !u!114 &114179617546939180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,6 +86,21 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114235861268578674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GamePause
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114244758816960234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +122,62 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114250707760706394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MU_Main
+  guid: e08284450a49884e91706a46bd922905
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114254706479922334}
+  - {fileID: 114235861268578674}
+  MinDistance: 0
+  MaxDistance: 0
+--- !u!114 &114254706479922334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114336523812897656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: FMOD Pillow Fight Project\Build\Desktop\Master Bank.strings.bank
+  lastModified: 636242637711037937
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1034
+  Exists: 1
 --- !u!114 &114495652072293076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,6 +193,27 @@ MonoBehaviour:
   guid: be251ce156bda445ae7146dd3d3b9cf2
   Banks:
   - {fileID: 114747625960593166}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+--- !u!114 &114545826155439644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Swing
+  guid: be251ce156bda445ae7146dd3d3b9cf2
+  Banks:
+  - {fileID: 114020375388585542}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -104,6 +239,27 @@ MonoBehaviour:
   - Name: Desktop
     Value: 26368
   Exists: 1
+--- !u!114 &114912497962218828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/JumpLand
+  guid: f7dfb9d7cb2a8d498643c7448b19c7df
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114913312799567924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,3 +278,45 @@ MonoBehaviour:
   - Name: Desktop
     Value: 760
   Exists: 1
+--- !u!114 &114943667638206774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Footsteps
+  guid: 6bf8a79f357afd40b3effa36d34dceb4
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+--- !u!114 &114951960291538660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Jump
+  guid: bd740f733542d648b3bd4251e86b79a0
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0

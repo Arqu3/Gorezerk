@@ -16,7 +16,7 @@ MonoBehaviour:
   SourceProjectPath: FMOD Pillow Fight Project\FMOD Pillow Fight Project.fspro
   SourceBankPath: FMOD Pillow Fight Project\Build
   AutomaticEventLoading: 1
-  AutomaticSampleLoading: 0
+  AutomaticSampleLoading: 1
   ImportType: 0
   TargetAssetPath: 
   SpeakerModeSettings:
