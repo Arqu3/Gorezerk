@@ -365,6 +365,7 @@ public class ControllerPlayer : MonoBehaviour
         m_IsJump = true;
         m_FallGraceTimer = 0.0f;
         m_CanAirJump = false;
+        m_SfxManager.PlayerJump();
     }
 
     void GrappleUpdate()

@@ -65,5 +65,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: 0
   FootstepsEv: event:/SFX/Footsteps
-  JumpEv: event:/SFX/Jump
+  JumpEv: event:/SFX/Swing
   JumpLandEv: event:/SFX/JumpLand

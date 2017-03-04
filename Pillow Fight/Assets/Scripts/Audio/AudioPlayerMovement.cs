@@ -7,9 +7,9 @@ public class AudioPlayerMovement : MonoBehaviour
     public int material;
     private SFXManager sfxMananger;
 
-    //[FMODUnity.EventRef]
-    //public string FootstepsEv;
-    //FMOD.Studio.EventInstance Footsteps;
+    [FMODUnity.EventRef]
+    public string FootstepsEv;
+    FMOD.Studio.EventInstance Footsteps;
     //FMOD.Studio.ParameterInstance FMaterial;
 
     [FMODUnity.EventRef]
@@ -28,7 +28,7 @@ public class AudioPlayerMovement : MonoBehaviour
 
     void Start()
     {
-        //Footsteps = FMODUnity.RuntimeManager.CreateInstance(FootstepsEv);
+        Footsteps = FMODUnity.RuntimeManager.CreateInstance(FootstepsEv);
         //JumpLand.getParameter("Material", out JMaterial);
         //Footsteps.getParameter("Material", out FMaterial);
     }
@@ -43,12 +43,12 @@ public class AudioPlayerMovement : MonoBehaviour
     {
         sfxMananger.PlayerRun(material);
         //FMaterial.setValue(material);
-        //Footsteps.start();
+        Footsteps.start();
     }
 
     public void PlayerStop()
     {
-        //Footsteps.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        Footsteps.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 
     public void PlayerJump()
