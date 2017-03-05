@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{388ac022-8104-4b1b-9818-00368a1db5d8}">
+        <property name="assetPath">
+            <value>Metals_1 - Trimmed (4).wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>1.9453287981859411</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{32dc9d01-c288-4fa5-a729-113249d89e4b}</destination>
+        </relationship>
+    </object>
+</objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{c36cd6eb-a028-4a0e-800e-bf5e703208f3}">
+        <property name="assetPath">
+            <value>mediapaja2009__drawing-sword - Trimmed.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>1.53</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{32dc9d01-c288-4fa5-a729-113249d89e4b}</destination>
+        </relationship>
+    </object>
+</objects>

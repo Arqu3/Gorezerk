@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="MixerGroup" id="{ce08282e-4f48-4afe-866b-8a4346424a8a}">
+        <property name="name">
+            <value>PlayerDeath</value>
+        </property>
+        <relationship name="effectChain">
+            <destination>{bd30b2c3-101e-4fe9-ac1f-33cfb4a515d5}</destination>
+        </relationship>
+        <relationship name="panner">
+            <destination>{2f3a30a9-3eec-4455-9164-6f83e4d69daf}</destination>
+        </relationship>
+        <relationship name="output">
+            <destination>{9a6933b3-4694-4162-9863-432def197763}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusEffectChain" id="{bd30b2c3-101e-4fe9-ac1f-33cfb4a515d5}">
+        <relationship name="effects">
+            <destination>{448ff3df-1e18-4fba-a276-d051db65a7d9}</destination>
+            <destination>{fd78f929-6f6c-4f41-936e-d901ce85124e}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusPanner" id="{2f3a30a9-3eec-4455-9164-6f83e4d69daf}"/>
+    <object class="MixerBusFader" id="{448ff3df-1e18-4fba-a276-d051db65a7d9}"/>
+    <object class="Sidechain" id="{fd78f929-6f6c-4f41-936e-d901ce85124e}">
+        <relationship name="targets">
+            <destination>{93d5966b-8332-4417-8710-851c19986335}</destination>
+        </relationship>
+    </object>
+</objects>

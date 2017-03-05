@@ -210,6 +210,8 @@
     <object class="MixerBusEffectChain" id="{7a94436d-6722-48bc-832d-f5350b443796}">
         <relationship name="effects">
             <destination>{6dda77f5-1bc2-415e-b505-d9b2934035f1}</destination>
+            <destination>{faeafc61-1c29-469a-a670-99abffcc0d6a}</destination>
+            <destination>{57011882-1212-47cb-98ad-c457f23d12c6}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{883c758e-f167-49a1-9ce6-59e039933a32}"/>
@@ -247,4 +249,72 @@
         </property>
     </object>
     <object class="MixerBusFader" id="{6dda77f5-1bc2-415e-b505-d9b2934035f1}"/>
+    <object class="ThreeEQEffect" id="{faeafc61-1c29-469a-a670-99abffcc0d6a}">
+        <property name="lowGain">
+            <value>-10</value>
+        </property>
+        <property name="highGain">
+            <value>8.5</value>
+        </property>
+    </object>
+    <object class="PluginEffect" id="{57011882-1212-47cb-98ad-c457f23d12c6}">
+        <relationship name="plugin">
+            <destination>{182a88fa-a3e0-49a3-9996-9b4dfa078e75}</destination>
+        </relationship>
+    </object>
+    <object class="Plugin" id="{182a88fa-a3e0-49a3-9996-9b4dfa078e75}">
+        <property name="identifier">
+            <value>FMOD Pitch Shifter</value>
+        </property>
+        <relationship name="pluginParameters">
+            <destination>{27bc8e07-a91a-478d-9d42-d37804eb407c}</destination>
+            <destination>{e80d92a6-c15a-4a90-b450-12252f578a72}</destination>
+            <destination>{3d5aa45b-c46c-4854-bf73-a5672acd3b21}</destination>
+            <destination>{c346a246-7ada-4f59-9f04-0bbe45c16ab3}</destination>
+        </relationship>
+    </object>
+    <object class="FloatPluginParameter" id="{27bc8e07-a91a-478d-9d42-d37804eb407c}">
+        <property name="name">
+            <value>Pitch</value>
+        </property>
+        <property name="curve">
+            <value>LinearCurveStrategy{(0.000000,0.500000)(1.000000,2.000000)}</value>
+        </property>
+        <property name="value">
+            <value>1.20000005</value>
+        </property>
+    </object>
+    <object class="FloatPluginParameter" id="{e80d92a6-c15a-4a90-b450-12252f578a72}">
+        <property name="name">
+            <value>FFT size</value>
+        </property>
+        <property name="curve">
+            <value>LinearPiecewiseCurveStrategy{(7.186666,256.000000)(8.000000,500.000000)(9.000000,1000.000000)(10.000000,2000.000000)(10.698667,4096.000000)}</value>
+        </property>
+        <property name="value">
+            <value>1024</value>
+        </property>
+    </object>
+    <object class="FloatPluginParameter" id="{3d5aa45b-c46c-4854-bf73-a5672acd3b21}">
+        <property name="name">
+            <value>Overlap</value>
+        </property>
+        <property name="curve">
+            <value>LinearPiecewiseCurveStrategy{(0.000000,1.000000)(1.000000,2.000000)(2.000000,5.000000)(3.000000,10.000000)(4.000000,20.000000)(4.400000,32.000000)}</value>
+        </property>
+        <property name="value">
+            <value>4</value>
+        </property>
+    </object>
+    <object class="FloatPluginParameter" id="{c346a246-7ada-4f59-9f04-0bbe45c16ab3}">
+        <property name="name">
+            <value>Max channels</value>
+        </property>
+        <property name="curve">
+            <value>LinearCurveStrategy{(0.000000,0.000000)(1.000000,16.000000)}</value>
+        </property>
+        <property name="value">
+            <value>0</value>
+        </property>
+    </object>
 </objects>
