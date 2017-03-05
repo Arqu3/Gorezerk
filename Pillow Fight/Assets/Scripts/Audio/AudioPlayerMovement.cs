@@ -9,7 +9,7 @@ public class AudioPlayerMovement : MonoBehaviour
     [FMODUnity.EventRef]
     public string FootstepsEv;
     FMOD.Studio.EventInstance Footsteps;
-    //FMOD.Studio.ParameterInstance FMaterial;
+    FMOD.Studio.ParameterInstance FMaterial;
 
     [FMODUnity.EventRef]
     public string JumpEv;
@@ -20,11 +20,20 @@ public class AudioPlayerMovement : MonoBehaviour
     FMOD.Studio.EventInstance JumpLand;
     //FMOD.Studio.ParameterInstance JMaterial;
 
+    [FMODUnity.EventRef]
+    public string WeaponSwingEv;
+    FMOD.Studio.EventInstance WeaponSwing;
+
+    [FMODUnity.EventRef]
+    public string DeathEv;
+    FMOD.Studio.EventInstance Death;
+
     void Start()
     {
         Footsteps = FMODUnity.RuntimeManager.CreateInstance(FootstepsEv);
+        JumpLand = FMODUnity.RuntimeManager.CreateInstance(JumpLandEv);
         //JumpLand.getParameter("Material", out JMaterial);
-        //Footsteps.getParameter("Material", out FMaterial);
+        Footsteps.getParameter("Material", out FMaterial);
     }
 
     public void PlayerJumpLand(int material)
@@ -35,7 +44,7 @@ public class AudioPlayerMovement : MonoBehaviour
 
     public void PlayerRun(int material)
     {
-        //FMaterial.setValue(material);
+        FMaterial.setValue(material);
         Footsteps.start();
     }
 
@@ -47,6 +56,18 @@ public class AudioPlayerMovement : MonoBehaviour
     public void PlayerJump()
     {
         FMODUnity.RuntimeManager.PlayOneShot(JumpEv);
+    }
+
+    public void PlayerSwing()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(WeaponSwingEv);
+
+    }
+
+    public void PlayerDeath()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(DeathEv);
+
     }
 }
 

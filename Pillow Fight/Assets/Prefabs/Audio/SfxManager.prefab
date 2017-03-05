@@ -67,3 +67,5 @@ MonoBehaviour:
   FootstepsEv: event:/SFX/Footsteps
   JumpEv: event:/SFX/Swing
   JumpLandEv: event:/SFX/JumpLand
+  WeaponSwingEv: event:/SFX/Swing
+  DeathEv: event:/SFX/Death

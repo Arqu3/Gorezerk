@@ -660,7 +660,7 @@ public class ControllerPlayer : MonoBehaviour
                 m_AttackBox.transform.localPosition = new Vector3(m_AttackBox.transform.localScale.x / 2.0f * m_AttackDirection, 0f, 0f);
                 m_AttackTimer = 0.0f;
                 m_CanAttack = false;
-                //m_SfxManager.PlayerSwing();
+                m_SfxManager.PlayerSwing();
             }
         }
         else
@@ -706,8 +706,8 @@ public class ControllerPlayer : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(m_Collider.bounds.size.x / 4, m_Collider.bounds.size.y / 2 * 1.2f, 0), Vector2.right, 0.5f, m_GroundMask);
         if (hit)
         {
-            //if (m_IsInAir)
-            //    m_SfxManager.PlayerJumpLand(0);
+            if (m_IsInAir)
+                m_SfxManager.PlayerJumpLand(0);
 
             onGround = true;
 
@@ -858,7 +858,7 @@ public class ControllerPlayer : MonoBehaviour
         if (m_HookClone)
             Destroy(m_HookClone);
         ControllerScene.ReducePlayerCount();
-        //m_SfxManager.PlayerDeath();
+        m_SfxManager.PlayerDeath();
         gameObject.SetActive(false);
     }
 

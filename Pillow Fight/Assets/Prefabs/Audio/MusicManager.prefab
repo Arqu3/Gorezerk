@@ -69,7 +69,7 @@ MonoBehaviour:
   CollisionTag: 
   AllowFadeout: 1
   TriggerOnce: 0
-  Preload: 0
+  Preload: 1
   Params:
   - Name: 
     Value: 1

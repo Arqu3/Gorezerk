@@ -16,7 +16,7 @@ public class MusicManager : MonoBehaviour
     //Call these functions to change music playback
     public void MenuMusic ()
     {
-        musicManager.SetParameter("Intensity", 0f);        
+        musicManager.SetParameter("Intensity",0f);        
     }
 
     public void MatchMusic()

@@ -21,9 +21,10 @@ MonoBehaviour:
   - {fileID: 114912497962218828}
   - {fileID: 114250707760706394}
   - {fileID: 114002188997585296}
+  - {fileID: 114488620861533012}
   MasterBankRef: {fileID: 114020375388585542}
   StringsBankRef: {fileID: 114336523812897656}
-  stringsBankWriteTime: 636242637711037937
+  stringsBankWriteTime: 636242738294891005
   cacheVersion: 2
 --- !u!114 &114002188997585296
 MonoBehaviour:
@@ -59,12 +60,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: F:\Programs\Unity_Projects\Pillow Fight\Pillow Fight\FMOD Pillow Fight Project\Build\Desktop\Master
     Bank.bank
-  lastModified: 636242637711027937
+  lastModified: 636242738294881004
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 2647808
+    Value: 2694336
   Exists: 1
+--- !u!114 &114071202471287282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GamePause
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114179617546939180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +102,21 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114233830630233904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114235861268578674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,11 +172,41 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114254706479922334}
-  - {fileID: 114235861268578674}
+  - {fileID: 114261266715078996}
+  - {fileID: 114427694657989912}
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114252237917718776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114254706479922334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114261266715078996
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -172,12 +233,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: FMOD Pillow Fight Project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636242637711037937
+  lastModified: 636242738294891005
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1034
+    Value: 1070
   Exists: 1
+--- !u!114 &114421022235581402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114427694657989912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GamePause
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114488620861533012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Death
+  guid: 76813884aabb6c4793e4147022e5816e
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
 --- !u!114 &114495652072293076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +351,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 26368
   Exists: 1
+--- !u!114 &114842140865314092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114912497962218828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,11 +382,12 @@ MonoBehaviour:
   Banks:
   - {fileID: 114020375388585542}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  Parameters:
+  - {fileID: 114233830630233904}
+  MinDistance: 0
+  MaxDistance: 0
 --- !u!114 &114913312799567924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +424,8 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 114842140865314092}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114951960291538660
@@ -320,3 +449,18 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114991230422285822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 1
+  Default: 0

@@ -5,7 +5,7 @@
             <value>MenuLooper</value>
         </property>
         <property name="outputFormat">
-            <value>1</value>
+            <value>0</value>
         </property>
         <relationship name="mixer">
             <destination>{085a8faf-3cd2-448d-bec5-f3b6f996b7a4}</destination>

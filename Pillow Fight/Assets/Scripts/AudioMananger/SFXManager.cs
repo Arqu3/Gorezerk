@@ -37,4 +37,14 @@ public class SFXManager : MonoBehaviour {
     {
         audioPlayerMovement.PlayerJumpLand(material);
     }
+
+    public void PlayerSwing()
+    {
+        audioPlayerMovement.PlayerSwing();
+    }
+
+    public void PlayerDeath()
+    {
+        audioPlayerMovement.PlayerDeath();
+    }
 }
