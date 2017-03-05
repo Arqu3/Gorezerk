@@ -4,6 +4,9 @@
         <property name="name">
             <value>PlayerSwing</value>
         </property>
+        <property name="maxInstances">
+            <value>8</value>
+        </property>
         <relationship name="effectChain">
             <destination>{b76c042f-11dd-47ca-8420-fae396792a6e}</destination>
         </relationship>
@@ -22,12 +25,5 @@
     </object>
     <object class="MixerBusPanner" id="{36305668-1769-4690-8ea5-7fc42aa24fbf}"/>
     <object class="MixerBusFader" id="{9f26a96c-776f-4e4c-91cd-a256e84818c9}"/>
-    <object class="CompressorEffect" id="{93d5966b-8332-4417-8710-851c19986335}">
-        <property name="threshold">
-            <value>-30.5</value>
-        </property>
-        <property name="sidechainEnabled">
-            <value>true</value>
-        </property>
-    </object>
+    <object class="CompressorEffect" id="{93d5966b-8332-4417-8710-851c19986335}"/>
 </objects>
