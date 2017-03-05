@@ -56,6 +56,7 @@ public class ControllerPlayer : MonoBehaviour
 
     [Header("Spawnable prefabs")]
     public GameObject m_HookPrefab;
+    public GameObject m_DeathParticle;
 
     [Header("Layermasks")]
     //Layermasks
@@ -69,19 +70,20 @@ public class ControllerPlayer : MonoBehaviour
     private SFXManager m_SfxManager;
 
     //Ground vars
-    private bool m_IsOnGround = false;
-    private bool m_IsInAir = true;
+    private bool m_OnGround = false;
+    private bool m_InAir = true;
+    private bool m_WasAir = true;
     private float m_FallGraceTimer = 0.0f;
-    private bool m_IsJump = false;
-    private bool m_CanAirJump = false;
+    private bool m_Jump = false;
+    private bool m_AirJump = false;
 
     //General player vars
     private int m_PlayerNum = 1;
 
     //Movement vars
     private float m_Horizontal = 0.0f;
-    private bool m_HasStartedRunning = false;
-    private bool m_HasStoppedRunning = false;
+    private bool m_StartedRunning = false;
+    private bool m_StoppedRunning = false;
 
     //Score vars
     private int m_Score = 0;
@@ -275,8 +277,8 @@ public class ControllerPlayer : MonoBehaviour
         if (transform.position.y < -40.0f)
             transform.position = Vector3.zero;
 
-        m_IsInAir = Mathf.Round(m_Rigidbody.velocity.y) != 0;
-        m_IsOnGround = GroundCheck();
+        m_InAir = Mathf.Round(m_Rigidbody.velocity.y) != 0;
+        m_OnGround = GroundCheck();
 
         if (!WallCheck())
         {
@@ -294,25 +296,37 @@ public class ControllerPlayer : MonoBehaviour
         }
 
         //Player footstep sounds
-        if (m_IsOnGround)
+        if (m_OnGround)
         {
             if (Mathf.Round(Mathf.Abs(m_Horizontal)) != 0)
             {
-                if (!m_HasStartedRunning)
+                if (!m_StartedRunning)
                 {
                     m_SfxManager.PlayerRun(0);
-                    m_HasStartedRunning = true;
-                    m_HasStoppedRunning = false;
+                    m_StartedRunning = true;
+                    m_StoppedRunning = false;
                 }
             }
-            else if (m_HasStartedRunning)
+            else if (m_StartedRunning)
             {
-                m_HasStartedRunning = false;
-                if (!m_HasStoppedRunning)
+                m_StartedRunning = false;
+                if (!m_StoppedRunning)
                 {
                     m_SfxManager.PlayerStop();
-                    m_HasStoppedRunning = true;
+                    m_StoppedRunning = true;
                 }
+            }
+        }
+        else
+        {
+            if (m_InAir)
+                m_WasAir = true;
+
+            if (m_StartedRunning)
+            {
+                m_StartedRunning = false;
+                m_StoppedRunning = false;
+                m_SfxManager.PlayerStop();
             }
         }
 
@@ -335,7 +349,7 @@ public class ControllerPlayer : MonoBehaviour
                     m_Rigidbody.velocity = new Vector2(totalSpeed, m_Rigidbody.velocity.y);
                 else
                 {
-                    if (!m_IsOnGround)
+                    if (!m_OnGround)
                     {
                         if (m_Horizontal > 0.5f || m_Horizontal < -0.5f)
                             m_Rigidbody.velocity = new Vector2(totalAirSpeed, m_Rigidbody.velocity.y);
@@ -346,15 +360,15 @@ public class ControllerPlayer : MonoBehaviour
             }
         }
 
-        if (!m_IsOnGround && !m_IsJump)
+        if (!m_OnGround && !m_Jump)
         {
-            m_CanAirJump = true;
+            m_AirJump = true;
             m_FallGraceTimer += Time.deltaTime;
             if (m_FallGraceTimer >= m_FallGraceTime)
             {
                 m_FallGraceTimer = 0.0f;
-                m_CanAirJump = false;
-                m_IsJump = true;
+                m_AirJump = false;
+                m_Jump = true;
             }
         }
 
@@ -362,7 +376,7 @@ public class ControllerPlayer : MonoBehaviour
         {
             if (Input.GetAxis(m_JumpInput) != 0.0f)
             {
-                if ((m_IsOnGround && !m_IsInAir) || m_CanAirJump)
+                if ((m_OnGround && !m_InAir) || m_AirJump)
                     Jump();
             }
         }
@@ -370,14 +384,14 @@ public class ControllerPlayer : MonoBehaviour
         {
             if (Input.GetKey(m_JumpInputK))
             {
-                if ((m_IsOnGround && !m_IsInAir) || m_CanAirJump)
+                if ((m_OnGround && !m_InAir) || m_AirJump)
                     Jump();
             }
         }
 
         if (!m_GrappleHit)
         {
-            if (m_IsOnGround)
+            if (m_OnGround)
                 m_Rigidbody.gravityScale = 0.0f;
             else
                 m_Rigidbody.gravityScale = 1.0f;
@@ -387,9 +401,9 @@ public class ControllerPlayer : MonoBehaviour
     void Jump()
     {
         m_Rigidbody.AddForce(Vector2.up * m_JumpForce, ForceMode2D.Impulse);
-        m_IsJump = true;
+        m_Jump = true;
         m_FallGraceTimer = 0.0f;
-        m_CanAirJump = false;
+        m_AirJump = false;
         m_SfxManager.PlayerJump();
     }
 
@@ -706,13 +720,16 @@ public class ControllerPlayer : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(m_Collider.bounds.size.x / 4, m_Collider.bounds.size.y / 2 * 1.2f, 0), Vector2.right, 0.5f, m_GroundMask);
         if (hit)
         {
-            if (m_IsInAir)
+            if (m_WasAir)
+            {
+                m_WasAir = false;
                 m_SfxManager.PlayerJumpLand(0);
+            }
 
             onGround = true;
 
             if (m_Rigidbody.velocity.y <= 0.0f)
-                m_IsJump = false;
+                m_Jump = false;
 
             col = Color.red;
 
@@ -838,9 +855,9 @@ public class ControllerPlayer : MonoBehaviour
         m_CanShootHook = true;
         m_Aim = Vector2.zero;
         m_FallGraceTimer = 0.0f;
-        m_IsJump = false;
-        m_IsOnGround = false;
-        m_CanAirJump = false;
+        m_Jump = false;
+        m_OnGround = false;
+        m_AirJump = false;
 
         //Attack vars
         m_CanAttack = true;
@@ -859,6 +876,10 @@ public class ControllerPlayer : MonoBehaviour
             Destroy(m_HookClone);
         ControllerScene.ReducePlayerCount();
         m_SfxManager.PlayerDeath();
+
+        if (m_DeathParticle)
+            Instantiate(m_DeathParticle, transform.position, m_DeathParticle.transform.rotation);
+
         gameObject.SetActive(false);
     }
 

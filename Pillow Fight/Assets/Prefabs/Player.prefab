@@ -618,6 +618,8 @@ MonoBehaviour:
   m_ParryForce: 20
   m_HookPrefab: {fileID: 1180675877472092, guid: cde91c73289686b42841444ec31e9cd8,
     type: 2}
+  m_DeathParticle: {fileID: 1481695953963768, guid: 3cf97a9114103234c969322a5cbcdc53,
+    type: 2}
   m_HookMask:
     serializedVersion: 2
     m_Bits: 0
