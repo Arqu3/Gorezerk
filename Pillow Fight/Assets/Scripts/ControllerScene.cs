@@ -289,7 +289,7 @@ public class ControllerScene : MonoBehaviour
         }
         else
         {
-            m_MusicManager.MatchMusic();
+            m_MusicManager.UnPauseMusic();
             Time.timeScale = 1.0f;
             if (m_ModifierPanel.activeSelf)
                 m_ModifierPanel.SetActive(m_IsPaused);

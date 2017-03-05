@@ -29,4 +29,9 @@ public class MusicManager : MonoBehaviour
         musicManager.SetParameter("GamePause", 1f);
     }
 
+    public void UnPauseMusic()
+    {
+        musicManager.SetParameter("GamePause", 0f);
+    }
+
 }
