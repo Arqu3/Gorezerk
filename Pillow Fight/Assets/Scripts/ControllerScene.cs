@@ -23,7 +23,7 @@ public class ControllerScene : MonoBehaviour
     //Static vars
     private static bool m_IsPaused = true;
     private static int m_PlayerCount = 0;
-    private static bool m_UpdateText = false;
+    private static bool m_UpdateText = true;
 
     //Round start vars
     private Text m_CountdownText;
@@ -225,11 +225,17 @@ public class ControllerScene : MonoBehaviour
         m_ScoreText.text = "";
         for (int i = 0; i < m_Players.Count; i++)
         {
-            m_ScoreStrings[i] = "Player " + (m_Players[i].GetPlayerNum() + 1) + ": " + m_Players[i].GetScore();
+            m_ScoreStrings[i] = "<color=#" + ColorToHex(m_Players[i].GetColor()) + ">" + "Player " + (m_Players[i].GetPlayerNum() + 1) + ": " + m_Players[i].GetScore() + "</color>";
             m_ScoreText.text += m_ScoreStrings[i];
             if (i < m_Players.Count - 1)
                 m_ScoreText.text += "    ";
         }
+    }
+
+    string ColorToHex(Color32 col)
+    {
+        string hex = col.r.ToString("X2") + col.g.ToString("X2") + col.b.ToString("X2");
+        return hex;
     }
 
     void SpawnPlayers()

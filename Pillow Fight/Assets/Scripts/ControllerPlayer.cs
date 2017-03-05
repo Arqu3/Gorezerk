@@ -1002,4 +1002,9 @@ public class ControllerPlayer : MonoBehaviour
     {
         m_PlayerNum = num;
     }
+
+    public Color GetColor()
+    {
+        return m_Renderer.material.color;
+    }
 }
