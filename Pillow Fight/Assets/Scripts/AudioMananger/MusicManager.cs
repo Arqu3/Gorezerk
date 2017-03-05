@@ -26,7 +26,7 @@ public class MusicManager : MonoBehaviour
 
     public void PauseMusic()
     {
-        musicManager.SetParameter("Pause", 1f);
+        musicManager.SetParameter("GamePause", 1f);
     }
 
 }

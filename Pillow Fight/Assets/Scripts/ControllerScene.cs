@@ -49,8 +49,13 @@ public class ControllerScene : MonoBehaviour
     GameObject m_PausePanel;
     GameObject m_ModifierPanel;
 
+    //Music vars
+    private MusicManager m_MusicManager;
+
     void Awake()
     {
+        m_MusicManager = FindObjectOfType<MusicManager>();
+
         if (m_PlayerPrefab)
         {
             for (int i = 0; i < Toolbox.Instance.m_PlayerCount; i++)
@@ -278,9 +283,13 @@ public class ControllerScene : MonoBehaviour
         m_IsPaused = !m_IsPaused;
 
         if (GetPaused())
+        {
+            m_MusicManager.PauseMusic();
             Time.timeScale = 0.0f;
+        }
         else
         {
+            m_MusicManager.MatchMusic();
             Time.timeScale = 1.0f;
             if (m_ModifierPanel.activeSelf)
                 m_ModifierPanel.SetActive(m_IsPaused);

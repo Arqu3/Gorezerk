@@ -706,6 +706,9 @@ public class ControllerPlayer : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(m_Collider.bounds.size.x / 4, m_Collider.bounds.size.y / 2 * 1.2f, 0), Vector2.right, 0.5f, m_GroundMask);
         if (hit)
         {
+            //if (m_IsInAir)
+            //    m_SfxManager.PlayerJumpLand(0);
+
             onGround = true;
 
             if (m_Rigidbody.velocity.y <= 0.0f)
@@ -855,6 +858,7 @@ public class ControllerPlayer : MonoBehaviour
         if (m_HookClone)
             Destroy(m_HookClone);
         ControllerScene.ReducePlayerCount();
+        //m_SfxManager.PlayerDeath();
         gameObject.SetActive(false);
     }
 

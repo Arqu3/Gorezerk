@@ -72,10 +72,16 @@ public class ControllerMenu : MonoBehaviour
     private float m_CountdownTimer = 0.0f;
     private Text m_CountdownText;
 
+    //Music variables
+    private MusicManager m_MusicManager;
+
 	void Start()
     {
         //Reset toolbox variables whenever main menu is loaded
         Toolbox.Instance.ClearInformation();
+
+        m_MusicManager = FindObjectOfType<MusicManager>();
+        m_MusicManager.MenuMusic();
 
         //Set countdown vars
         m_CountdownTimer = m_CountdownTime;
@@ -227,7 +233,10 @@ public class ControllerMenu : MonoBehaviour
                 if (m_CountdownTimer > 1.0f)
                     m_CountdownTimer -= Time.deltaTime;
                 else
+                {
+                    m_MusicManager.MatchMusic();
                     SceneManager.LoadScene(1);
+                }
 
                 m_CountdownText.text = m_CountdownTimer.ToString("F0");
             }
