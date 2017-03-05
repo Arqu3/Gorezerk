@@ -19,6 +19,8 @@ public class Trap : MonoBehaviour
         if (!m_Rigidbody.isKinematic)
             m_Rigidbody.isKinematic = true;
 
-
+        ControllerPlayer player = col.gameObject.GetComponent<ControllerPlayer>();
+        if (player)
+            player.Kill();
     }
 }

@@ -8,6 +8,7 @@ public class ControllerHomingMissiles : Modifier
     public GameObject m_MissilePrefab;
     public GameObject m_SpawnpointPrefab;
     public bool m_SpawnForEachPlayer = true;
+    [Range(0, 100)]
     public int m_SpawnAmount = 1;
 
     //Round start vars
@@ -77,7 +78,8 @@ public class ControllerHomingMissiles : Modifier
             m_Missiles.Add(clone);
 
             tempSpawn.RemoveAt(random);
-            tempPlayers.RemoveAt(randomPlayer);
+            if (tempPlayers.Count > randomPlayer)
+                tempPlayers.RemoveAt(randomPlayer);
         }
     }
 

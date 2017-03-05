@@ -280,21 +280,6 @@ public class ControllerPlayer : MonoBehaviour
         m_InAir = Mathf.Round(m_Rigidbody.velocity.y) != 0;
         m_OnGround = GroundCheck();
 
-        if (!WallCheck())
-        {
-            if (!m_ControllerType.Equals(ControllerType.Keyboard))
-                m_Horizontal = Input.GetAxis(m_HorizontalInput);
-            else
-            {
-                if (Input.GetKey(m_HorizontalInputK1))
-                    m_Horizontal = -1.0f;
-                else if (Input.GetKey(m_HorizontalInputK2))
-                    m_Horizontal = 1.0f;
-                else
-                    m_Horizontal = 0.0f;
-            }
-        }
-
         //Player footstep sounds
         if (m_OnGround)
         {
@@ -327,6 +312,32 @@ public class ControllerPlayer : MonoBehaviour
                 m_StartedRunning = false;
                 m_StoppedRunning = false;
                 m_SfxManager.PlayerStop();
+            }
+        }
+
+        //if (Physics2D.Raycast(transform.position - new Vector3(0.0f, m_Collider.bounds.size.y / 2 * 1.1f), Vector2.down, 0.2f, m_GroundMask))
+        //{
+        //    if (m_WasAir)
+        //    {
+        //        m_WasAir = false;
+        //        m_SfxManager.PlayerJumpLand(0);
+        //    }
+        //}
+        //else
+        //    m_WasAir = true;
+
+        if (!WallCheck())
+        {
+            if (!m_ControllerType.Equals(ControllerType.Keyboard))
+                m_Horizontal = Input.GetAxis(m_HorizontalInput);
+            else
+            {
+                if (Input.GetKey(m_HorizontalInputK1))
+                    m_Horizontal = -1.0f;
+                else if (Input.GetKey(m_HorizontalInputK2))
+                    m_Horizontal = 1.0f;
+                else
+                    m_Horizontal = 0.0f;
             }
         }
 
@@ -477,7 +488,7 @@ public class ControllerPlayer : MonoBehaviour
             }
 
             //Always rotate pointer
-            if (m_Rigidbody.velocity.magnitude > 0.1f)
+            //if (m_Rigidbody.velocity.magnitude > 0.1f)
             {
                 Vector2 dir = new Vector2(m_Aim.x, m_Aim.y).normalized;
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
