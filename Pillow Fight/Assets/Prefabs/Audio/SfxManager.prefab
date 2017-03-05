@@ -69,3 +69,5 @@ MonoBehaviour:
   JumpLandEv: event:/SFX/JumpLand
   WeaponSwingEv: event:/SFX/Swing
   DeathEv: event:/SFX/Death
+  GrappleEv: event:/SFX/Grapple(unfinished)
+  ParryEv: event:/SFX/Parry(unfinished)

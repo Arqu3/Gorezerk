@@ -43,8 +43,28 @@ public class SFXManager : MonoBehaviour {
         audioPlayerMovement.PlayerSwing();
     }
 
+    public void PlayerParry()
+    {
+        audioPlayerMovement.PlayerParry();
+    }
+
     public void PlayerDeath()
     {
         audioPlayerMovement.PlayerDeath();
+    }
+
+    public void GrappleFire()
+    {
+        audioPlayerMovement.GrappleFire();
+    }
+
+    public void GrappleImpact()
+    {
+        audioPlayerMovement.GrappleImpact();
+    }
+
+    public void GrappleDrag()
+    {
+        audioPlayerMovement.GrappleDrag();
     }
 }
