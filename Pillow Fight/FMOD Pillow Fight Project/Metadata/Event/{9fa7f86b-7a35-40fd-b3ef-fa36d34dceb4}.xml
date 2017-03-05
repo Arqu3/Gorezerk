@@ -28,6 +28,9 @@
         <relationship name="timeline">
             <destination>{d6afc4a2-3986-4dc5-aecb-9d5a4b2c94c6}</destination>
         </relationship>
+        <relationship name="parameters">
+            <destination>{0cc9862d-c877-4367-a527-96942cdf4b3b}</destination>
+        </relationship>
         <relationship name="banks">
             <destination>{2f4d6ed1-135a-49e0-9dda-0df3e9e68acc}</destination>
         </relationship>
@@ -73,6 +76,11 @@
         <relationship name="markers">
             <destination>{9a1a6fc2-fa4f-48f2-b8dc-c9a61f1a1e25}</destination>
         </relationship>
+    </object>
+    <object class="GameParameter" id="{0cc9862d-c877-4367-a527-96942cdf4b3b}">
+        <property name="name">
+            <value>Material</value>
+        </property>
     </object>
     <object class="EventMixerMaster" id="{d5fc1e1f-4565-4afc-b108-bf8de3315059}">
         <relationship name="effectChain">

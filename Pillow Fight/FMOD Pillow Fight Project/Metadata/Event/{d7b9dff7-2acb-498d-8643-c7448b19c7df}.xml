@@ -5,7 +5,7 @@
             <value>JumpLand</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{844ed3c9-cc65-4c79-b7cb-c2049ba5a847}</destination>
@@ -27,6 +27,9 @@
         </relationship>
         <relationship name="timeline">
             <destination>{b2836373-d435-453d-958b-bd21e6501292}</destination>
+        </relationship>
+        <relationship name="parameters">
+            <destination>{21b96d4e-2fdf-4ea0-ba10-409d2bdea81b}</destination>
         </relationship>
         <relationship name="banks">
             <destination>{2f4d6ed1-135a-49e0-9dda-0df3e9e68acc}</destination>
@@ -71,6 +74,11 @@
             <destination>{e94de776-e15b-497c-8766-f831b85947c1}</destination>
         </relationship>
     </object>
+    <object class="GameParameter" id="{21b96d4e-2fdf-4ea0-ba10-409d2bdea81b}">
+        <property name="name">
+            <value>Material</value>
+        </property>
+    </object>
     <object class="EventMixerMaster" id="{2195be41-1a00-4070-a81d-30e3f936305b}">
         <relationship name="effectChain">
             <destination>{ef7a36d2-a05c-4b49-bb13-c174811fb278}</destination>
@@ -100,6 +108,9 @@
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{aef31eae-e59d-4fce-aadd-115e037ec2ae}">
+        <property name="volume">
+            <value>-9</value>
+        </property>
         <property name="name">
             <value>Audio 1</value>
         </property>
@@ -116,7 +127,6 @@
     <object class="MixerBusEffectChain" id="{ef7a36d2-a05c-4b49-bb13-c174811fb278}">
         <relationship name="effects">
             <destination>{9f491cef-5ed4-48fc-b1ac-2d6d6b2dbd4a}</destination>
-            <destination>{b75e6ac3-2f68-4069-ae55-4819e93c1ea4}</destination>
             <destination>{4e3ac90c-00e4-42bf-a043-f191d52a5d73}</destination>
         </relationship>
     </object>
@@ -129,10 +139,9 @@
     </object>
     <object class="MixerBusPanner" id="{6f296aad-85b9-4827-b574-5693bfffe190}"/>
     <object class="MixerBusFader" id="{9f491cef-5ed4-48fc-b1ac-2d6d6b2dbd4a}"/>
-    <object class="SpatialiserEffect" id="{b75e6ac3-2f68-4069-ae55-4819e93c1ea4}"/>
     <object class="MixerSend" id="{4e3ac90c-00e4-42bf-a043-f191d52a5d73}">
         <property name="inputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixerReturn">
             <destination>{dc801420-cd89-465d-bb1a-454f48242d0f}</destination>
