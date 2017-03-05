@@ -411,11 +411,14 @@ public class ControllerPlayer : MonoBehaviour
 
     void Jump()
     {
-        m_Rigidbody.AddForce(Vector2.up * m_JumpForce, ForceMode2D.Impulse);
-        m_Jump = true;
-        m_FallGraceTimer = 0.0f;
-        m_AirJump = false;
-        m_SfxManager.PlayerJump();
+        if (Toolbox.Instance.m_CanJump)
+        {
+            m_Rigidbody.AddForce(Vector2.up * m_JumpForce, ForceMode2D.Impulse);
+            m_Jump = true;
+            m_FallGraceTimer = 0.0f;
+            m_AirJump = false;
+            m_SfxManager.PlayerJump();
+        }
     }
 
     void GrappleUpdate()

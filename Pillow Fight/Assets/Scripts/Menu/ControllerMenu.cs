@@ -59,7 +59,7 @@ public class ControllerMenu : MonoBehaviour
 
     private static List<Color> m_StaticColors = new List<Color>();
 
-    public List<PlayerIndex> m_Controllers = new List<PlayerIndex>();
+    private List<PlayerIndex> m_Controllers = new List<PlayerIndex>();
 
     //Player slot vars
     private List<PlayerSlot> m_PlayerSlots = new List<PlayerSlot>();

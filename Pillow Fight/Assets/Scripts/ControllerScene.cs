@@ -24,6 +24,7 @@ public class ControllerScene : MonoBehaviour
     private static bool m_IsPaused = true;
     private static int m_PlayerCount = 0;
     private static bool m_UpdateText = true;
+    private static int m_RoundNum = 0;
 
     //Round start vars
     private Text m_CountdownText;
@@ -49,13 +50,16 @@ public class ControllerScene : MonoBehaviour
     GameObject m_PausePanel;
     GameObject m_ModifierPanel;
 
-    //Music vars
+    //Component
     private MusicManager m_MusicManager;
+    private ControllerModifiers m_ModController;
 
     void Awake()
     {
         m_MusicManager = FindObjectOfType<MusicManager>();
         m_MusicManager.MatchMusic();
+
+        m_ModController = GetComponent<ControllerModifiers>();
 
         if (m_PlayerPrefab)
         {
@@ -266,6 +270,11 @@ public class ControllerScene : MonoBehaviour
             m_Modifiers[i].OnRoundEnd();
         }
 
+        m_RoundNum++;
+        //Debug.Log("Current round: " + m_RoundNum);
+        if (m_ModController)
+            m_ModController.ChangeMods(m_RoundNum);
+
         m_PausePanel.SetActive(false);
         Cursor.visible = false;
 
@@ -346,6 +355,11 @@ public class ControllerScene : MonoBehaviour
     public static void ToggleUpdateText()
     {
         m_UpdateText = true;
+    }
+
+    public static int GetRoundNum()
+    {
+        return m_RoundNum;
     }
 
     public void AddModifier(Modifier mod)

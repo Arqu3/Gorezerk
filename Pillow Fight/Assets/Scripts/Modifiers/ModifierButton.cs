@@ -27,7 +27,7 @@ public class ModifierButton : MonoBehaviour
             enabled = false;
             return;
         }
-        if (!m_Modifier.GetComponent<Modifier>())
+        else if (!m_Modifier.GetComponent<Modifier>())
         {
             Debug.Log("Modifier button prefab does not contain a modifier script!");
             enabled = false;
