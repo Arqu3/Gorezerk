@@ -80,6 +80,8 @@ public class ControllerPlayer : MonoBehaviour
 
     //Movement vars
     private float m_Horizontal = 0.0f;
+    private bool m_HasStartedRunning = false;
+    private bool m_HasStoppedRunning = false;
 
     //Score vars
     private int m_Score = 0;
@@ -288,6 +290,29 @@ public class ControllerPlayer : MonoBehaviour
                     m_Horizontal = 1.0f;
                 else
                     m_Horizontal = 0.0f;
+            }
+        }
+
+        //Player footstep sounds
+        if (m_IsOnGround)
+        {
+            if (Mathf.Round(Mathf.Abs(m_Horizontal)) != 0)
+            {
+                if (!m_HasStartedRunning)
+                {
+                    m_SfxManager.PlayerRun(0);
+                    m_HasStartedRunning = true;
+                    m_HasStoppedRunning = false;
+                }
+            }
+            else if (m_HasStartedRunning)
+            {
+                m_HasStartedRunning = false;
+                if (!m_HasStoppedRunning)
+                {
+                    m_SfxManager.PlayerStop();
+                    m_HasStoppedRunning = true;
+                }
             }
         }
 
@@ -635,6 +660,7 @@ public class ControllerPlayer : MonoBehaviour
                 m_AttackBox.transform.localPosition = new Vector3(m_AttackBox.transform.localScale.x / 2.0f * m_AttackDirection, 0f, 0f);
                 m_AttackTimer = 0.0f;
                 m_CanAttack = false;
+                //m_SfxManager.PlayerSwing();
             }
         }
         else

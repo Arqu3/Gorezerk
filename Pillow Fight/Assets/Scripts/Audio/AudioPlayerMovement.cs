@@ -5,7 +5,6 @@ using UnityEngine;
 public class AudioPlayerMovement : MonoBehaviour
 {
     public int material;
-    private SFXManager sfxMananger;
 
     [FMODUnity.EventRef]
     public string FootstepsEv;
@@ -20,11 +19,6 @@ public class AudioPlayerMovement : MonoBehaviour
     public string JumpLandEv;
     FMOD.Studio.EventInstance JumpLand;
     //FMOD.Studio.ParameterInstance JMaterial;
-
-    void Awake()
-    {
-        sfxMananger = GetComponent<SFXManager>();
-    }
 
     void Start()
     {
@@ -41,7 +35,6 @@ public class AudioPlayerMovement : MonoBehaviour
 
     public void PlayerRun(int material)
     {
-        sfxMananger.PlayerRun(material);
         //FMaterial.setValue(material);
         Footsteps.start();
     }
