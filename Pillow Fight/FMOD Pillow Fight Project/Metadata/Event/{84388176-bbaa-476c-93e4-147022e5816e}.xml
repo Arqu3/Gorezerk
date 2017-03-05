@@ -93,17 +93,11 @@
         </relationship>
     </object>
     <object class="GroupTrack" id="{090d835c-59b2-4479-8746-d928f8fa9005}">
-        <relationship name="modules">
-            <destination>{e421a13c-2556-4028-9236-f2eb8ab7eeac}</destination>
-        </relationship>
         <relationship name="mixerGroup">
             <destination>{9aa683d1-4165-4ac4-8897-a6425f62a9b1}</destination>
         </relationship>
     </object>
     <object class="GroupTrack" id="{68b6d395-0825-4650-8940-591700112bb2}">
-        <relationship name="modules">
-            <destination>{45767992-20be-41d0-a47a-061ceca780b6}</destination>
-        </relationship>
         <relationship name="mixerGroup">
             <destination>{3e9957f1-f205-436f-895a-927039b851c9}</destination>
         </relationship>
@@ -118,8 +112,6 @@
             <destination>{b4595498-e2d6-4d80-8d7b-75e341cda3f3}</destination>
             <destination>{56a9385e-3d5a-4645-b38c-db5e8dfd7151}</destination>
             <destination>{79987294-a737-483c-8cc0-22c15d17c98b}</destination>
-            <destination>{e421a13c-2556-4028-9236-f2eb8ab7eeac}</destination>
-            <destination>{45767992-20be-41d0-a47a-061ceca780b6}</destination>
         </relationship>
         <relationship name="automationCurves">
             <destination>{76209c40-a656-4b95-8996-739eb8b8ae9e}</destination>
@@ -270,17 +262,6 @@
             <destination>{89967153-ee33-4ed8-bca6-4559bcb54267}</destination>
         </relationship>
     </object>
-    <object class="SingleSound" id="{e421a13c-2556-4028-9236-f2eb8ab7eeac}">
-        <property name="start">
-            <value>0</value>
-        </property>
-        <property name="length">
-            <value>0.96068027210884355</value>
-        </property>
-        <relationship name="audioFile">
-            <destination>{344f41d7-d818-4889-b9d8-3f9d0d28a663}</destination>
-        </relationship>
-    </object>
     <object class="EventMixerGroup" id="{9aa683d1-4165-4ac4-8897-a6425f62a9b1}">
         <property name="volume">
             <value>4.5</value>
@@ -296,17 +277,6 @@
         </relationship>
         <relationship name="output">
             <destination>{89967153-ee33-4ed8-bca6-4559bcb54267}</destination>
-        </relationship>
-    </object>
-    <object class="SingleSound" id="{45767992-20be-41d0-a47a-061ceca780b6}">
-        <property name="start">
-            <value>0.059999999999999998</value>
-        </property>
-        <property name="length">
-            <value>0.81160997732426299</value>
-        </property>
-        <relationship name="audioFile">
-            <destination>{367a8bc1-18b3-4fa3-914b-073750d96f4e}</destination>
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{3e9957f1-f205-436f-895a-927039b851c9}">
