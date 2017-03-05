@@ -55,6 +55,7 @@ public class ControllerScene : MonoBehaviour
     void Awake()
     {
         m_MusicManager = FindObjectOfType<MusicManager>();
+        m_MusicManager.MatchMusic();
 
         if (m_PlayerPrefab)
         {

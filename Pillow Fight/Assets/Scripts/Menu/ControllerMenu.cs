@@ -233,10 +233,7 @@ public class ControllerMenu : MonoBehaviour
                 if (m_CountdownTimer > 1.0f)
                     m_CountdownTimer -= Time.deltaTime;
                 else
-                {
-                    m_MusicManager.MatchMusic();
                     SceneManager.LoadScene(1);
-                }
 
                 m_CountdownText.text = m_CountdownTimer.ToString("F0");
             }
