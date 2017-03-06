@@ -90,18 +90,18 @@ public class AudioPlayerMovement : MonoBehaviour
     }
 
     //Grapple functions
-    public void GrappleFire()
+    public void GrappleFire( )
     {
         GrappleState.setValue(0);
         Grapple.start();
     }
 
-    public void GrappleImpact()
+    public void GrappleImpact( )
     {
         GrappleState.setValue(1);
     }
 
-    public void GrappleDrag()
+    public void GrappleDrag( )
     {
         GrappleState.setValue(2);
     }

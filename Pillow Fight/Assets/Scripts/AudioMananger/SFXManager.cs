@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioPlayerMovement))]
 public class SFXManager : MonoBehaviour {
     int material;
+    int state;
     private AudioPlayerMovement audioPlayerMovement;
 
     void Start()
@@ -53,17 +54,18 @@ public class SFXManager : MonoBehaviour {
         audioPlayerMovement.PlayerDeath();
     }
 
-    public void GrappleFire()
+    public void GrappleFire( )
     {
+
         audioPlayerMovement.GrappleFire();
     }
 
-    public void GrappleImpact()
+    public void GrappleImpact( )
     {
         audioPlayerMovement.GrappleImpact();
     }
 
-    public void GrappleDrag()
+    public void GrappleDrag( )
     {
         audioPlayerMovement.GrappleDrag();
     }
