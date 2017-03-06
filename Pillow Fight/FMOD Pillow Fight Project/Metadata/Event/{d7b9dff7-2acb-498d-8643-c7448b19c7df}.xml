@@ -31,9 +31,6 @@
         <relationship name="timeline">
             <destination>{b2836373-d435-453d-958b-bd21e6501292}</destination>
         </relationship>
-        <relationship name="parameters">
-            <destination>{21b96d4e-2fdf-4ea0-ba10-409d2bdea81b}</destination>
-        </relationship>
         <relationship name="banks">
             <destination>{2f4d6ed1-135a-49e0-9dda-0df3e9e68acc}</destination>
         </relationship>
@@ -109,11 +106,6 @@
         <relationship name="automationCurves">
             <destination>{79af7d15-3a03-475b-a2dc-af0c19b85f60}</destination>
         </relationship>
-    </object>
-    <object class="GameParameter" id="{21b96d4e-2fdf-4ea0-ba10-409d2bdea81b}">
-        <property name="name">
-            <value>Material</value>
-        </property>
     </object>
     <object class="EventMixerMaster" id="{2195be41-1a00-4070-a81d-30e3f936305b}">
         <property name="volume">

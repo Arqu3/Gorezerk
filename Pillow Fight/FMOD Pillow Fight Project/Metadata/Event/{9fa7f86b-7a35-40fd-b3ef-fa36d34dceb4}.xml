@@ -81,6 +81,9 @@
         <property name="name">
             <value>Material</value>
         </property>
+        <property name="maximum">
+            <value>3</value>
+        </property>
     </object>
     <object class="EventMixerMaster" id="{d5fc1e1f-4565-4afc-b108-bf8de3315059}">
         <relationship name="modulators">
