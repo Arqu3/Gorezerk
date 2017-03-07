@@ -5,6 +5,7 @@ using UnityEngine;
 public class AudioPlayerMovement : MonoBehaviour
 {
     public int material;
+    
 
     [FMODUnity.EventRef]
     public string FootstepsEv;
@@ -41,6 +42,7 @@ public class AudioPlayerMovement : MonoBehaviour
     void Start()
     {
         Footsteps = FMODUnity.RuntimeManager.CreateInstance(FootstepsEv);
+        //FMODUnity.RuntimeManager.AttachInstanceToGameObject(Footsteps, GetComponent<>, GetComponent<>());
         JumpLand = FMODUnity.RuntimeManager.CreateInstance(JumpLandEv);
         Grapple = FMODUnity.RuntimeManager.CreateInstance(GrappleEv);
 

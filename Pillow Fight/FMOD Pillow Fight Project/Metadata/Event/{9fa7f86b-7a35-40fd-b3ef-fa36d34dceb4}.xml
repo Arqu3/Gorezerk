@@ -5,7 +5,7 @@
             <value>Footsteps</value>
         </property>
         <property name="outputFormat">
-            <value>1</value>
+            <value>2</value>
         </property>
         <relationship name="mixer">
             <destination>{6af6611d-de0d-40e9-b6ec-f74a9878f6a0}</destination>
@@ -234,6 +234,7 @@
             <destination>{41eecbf1-17ad-4826-9805-cbb19a23a46e}</destination>
             <destination>{2c98e812-35f9-4abd-a92e-38de1bd01653}</destination>
             <destination>{673a6722-3c9e-40e1-bb6d-4378495de29d}</destination>
+            <destination>{47c31219-b67a-4741-9a22-fc1348b97c21}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{5149591a-9908-4e72-bd5d-31c459aa564c}"/>
@@ -290,6 +291,7 @@
             <value>-5</value>
         </property>
     </object>
+    <object class="SpatialiserEffect" id="{47c31219-b67a-4741-9a22-fc1348b97c21}"/>
     <object class="AutomationPoint" id="{3fb02cfb-2c01-4e1a-92a4-0359c1dbee21}">
         <property name="position">
             <value>0.13</value>
