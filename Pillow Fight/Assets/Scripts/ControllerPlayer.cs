@@ -86,7 +86,8 @@ public class ControllerPlayer : MonoBehaviour
     private bool m_StoppedRunning = false;
 
     //Score vars
-    private int m_Score = 0;
+    private int m_RoundScore = 0;
+    private int m_RoundsWon = 0;
 
     //Grappling hook vars
     private bool m_IsGrapple = false;
@@ -927,12 +928,33 @@ public class ControllerPlayer : MonoBehaviour
             ControllerScene.ToggleUpdateText();
         }
 
-        m_Score += score;
+        m_RoundScore += score;
+        ControllerScene scene = FindObjectOfType<ControllerScene>();
+        if (scene)
+        {
+            if (m_RoundScore >= scene.m_ScoreToWinRound)
+            {
+                m_RoundsWon++;
+                ControllerScene.ResetScores();
+                if (m_RoundsWon >= scene.m_RoundsToWin)
+                    ControllerScene.GameOver();
+            }
+        }
     }
 
     public int GetScore()
     {
-        return m_Score;
+        return m_RoundScore;
+    }
+
+    public void SetScore(int score)
+    {
+        m_RoundScore = 0;
+    }
+
+    public int GetRounds()
+    {
+        return m_RoundsWon;
     }
 
     public void SetControllerType(ControllerType newType)

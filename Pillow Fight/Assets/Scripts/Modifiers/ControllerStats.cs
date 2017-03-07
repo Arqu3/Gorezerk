@@ -11,7 +11,8 @@ public class ControllerStats : Modifier
 
     protected override void Start()
     {
-        Toolbox.Instance.m_MovementSpeed += m_MoveSpeedMod;
+        if (Toolbox.Instance)
+            Toolbox.Instance.m_MovementSpeed += m_MoveSpeedMod;
     }
 
     public override void OnRoundEnd()
@@ -24,7 +25,8 @@ public class ControllerStats : Modifier
 
     protected override void OnDestroy()
     {
-        Toolbox.Instance.m_MovementSpeed -= m_MoveSpeedMod;
+        if (Toolbox.Instance)
+            Toolbox.Instance.m_MovementSpeed -= m_MoveSpeedMod;
     }
 
     public override string GetName()

@@ -14,6 +14,8 @@ public class ControllerScene : MonoBehaviour
     public float m_CountdownTime = 3.0f;
     public float m_CountdownSpeed = 2.0f;
     public float m_BarkTime = 1.0f;
+    public int m_ScoreToWinRound = 10;
+    public int m_RoundsToWin = 5;
     public GameObject m_PlayerPrefab;
 
     //Lists
@@ -34,7 +36,6 @@ public class ControllerScene : MonoBehaviour
 
     //Score vars
     private Text m_ScoreText;
-    private string[] m_ScoreStrings;
 
     //Bark vars
     private static string m_ScoreBark = "";
@@ -43,12 +44,14 @@ public class ControllerScene : MonoBehaviour
     private float m_BarkTimer = 0.0f;
     private static bool m_IsBark = false;
 
-    //Modifier vars
-    private List<Modifier> m_Modifiers = new List<Modifier>();
-
     //Panel vars
-    GameObject m_PausePanel;
-    GameObject m_ModifierPanel;
+    private GameObject m_PausePanel;
+    private GameObject m_ModifierPanel;
+    private GameObject m_GameOverPanel;
+
+    //Game over vars
+    private static bool m_GameOver = false;
+    private static bool m_ResetScores = false;
 
     //Component
     private MusicManager m_MusicManager;
@@ -56,6 +59,17 @@ public class ControllerScene : MonoBehaviour
 
     void Awake()
     {
+        //Static variables needs to reset manually because they are a part of the class, not the object
+        m_GameOver = false;
+        m_ResetScores = false;
+        m_IsBark = false;
+        m_BarkColor = Color.red;
+        m_ScoreBark = "";
+        m_IsPaused = true;
+        m_PlayerCount = 0;
+        m_UpdateText = true;
+        m_RoundNum = 0;
+
         m_MusicManager = FindObjectOfType<MusicManager>();
         m_MusicManager.MatchMusic();
 
@@ -78,7 +92,6 @@ public class ControllerScene : MonoBehaviour
         var players = FindObjectsOfType<ControllerPlayer>();
         if (players.Length > 0)
         {
-            m_ScoreStrings = new string[players.Length];
             for (int i = 0; i < players.Length; i++)
             {
                 m_Players.Add(players[i]);
@@ -126,50 +139,48 @@ public class ControllerScene : MonoBehaviour
 
         m_PausePanel = GameObject.Find("PausePanel");
         m_ModifierPanel = GameObject.Find("ModifierPanel");
+        m_GameOverPanel = GameObject.Find("GameOverPanel");
 
         if (m_ModifierPanel)
             m_ModifierPanel.SetActive(false);
 
-        //Get modifiers
-        var mods = GetComponentsInChildren<Modifier>();
-        for (int i = 0; i < mods.Length; i++)
-        {
-            m_Modifiers.Add(mods[i]);
-        }
+        if (m_GameOverPanel)
+            m_GameOverPanel.SetActive(false);
 
-        UpdateText();
         StartRound();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !m_IsRoundStart)
-            TogglePaused();
-
-        if (m_IsPaused && Input.GetKeyDown(KeyCode.F11))
-            m_ModifierPanel.SetActive(!m_ModifierPanel.activeSelf);
-
-        if (Input.GetKeyDown(KeyCode.Return))
-            StartRound();
-
-        CountdownUpdate();
-
-        if (m_PlayerCount <= m_RestartNum)
+        if (!m_GameOver)
         {
-            for (int i = 0; i < m_Players.Count; i++)
+            if (Input.GetKeyDown(KeyCode.Escape) && !m_IsRoundStart)
+                TogglePaused();
+
+            if (m_IsPaused && Input.GetKeyDown(KeyCode.F11))
+                m_ModifierPanel.SetActive(!m_ModifierPanel.activeSelf);
+
+            if (Input.GetKeyDown(KeyCode.Return))
+                StartRound();
+
+            CountdownUpdate();
+
+            if (m_PlayerCount <= m_RestartNum)
             {
-                if (m_Players[i].gameObject.activeSelf)
+                for (int i = 0; i < m_Players.Count; i++)
                 {
-                    m_Players[i].AddScore(1);
-                    break;
+                    if (m_Players[i].gameObject.activeSelf)
+                    {
+                        m_Players[i].AddScore(1);
+                        break;
+                    }
                 }
+                UpdateText();
+                StartRound();
             }
-            UpdateText();
-            StartRound();
+
+            ScoreBarkUpdate();
         }
-
-        ScoreBarkUpdate();
-
         if (m_UpdateText)
         {
             UpdateText();
@@ -193,11 +204,6 @@ public class ControllerScene : MonoBehaviour
                 m_IsRoundStart = false;
 
                 //Call all modifier starting functions
-                //for (int i = 0; i < m_Modifiers.Count; i++)
-                //{
-                //    m_Modifiers[i].OnRoundStart();
-                //}
-
                 for (int i = 0; i < m_ModController.GetActiveMods().Count; i++)
                 {
                     m_ModController.GetActiveMods()[i].OnRoundStart();
@@ -234,13 +240,37 @@ public class ControllerScene : MonoBehaviour
 
     void UpdateText()
     {
+        if (m_ResetScores)
+        {
+            for (int i = 0; i < m_Players.Count; i++)
+            {
+                m_Players[i].SetScore(0);
+            }
+            m_ResetScores = false;
+        }
+
         m_ScoreText.text = "";
         for (int i = 0; i < m_Players.Count; i++)
         {
-            m_ScoreStrings[i] = "<color=#" + ColorToHex(m_Players[i].GetColor()) + ">" + "Player " + (m_Players[i].GetPlayerNum() + 1) + ": " + m_Players[i].GetScore() + "</color>";
-            m_ScoreText.text += m_ScoreStrings[i];
+            m_ScoreText.text += "<color=#" + ColorToHex(m_Players[i].GetColor()) + ">" + "Player " + (m_Players[i].GetPlayerNum() + 1) + ": " + m_Players[i].GetScore() + "</color>";
             if (i < m_Players.Count - 1)
                 m_ScoreText.text += "    ";
+        }
+        m_ScoreText.text += "\n";
+        for (int i = 0; i < m_Players.Count; i++)
+        {
+            m_ScoreText.text += "<color=#" + ColorToHex(m_Players[i].GetColor()) + ">" + "Rounds: " + m_Players[i].GetRounds() + "</color>";
+            if (i < m_Players.Count - 1)
+                m_ScoreText.text += "    ";
+        }
+
+        if (m_GameOver)
+        {
+            m_UpdateText = true;
+            Time.timeScale = 0.0f;
+            m_IsPaused = true;
+            Cursor.visible = true;
+            m_GameOverPanel.SetActive(true);
         }
     }
 
@@ -273,11 +303,6 @@ public class ControllerScene : MonoBehaviour
     void StartRound()
     {
         //Call all modifier end functions
-        //for (int i = 0; i < m_Modifiers.Count; i++)
-        //{
-        //    m_Modifiers[i].OnRoundEnd();
-        //}
-
         for (int i = 0; i < m_ModController.GetActiveMods().Count; i++)
         {
             m_ModController.GetActiveMods()[i].OnRoundEnd();
@@ -303,8 +328,17 @@ public class ControllerScene : MonoBehaviour
     }
     public void LoadMenu()
     {
+        m_MusicManager.UnPauseMusic();
+        m_MusicManager.MenuMusic();
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(0);
+    }
+    public void ReloadScene()
+    {
+        Time.timeScale = 1.0f;
+        Toolbox.Instance.m_CanMove = true;
+        Toolbox.Instance.m_MovementSpeed = 1.0f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void TogglePaused()
@@ -375,14 +409,25 @@ public class ControllerScene : MonoBehaviour
         return m_RoundNum;
     }
 
+    public static void GameOver()
+    {
+        m_GameOver = true;
+    }
+
+    public static void ResetScores()
+    {
+        m_ResetScores = true;
+    }
+
     public void AddModifier(Modifier mod)
     {
-        m_Modifiers.Add(mod);
+        m_ModController.AddMod(mod);
+        
     }
 
     public void RemoveModifier(Modifier mod)
     {
-        m_Modifiers.Remove(mod);
+        m_ModController.AddMod(mod);
     }
 
     public List<Transform> GetSpawnPoints()

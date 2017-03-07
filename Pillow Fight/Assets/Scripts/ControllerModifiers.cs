@@ -111,4 +111,9 @@ public class ControllerModifiers : MonoBehaviour
     {
         return m_ActiveMods;
     }
+
+    public void AddMod(Modifier mod)
+    {
+        m_ActiveMods.Add(mod);
+    }
 }

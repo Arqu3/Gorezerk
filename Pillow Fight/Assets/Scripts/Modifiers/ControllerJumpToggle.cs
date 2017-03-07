@@ -8,7 +8,8 @@ public class ControllerJumpToggle : Modifier
 
     protected override void Start()
     {
-        Toolbox.Instance.m_CanMove = false;
+        if (Toolbox.Instance)
+            Toolbox.Instance.m_CanMove = false;
     }
 
     public override void OnRoundEnd()
@@ -21,7 +22,8 @@ public class ControllerJumpToggle : Modifier
 
     protected override void OnDestroy()
     {
-        Toolbox.Instance.m_CanMove = true;
+        if (Toolbox.Instance)
+            Toolbox.Instance.m_CanMove = true;
     }
 
     public override string GetName()
