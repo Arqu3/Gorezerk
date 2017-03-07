@@ -44,7 +44,7 @@ public class AudioModifiers : MonoBehaviour {
 
     public void ModBodySnatchers()
     {
-
+        FMODUnity.RuntimeManager.PlayOneShot(BodySnatchersEv);
     }
 
     public void ModMissile()
