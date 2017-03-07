@@ -31,6 +31,7 @@
         </relationship>
         <relationship name="parameters">
             <destination>{0cc9862d-c877-4367-a527-96942cdf4b3b}</destination>
+            <destination>{06e0d4b8-4a05-45cf-94ee-2e67d2fa86fd}</destination>
         </relationship>
         <relationship name="banks">
             <destination>{2f4d6ed1-135a-49e0-9dda-0df3e9e68acc}</destination>
@@ -93,6 +94,11 @@
         </property>
         <property name="maximum">
             <value>3</value>
+        </property>
+    </object>
+    <object class="DistanceParameter" id="{06e0d4b8-4a05-45cf-94ee-2e67d2fa86fd}">
+        <property name="maximum">
+            <value>100</value>
         </property>
     </object>
     <object class="EventMixerMaster" id="{d5fc1e1f-4565-4afc-b108-bf8de3315059}">
@@ -291,7 +297,11 @@
             <value>-5</value>
         </property>
     </object>
-    <object class="SpatialiserEffect" id="{47c31219-b67a-4741-9a22-fc1348b97c21}"/>
+    <object class="SpatialiserEffect" id="{47c31219-b67a-4741-9a22-fc1348b97c21}">
+        <property name="maximumDistance">
+            <value>100</value>
+        </property>
+    </object>
     <object class="AutomationPoint" id="{3fb02cfb-2c01-4e1a-92a4-0359c1dbee21}">
         <property name="position">
             <value>0.13</value>

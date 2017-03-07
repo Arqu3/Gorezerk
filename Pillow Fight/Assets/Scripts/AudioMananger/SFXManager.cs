@@ -6,6 +6,7 @@ using UnityEngine;
 public class SFXManager : MonoBehaviour {
     int material;
     int state;
+    Vector3 playerPosition;
     private AudioPlayerMovement audioPlayerMovement;
     private AudioModifiers audioModifiers;
 
@@ -24,6 +25,11 @@ public class SFXManager : MonoBehaviour {
     //::PLAYER::
 
     //Call these functions to play SFX
+    public void PlayerPosition(Vector3 position)
+    {
+        audioPlayerMovement.PlayerPos(position);
+    }
+
     public void PlayerRun(int material)
     {
         audioPlayerMovement.PlayerRun(material);

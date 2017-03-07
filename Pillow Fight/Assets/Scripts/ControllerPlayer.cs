@@ -284,6 +284,8 @@ public class ControllerPlayer : MonoBehaviour
         //Player footstep sounds
         if (m_OnGround && Toolbox.Instance.m_CanMove)
         {
+            m_SfxManager.PlayerPosition(transform.position);
+
             if (Mathf.Round(Mathf.Abs(m_Horizontal)) != 0)
             {
                 if (!m_StartedRunning)

@@ -5,8 +5,8 @@ using UnityEngine;
 public class AudioPlayerMovement : MonoBehaviour
 {
     public int material;
+    Vector3 playerPosition;
     
-
     [FMODUnity.EventRef]
     public string FootstepsEv;
     FMOD.Studio.EventInstance Footsteps;
@@ -42,13 +42,20 @@ public class AudioPlayerMovement : MonoBehaviour
     void Start()
     {
         Footsteps = FMODUnity.RuntimeManager.CreateInstance(FootstepsEv);
-        //FMODUnity.RuntimeManager.AttachInstanceToGameObject(Footsteps, GetComponent<>, GetComponent<>());
         JumpLand = FMODUnity.RuntimeManager.CreateInstance(JumpLandEv);
         Grapple = FMODUnity.RuntimeManager.CreateInstance(GrappleEv);
 
         JumpLand.getParameter("Material", out JMaterial);
         Footsteps.getParameter("Material", out FMaterial);
         Grapple.getParameter("State", out GrappleState);
+
+    }
+
+    public void PlayerPos(Vector3 position)
+    {
+        playerPosition = position;
+        Footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(playerPosition));
+
     }
 
     public void PlayerJumpLand(int material)
@@ -61,6 +68,8 @@ public class AudioPlayerMovement : MonoBehaviour
     {
         FMaterial.setValue(material);
         Footsteps.start();
+
+        //FMODUnity.RuntimeManager.PlayOneShot(FootstepsEv, position);
     }
 
     public void PlayerStop()
