@@ -52,17 +52,6 @@ public class ControllerBodySnatchers : Modifier
             if (m_Players[i].gameObject.activeSelf)
             {
                 tempSpawn.Add(m_Players[i].transform);
-
-                if (m_ParticlePrefab)
-                {
-                    GameObject particle = Instantiate(m_ParticlePrefab, m_Players[i].transform.position, m_ParticlePrefab.transform.rotation);
-                    ParticleSystem PS = particle.GetComponent<ParticleSystem>();
-                    if (PS)
-                    {
-                        var module = PS.main;
-                        module.startColor = m_Players[i].GetColor();
-                    }
-                }
             }
         }
 
@@ -93,10 +82,26 @@ public class ControllerBodySnatchers : Modifier
             {
                 next = 0;
                 tempSpawn[i].position = initial;
+                SpawnParticle(initial, tempSpawn[i].GetComponent<ControllerPlayer>().GetColor());
                 break;
             }
 
+            SpawnParticle(tempSpawn[next].position, tempSpawn[i].GetComponent<ControllerPlayer>().GetColor());
             tempSpawn[i].position = tempSpawn[next].position;
+        }
+    }
+
+    void SpawnParticle(Vector3 position, Color col)
+    {
+        if (m_ParticlePrefab)
+        {
+            GameObject particle = Instantiate(m_ParticlePrefab, position, m_ParticlePrefab.transform.rotation);
+            ParticleSystem PS = particle.GetComponent<ParticleSystem>();
+            if (PS)
+            {
+                var module = PS.main;
+                module.startColor = col;
+            }
         }
     }
 
