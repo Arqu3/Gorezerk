@@ -24,6 +24,7 @@
         </relationship>
         <relationship name="groupTracks">
             <destination>{299f7b5f-b206-4adc-948f-eb8322f8e3e2}</destination>
+            <destination>{4572044d-2a9b-42bb-a894-5920567a854d}</destination>
         </relationship>
         <relationship name="timeline">
             <destination>{b6c87457-8d6d-4716-b85a-7aec29c2da48}</destination>
@@ -69,9 +70,18 @@
             <destination>{9832d638-3b6e-480b-8ca2-733ae924e78f}</destination>
         </relationship>
     </object>
+    <object class="GroupTrack" id="{4572044d-2a9b-42bb-a894-5920567a854d}">
+        <relationship name="modules">
+            <destination>{7d23df6d-b9cf-432c-b034-ac2383e72ef7}</destination>
+        </relationship>
+        <relationship name="mixerGroup">
+            <destination>{a63ec4fe-21a7-434a-a217-9b73a5ef2d94}</destination>
+        </relationship>
+    </object>
     <object class="Timeline" id="{b6c87457-8d6d-4716-b85a-7aec29c2da48}">
         <relationship name="modules">
             <destination>{ce68794d-4113-401f-bffa-6a1bd60c02d8}</destination>
+            <destination>{7d23df6d-b9cf-432c-b034-ac2383e72ef7}</destination>
         </relationship>
     </object>
     <object class="GameParameter" id="{2f34ec11-a77c-4d23-b275-1d0833a7e841}">
@@ -139,6 +149,37 @@
             <destination>{202d1dde-f800-43d0-be83-680428dc9c42}</destination>
         </relationship>
     </object>
+    <object class="SingleSound" id="{7d23df6d-b9cf-432c-b034-ac2383e72ef7}">
+        <property name="start">
+            <value>0</value>
+        </property>
+        <property name="length">
+            <value>0.25126984126984125</value>
+        </property>
+        <relationship name="modulators">
+            <destination>{f4a95347-19b6-42cf-acfc-ed4da09e4579}</destination>
+        </relationship>
+        <relationship name="audioFile">
+            <destination>{5447c350-90fa-43f4-bf63-458506c02913}</destination>
+        </relationship>
+    </object>
+    <object class="EventMixerGroup" id="{a63ec4fe-21a7-434a-a217-9b73a5ef2d94}">
+        <property name="volume">
+            <value>-7</value>
+        </property>
+        <property name="name">
+            <value>Audio 2</value>
+        </property>
+        <relationship name="effectChain">
+            <destination>{f6ab28ea-4fc2-4dde-951a-09762dc5e9db}</destination>
+        </relationship>
+        <relationship name="panner">
+            <destination>{35581c27-1509-4363-93cf-0f6f5feac43b}</destination>
+        </relationship>
+        <relationship name="output">
+            <destination>{202d1dde-f800-43d0-be83-680428dc9c42}</destination>
+        </relationship>
+    </object>
     <object class="MixerBusEffectChain" id="{b141a7e0-33a3-4fea-8a43-342fe01a52aa}">
         <relationship name="effects">
             <destination>{df728b11-e562-428a-bb97-7d8590d7915a}</destination>
@@ -179,6 +220,20 @@
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{7b3acbf9-0f06-4995-a203-3d78a0885a49}"/>
+    <object class="RandomizerModulator" id="{f4a95347-19b6-42cf-acfc-ed4da09e4579}">
+        <property name="nameOfPropertyBeingModulated">
+            <value>pitch</value>
+        </property>
+        <property name="amount">
+            <value>7</value>
+        </property>
+    </object>
+    <object class="MixerBusEffectChain" id="{f6ab28ea-4fc2-4dde-951a-09762dc5e9db}">
+        <relationship name="effects">
+            <destination>{d67add54-118c-43e0-ac24-73540e89f46a}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusPanner" id="{35581c27-1509-4363-93cf-0f6f5feac43b}"/>
     <object class="MixerBusFader" id="{df728b11-e562-428a-bb97-7d8590d7915a}"/>
     <object class="MixerSend" id="{e3977bef-570a-4a5f-b027-b232ef067e6d}">
         <property name="inputFormat">
@@ -237,6 +292,7 @@
             <destination>{c53ccd68-4b95-4b48-84f7-ac936f006c63}</destination>
         </relationship>
     </object>
+    <object class="MixerBusFader" id="{d67add54-118c-43e0-ac24-73540e89f46a}"/>
     <object class="Plugin" id="{c53ccd68-4b95-4b48-84f7-ac936f006c63}">
         <property name="identifier">
             <value>FMOD Pitch Shifter</value>

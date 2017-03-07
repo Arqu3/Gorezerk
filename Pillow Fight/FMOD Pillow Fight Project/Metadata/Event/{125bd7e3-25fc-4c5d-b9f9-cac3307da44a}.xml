@@ -5,7 +5,7 @@
             <value>Parry(unfinished)</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{5b7eaf95-edd0-42e3-b068-a0a9d267d992}</destination>
@@ -54,7 +54,7 @@
             <destination>{e1c766ec-92f5-4b5f-8ff6-11a80cdf031c}</destination>
         </relationship>
         <relationship name="output">
-            <destination>{7115ac19-3c09-4dc1-a0ac-e1da1fa4b85e}</destination>
+            <destination>{ce08282e-4f48-4afe-866b-8a4346424a8a}</destination>
         </relationship>
     </object>
     <object class="EventAutomatableProperties" id="{866e5a0a-71e3-4b62-b632-baecebf7a0f5}"/>
@@ -163,7 +163,6 @@
     <object class="MixerBusEffectChain" id="{f5ef5c28-e3e4-4ed4-acd3-8aac19c25dd7}">
         <relationship name="effects">
             <destination>{7c5e7cac-a740-42d4-9e83-3e866772a189}</destination>
-            <destination>{6611299f-d293-42c2-b7c5-8a372dfa2b5a}</destination>
             <destination>{ddecdfd3-4f4e-446a-bc8c-efee30178633}</destination>
         </relationship>
     </object>
@@ -190,10 +189,9 @@
     </object>
     <object class="MixerBusPanner" id="{aab3f7e7-375c-4113-8896-914b3114a08a}"/>
     <object class="MixerBusFader" id="{7c5e7cac-a740-42d4-9e83-3e866772a189}"/>
-    <object class="SpatialiserEffect" id="{6611299f-d293-42c2-b7c5-8a372dfa2b5a}"/>
     <object class="MixerSend" id="{ddecdfd3-4f4e-446a-bc8c-efee30178633}">
         <property name="inputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixerReturn">
             <destination>{dc801420-cd89-465d-bb1a-454f48242d0f}</destination>
