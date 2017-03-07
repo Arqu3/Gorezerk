@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{6da909c3-8aed-46a8-b998-11ffe7655342}">
+        <property name="assetPath">
+            <value>Chips/Chipsounds_Galax_Long_02-001.ogg</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.1994104308390023</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{32dc9d01-c288-4fa5-a729-113249d89e4b}</destination>
+        </relationship>
+    </object>
+</objects>

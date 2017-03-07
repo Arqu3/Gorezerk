@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{22ef41a8-b353-47ec-9963-a30f777c2c38}">
+        <property name="assetPath">
+            <value>Impacts_medium_02.ogg</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.13696145124716552</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{32dc9d01-c288-4fa5-a729-113249d89e4b}</destination>
+        </relationship>
+    </object>
+</objects>

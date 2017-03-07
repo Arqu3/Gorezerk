@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BeesEv: 
-  BodySnatchersEv: 
+  BodySnatchersEv: event:/SFX/Modifiers/BodySnatchers
   MissileEv: 
   SanicEv: 
   RedButtonEv: 
@@ -83,10 +83,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: 0
-  FootstepsEv: event:/SFX/Footsteps
-  JumpEv: event:/SFX/Jump
-  JumpLandEv: event:/SFX/JumpLand
-  WeaponSwingEv: event:/SFX/Swing
-  DeathEv: event:/SFX/Death
-  GrappleEv: event:/SFX/Grapple(unfinished)
-  ParryEv: event:/SFX/Parry(unfinished)
+  FootstepsEv: event:/SFX/Player/Footsteps
+  JumpEv: event:/SFX/Player/Jump
+  JumpLandEv: event:/SFX/Player/JumpLand
+  WeaponSwingEv: event:/SFX/Player/Swing
+  DeathEv: event:/SFX/Player/Death
+  GrappleEv: event:/SFX/Player/Grapple(unfinished)
+  ParryEv: event:/SFX/Player/Parry(unfinished)

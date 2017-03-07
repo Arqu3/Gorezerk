@@ -7,6 +7,7 @@ public class SFXManager : MonoBehaviour {
     int material;
     int state;
     private AudioPlayerMovement audioPlayerMovement;
+    private AudioModifiers audioModifiers;
 
     void Start()
     {
@@ -16,7 +17,11 @@ public class SFXManager : MonoBehaviour {
     {
         DontDestroyOnLoad(gameObject);
         audioPlayerMovement = GetComponent<AudioPlayerMovement>();
+        audioModifiers = GetComponent<AudioModifiers>();
+
     }
+
+    //::PLAYER::
 
     //Call these functions to play SFX
     public void PlayerRun(int material)
@@ -68,5 +73,12 @@ public class SFXManager : MonoBehaviour {
     public void GrappleDrag( )
     {
         audioPlayerMovement.GrappleDrag();
+    }
+
+    //::MODIFIERS::
+
+    public void BodySnatchers()
+    {
+        audioModifiers.ModBodySnatchers();
     }
 }
