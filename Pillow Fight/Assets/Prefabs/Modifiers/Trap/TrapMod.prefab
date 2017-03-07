@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb13d9de74bd51a43b0e5e2bc2175b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ModName: It's a Trap!
   m_MissilePrefab: {fileID: 1054063889110828, guid: 633868dfcaf6b854bb3cf7d438b0fddd,
     type: 2}
   m_SpawnpointPrefab: {fileID: 1089314475944258, guid: 04ebd21fff5c1d44cbb0a392614d8d21,

@@ -51,3 +51,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ad85f1def826443bf352366b2a50dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ModName: No Feet Allowed

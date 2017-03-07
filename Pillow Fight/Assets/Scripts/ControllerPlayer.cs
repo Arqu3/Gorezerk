@@ -281,7 +281,7 @@ public class ControllerPlayer : MonoBehaviour
         m_OnGround = GroundCheck();
 
         //Player footstep sounds
-        if (m_OnGround)
+        if (m_OnGround && Toolbox.Instance.m_CanMove)
         {
             if (Mathf.Round(Mathf.Abs(m_Horizontal)) != 0)
             {
@@ -302,7 +302,7 @@ public class ControllerPlayer : MonoBehaviour
                 }
             }
         }
-        else
+        else if (!m_OnGround && Toolbox.Instance.m_CanMove)
         {
             if (m_InAir)
                 m_WasAir = true;
@@ -353,20 +353,23 @@ public class ControllerPlayer : MonoBehaviour
         {
             if (!m_IsParry)
             {
-                float totalSpeed = Mathf.Lerp(m_Rigidbody.velocity.x, m_Horizontal * m_Speed * Toolbox.Instance.m_MovementSpeed, m_Acceleration * Time.deltaTime);
-                float totalAirSpeed = Mathf.Lerp(m_Rigidbody.velocity.x, m_Horizontal * m_Speed * Toolbox.Instance.m_MovementSpeed * m_DampXAmount, m_Acceleration * Time.deltaTime);
-
-                if (Mathf.Approximately(m_Rigidbody.velocity.y, 0.0f))
-                    m_Rigidbody.velocity = new Vector2(totalSpeed, m_Rigidbody.velocity.y);
-                else
+                if (Toolbox.Instance.m_CanMove)
                 {
-                    if (!m_OnGround)
-                    {
-                        if (m_Horizontal > 0.5f || m_Horizontal < -0.5f)
-                            m_Rigidbody.velocity = new Vector2(totalAirSpeed, m_Rigidbody.velocity.y);
-                    }
-                    else
+                    float totalSpeed = Mathf.Lerp(m_Rigidbody.velocity.x, m_Horizontal * m_Speed * Toolbox.Instance.m_MovementSpeed, m_Acceleration * Time.deltaTime);
+                    float totalAirSpeed = Mathf.Lerp(m_Rigidbody.velocity.x, m_Horizontal * m_Speed * Toolbox.Instance.m_MovementSpeed * m_DampXAmount, m_Acceleration * Time.deltaTime);
+
+                    if (Mathf.Approximately(m_Rigidbody.velocity.y, 0.0f))
                         m_Rigidbody.velocity = new Vector2(totalSpeed, m_Rigidbody.velocity.y);
+                    else
+                    {
+                        if (!m_OnGround)
+                        {
+                            if (m_Horizontal > 0.5f || m_Horizontal < -0.5f)
+                                m_Rigidbody.velocity = new Vector2(totalAirSpeed, m_Rigidbody.velocity.y);
+                        }
+                        else
+                            m_Rigidbody.velocity = new Vector2(totalSpeed, m_Rigidbody.velocity.y);
+                    }
                 }
             }
         }
@@ -411,7 +414,7 @@ public class ControllerPlayer : MonoBehaviour
 
     void Jump()
     {
-        if (Toolbox.Instance.m_CanJump)
+        if (Toolbox.Instance.m_CanMove)
         {
             m_Rigidbody.AddForce(Vector2.up * m_JumpForce, ForceMode2D.Impulse);
             m_Jump = true;
@@ -521,6 +524,8 @@ public class ControllerPlayer : MonoBehaviour
                 //Spawn hook prefab
                 if (m_HookPrefab && m_CanShootHook && !m_IsHookCD)
                 {
+                    m_SfxManager.GrappleFire();
+
                     m_HookClone = (GameObject)Instantiate(m_HookPrefab, transform.position, Quaternion.identity);
                     if (m_HookClone.GetComponent<Rigidbody2D>())
                         m_HookClone.GetComponent<Rigidbody2D>().velocity = m_GrappleDir.normalized * m_HookTravelSpeed;
@@ -560,7 +565,10 @@ public class ControllerPlayer : MonoBehaviour
 
                     bool hit = m_HookController.GetHit();
                     if (hit)
+                    {
                         m_GrappleHit = true;
+                        m_SfxManager.GrappleImpact();
+                    }
                 }
             }
             //Interrupt the hook if button is released and hook hasn't hit anything
@@ -943,6 +951,7 @@ public class ControllerPlayer : MonoBehaviour
         //Reset attack
         if (m_IsParry)
         {
+            m_SfxManager.PlayerParry();
             m_AttackTimer = 0.0f;
             m_AttackBox.gameObject.SetActive(false);
             m_CanAttack = false;

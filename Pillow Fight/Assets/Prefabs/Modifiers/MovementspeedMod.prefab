@@ -51,5 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9c42bf76b31fb4a8d3dbf52cfaf4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ModName: Sanic Speed
   m_MoveSpeedMod: 1
-  m_CanJumpMod: 0

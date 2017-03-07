@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb13d9de74bd51a43b0e5e2bc2175b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ModName: Bees
   m_MissilePrefab: {fileID: 1405608021879260, guid: 8cf169a8205f2c14ab90a95cb663579b,
     type: 2}
   m_SpawnpointPrefab: {fileID: 1310117954951476, guid: ed70e44ca7508774b9160c019031ec87,

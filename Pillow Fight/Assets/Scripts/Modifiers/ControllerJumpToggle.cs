@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ControllerJumpToggle : Modifier
 {
+    public string m_ModName = "";
+
     protected override void Start()
     {
-        Toolbox.Instance.m_CanJump = false;
+        Toolbox.Instance.m_CanMove = false;
     }
 
     public override void OnRoundEnd()
@@ -19,6 +21,11 @@ public class ControllerJumpToggle : Modifier
 
     protected override void OnDestroy()
     {
-        Toolbox.Instance.m_CanJump = true;
+        Toolbox.Instance.m_CanMove = true;
+    }
+
+    public override string GetName()
+    {
+        return m_ModName;
     }
 }

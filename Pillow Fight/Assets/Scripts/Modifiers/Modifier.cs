@@ -11,4 +11,6 @@ public abstract class Modifier : MonoBehaviour
     public abstract void OnRoundEnd();
 
     protected abstract void OnDestroy();
+
+    public abstract string GetName();
 }

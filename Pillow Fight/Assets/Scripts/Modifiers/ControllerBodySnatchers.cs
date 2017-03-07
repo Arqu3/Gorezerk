@@ -5,6 +5,7 @@ using UnityEngine;
 public class ControllerBodySnatchers : Modifier
 {
     //Public vars
+    public string m_ModName = "";
     public float m_CountdownTime = 5.0f;
 
     //Timer vars
@@ -88,5 +89,10 @@ public class ControllerBodySnatchers : Modifier
 
     protected override void OnDestroy()
     {
+    }
+
+    public override string GetName()
+    {
+        return m_ModName;
     }
 }

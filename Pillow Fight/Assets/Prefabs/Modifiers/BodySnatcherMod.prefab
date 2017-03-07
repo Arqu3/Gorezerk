@@ -51,4 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbac1c1381eb6624993d75b6e6bd2c21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountdownTime: 5
+  m_ModName: Body Snatchers
+  m_CountdownTime: 3.84

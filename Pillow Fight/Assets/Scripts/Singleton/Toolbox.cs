@@ -23,13 +23,13 @@ public class Toolbox : Singleton<Toolbox>
 
     //Modification variables
     public float m_MovementSpeed = 1.0f;
-    public bool m_CanJump = true;
+    public bool m_CanMove = true;
 
     //Used whenever menu is loaded *BE CAREFUL WHEN TO CALL THIS*
     public void ClearInformation()
     {
         m_MovementSpeed = 1.0f;
-        m_CanJump = true;
+        m_CanMove = true;
 
         m_Information.Clear();
         m_Colors.Clear();

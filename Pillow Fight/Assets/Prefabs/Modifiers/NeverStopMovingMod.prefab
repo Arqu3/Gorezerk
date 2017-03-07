@@ -51,4 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cf94a8d450ba443ba49bcfec3e4d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ModName: Don't Stop
   m_StillTime: 1

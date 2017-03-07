@@ -51,5 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b755660982eb54bafcf79ed8a62935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ModName: Big Red Button
   m_ButtonPrefab: {fileID: 1007879806625570, guid: 01a1db702ea1f85439f3919ba705a730,
     type: 2}

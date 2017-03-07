@@ -141,10 +141,13 @@ public class ControllerScene : MonoBehaviour
         StartRound();
     }
 
-    void Update ()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !m_IsRoundStart)
             TogglePaused();
+
+        if (m_IsPaused && Input.GetKeyDown(KeyCode.F11))
+            m_ModifierPanel.SetActive(!m_ModifierPanel.activeSelf);
 
         if (Input.GetKeyDown(KeyCode.Return))
             StartRound();
@@ -190,9 +193,14 @@ public class ControllerScene : MonoBehaviour
                 m_IsRoundStart = false;
 
                 //Call all modifier starting functions
-                for (int i = 0; i < m_Modifiers.Count; i++)
+                //for (int i = 0; i < m_Modifiers.Count; i++)
+                //{
+                //    m_Modifiers[i].OnRoundStart();
+                //}
+
+                for (int i = 0; i < m_ModController.GetActiveMods().Count; i++)
                 {
-                    m_Modifiers[i].OnRoundStart();
+                    m_ModController.GetActiveMods()[i].OnRoundStart();
                 }
             }
         }
@@ -265,9 +273,14 @@ public class ControllerScene : MonoBehaviour
     void StartRound()
     {
         //Call all modifier end functions
-        for (int i = 0; i < m_Modifiers.Count; i++)
+        //for (int i = 0; i < m_Modifiers.Count; i++)
+        //{
+        //    m_Modifiers[i].OnRoundEnd();
+        //}
+
+        for (int i = 0; i < m_ModController.GetActiveMods().Count; i++)
         {
-            m_Modifiers[i].OnRoundEnd();
+            m_ModController.GetActiveMods()[i].OnRoundEnd();
         }
 
         m_RoundNum++;

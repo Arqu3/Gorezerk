@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ControllerStopMoving : Modifier
 {
+    public string m_ModName = "";
     [Header("Standing still timer")]
     [Range(0.0f, 10.0f)]
     public float m_StillTime = 1.0f;
@@ -62,5 +63,10 @@ public class ControllerStopMoving : Modifier
 
     protected override void OnDestroy()
     {
+    }
+
+    public override string GetName()
+    {
+        return m_ModName;
     }
 }

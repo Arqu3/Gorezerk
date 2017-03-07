@@ -5,6 +5,7 @@ using UnityEngine;
 public class ControllerRedButton : Modifier
 {
     //Public vars
+    public string m_ModName = "";
     public GameObject m_ButtonPrefab;
 
     //Button vars
@@ -45,5 +46,10 @@ public class ControllerRedButton : Modifier
     void DestroyButton()
     {
         Destroy(m_ButtonInstance);
+    }
+
+    public override string GetName()
+    {
+        return m_ModName;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ControllerHomingMissiles : Modifier
 {
     //Public vars
+    public string m_ModName = "";
     public GameObject m_MissilePrefab;
     public GameObject m_SpawnpointPrefab;
     public bool m_SpawnForEachPlayer = true;
@@ -103,5 +104,10 @@ public class ControllerHomingMissiles : Modifier
             Destroy(m_Spawns);
             m_Spawnpoints.Clear();
         }
+    }
+
+    public override string GetName()
+    {
+        return m_ModName;
     }
 }
