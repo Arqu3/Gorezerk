@@ -38,14 +38,12 @@ public class ControllerBodySnatchers : Modifier
                 m_CountdownTimer = m_CountdownTime;
             }
         }
-        else
-            m_CountdownTimer = 0.0f;
     }
 
     void SwapPlayers()
     {
-        //if (m_SfxManager)
-        //    m_SfxManager.BodySnatchers();
+        if (m_SfxManager)
+            m_SfxManager.BodySnatchers();
 
         List<Transform> tempSpawn = new List<Transform>();
 
@@ -56,7 +54,15 @@ public class ControllerBodySnatchers : Modifier
                 tempSpawn.Add(m_Players[i].transform);
 
                 if (m_ParticlePrefab)
-                    Instantiate(m_ParticlePrefab, m_Players[i].transform.position, m_ParticlePrefab.transform.rotation);
+                {
+                    GameObject particle = Instantiate(m_ParticlePrefab, m_Players[i].transform.position, m_ParticlePrefab.transform.rotation);
+                    ParticleSystem PS = particle.GetComponent<ParticleSystem>();
+                    if (PS)
+                    {
+                        var module = PS.main;
+                        module.startColor = m_Players[i].GetColor();
+                    }
+                }
             }
         }
 
