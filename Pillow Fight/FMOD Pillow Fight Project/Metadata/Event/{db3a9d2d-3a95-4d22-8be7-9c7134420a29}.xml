@@ -568,7 +568,7 @@
     </object>
     <object class="SingleSound" id="{943d848a-771b-4172-9f27-cf104226e04c}">
         <property name="volume">
-            <value>-7.5</value>
+            <value>-3</value>
         </property>
         <property name="pitch">
             <value>-2.20000005</value>
@@ -672,7 +672,7 @@
     </object>
     <object class="AutomationPoint" id="{695a97e2-72a3-4d0a-a2eb-e071b177f075}">
         <property name="position">
-            <value>0.21977782549433317</value>
+            <value>0.20047153410360469</value>
         </property>
         <property name="value">
             <value>0</value>
@@ -715,7 +715,7 @@
             <value>0.0135665324379218</value>
         </property>
         <property name="value">
-            <value>-18</value>
+            <value>-26.4999981</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{eca330de-523d-43f9-9cc5-ea62aeaa9c62}">
@@ -723,7 +723,7 @@
             <value>0.22384778522570969</value>
         </property>
         <property name="value">
-            <value>-45.5282593</value>
+            <value>-26.4999981</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{6c2bb060-8ec5-4f0b-9e06-153e556b206e}">
@@ -731,7 +731,7 @@
             <value>0.12888205816025711</value>
         </property>
         <property name="value">
-            <value>-18</value>
+            <value>-26.4999981</value>
         </property>
         <property name="curveShape">
             <value>-0.503933012</value>
@@ -820,7 +820,7 @@
             <value>0.0016413540713632203</value>
         </property>
         <property name="value">
-            <value>-31.2417374</value>
+            <value>-23.2204952</value>
         </property>
         <property name="curveShape">
             <value>0.422015995</value>
@@ -831,7 +831,7 @@
             <value>0.15182525160109789</value>
         </property>
         <property name="value">
-            <value>-16.8365211</value>
+            <value>-11.4699993</value>
         </property>
         <property name="curveShape">
             <value>-0.676440895</value>
@@ -842,7 +842,7 @@
             <value>0.24538243366880139</value>
         </property>
         <property name="value">
-            <value>-37.2330437</value>
+            <value>-27.5</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{29ab4926-3e0a-400b-8914-27ab00d3b333}">
@@ -850,7 +850,7 @@
             <value>0.067295516925892029</value>
         </property>
         <property name="value">
-            <value>-15.8346977</value>
+            <value>-10.4681759</value>
         </property>
     </object>
     <object class="MixerBusFader" id="{d8527632-f0cf-4b3b-811c-8bacb102b050}"/>
@@ -1048,7 +1048,7 @@
             <value>1</value>
         </property>
         <property name="curveShape">
-            <value>0.25471893</value>
+            <value>-0.216592163</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{9211e293-aeb0-4109-85fc-54d7377134b9}">
