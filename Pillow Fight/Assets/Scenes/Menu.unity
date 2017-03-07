@@ -1001,7 +1001,7 @@ MonoBehaviour:
     type: 2}
   m_MusicPrefab: {fileID: 1622891633774120, guid: 2d53bf230738ac447bcea5d4442e148b,
     type: 2}
-  m_CountdownTime: 1
+  m_CountdownTime: 5
   m_Colors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 0, g: 0.04827571, b: 1, a: 1}
