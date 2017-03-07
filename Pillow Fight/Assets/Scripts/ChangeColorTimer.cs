@@ -11,13 +11,20 @@ public class ChangeColorTimer : MonoBehaviour
 
     //Component vars
     private MeshRenderer m_Renderer;
+    private Color m_BaseColor;
 
     void Awake()
     {
         m_Renderer = GetComponent<MeshRenderer>();
+        m_BaseColor = m_Renderer.material.color;
     }
 
     void Start()
+    {
+        StartCoroutine(ChangeColor());
+    }
+
+    void OnEnable()
     {
         StartCoroutine(ChangeColor());
     }
@@ -26,6 +33,8 @@ public class ChangeColorTimer : MonoBehaviour
     {
         m_Renderer.material.color = new Color(Random.value, Random.value, Random.value);
         yield return new WaitForSeconds(m_Time);
-        StartCoroutine(ChangeColor());
+        //StartCoroutine(ChangeColor());
+        m_Renderer.material.color = m_BaseColor;
+        enabled = false;
     }
 }

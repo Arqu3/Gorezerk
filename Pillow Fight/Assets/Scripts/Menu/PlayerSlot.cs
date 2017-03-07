@@ -29,8 +29,13 @@ public class PlayerSlot : MonoBehaviour
     //Color vars
     private int m_ColorCounter = 0;
 
+    //Component vars
+    private ControllerMenu m_Menu;
+
     void Awake()
     {
+        m_Menu = FindObjectOfType<ControllerMenu>();
+
         m_NumText = transform.FindChild("PlayerText").GetComponent<Text>();
         m_ReadyText = transform.FindChild("ReadyText").GetComponent<Text>();
         if (m_ReadyText)
@@ -81,29 +86,28 @@ public class PlayerSlot : MonoBehaviour
                         //Getkeydown functionality for axis-input
                         if (!m_IsAxisInUse)
                         {
-                            //ControllerMenu.InsertColor(m_ColorCounter, m_Image.color);
+                            //if (!m_Menu.m_Colors.Contains(m_Image.color))
+                            //    m_Menu.m_Colors.Add(m_Image.color);
+
                             //Switch between colors
                             float horizontal = Input.GetAxisRaw("P" + m_ControllerNum + "Horizontal");
                             if (horizontal > 0)
                             {
                                 m_ColorCounter++;
-                                if (m_ColorCounter >= ControllerMenu.GetColorAmount())
+                                if (m_ColorCounter >= m_Menu.m_Colors.Count)
                                     m_ColorCounter = 0;
                             }
                             else if (horizontal < 0)
                             {
                                 m_ColorCounter--;
-                                if (m_ColorCounter < 0 || m_ColorCounter >= ControllerMenu.GetColorAmount())
-                                    m_ColorCounter = ControllerMenu.GetColorAmount() - 1;
+                                if (m_ColorCounter < 0 || m_ColorCounter >= m_Menu.m_Colors.Count)
+                                    m_ColorCounter = m_Menu.m_Colors.Count - 1;
                             }
 
-                            //m_ColorImage.color = m_Colors[m_ColorCounter];
-                            //Toolbox.Instance.m_Colors[m_PlayerNum] = m_Colors[m_ColorCounter];
+                            m_Image.color = m_Menu.m_Colors[m_ColorCounter];
+                            Toolbox.Instance.m_Colors[m_PlayerNum] = m_Menu.m_Colors[m_ColorCounter];
 
-                            m_Image.color = ControllerMenu.GetColor(m_ColorCounter);
-                            Toolbox.Instance.m_Colors[m_PlayerNum] = ControllerMenu.GetColor(m_ColorCounter);
-
-                            //ControllerMenu.RemoveColor(m_Image.color);
+                            //m_Menu.m_Colors.Remove(m_Image.color);
 
                             m_IsAxisInUse = true;
                         }
@@ -137,27 +141,26 @@ public class PlayerSlot : MonoBehaviour
                     bool input = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
                     if (input)
                     {
-                        //ControllerMenu.InsertColor(m_ColorCounter, m_Image.color);
+                        //if (!m_Menu.m_Colors.Contains(m_Image.color))
+                        //    m_Menu.m_Colors.Add(m_Image.color);
+
                         if (Input.GetKeyDown(KeyCode.D))
                         {
                             m_ColorCounter++;
-                            if (m_ColorCounter >= ControllerMenu.GetColorAmount())
+                            if (m_ColorCounter >= m_Menu.m_Colors.Count)
                                 m_ColorCounter = 0;
                         }
                         else if (Input.GetKeyDown(KeyCode.A))
                         {
                             m_ColorCounter--;
-                            if (m_ColorCounter < 0 || m_ColorCounter >= ControllerMenu.GetColorAmount())
-                                m_ColorCounter = ControllerMenu.GetColorAmount() - 1;
+                            if (m_ColorCounter < 0 || m_ColorCounter >= m_Menu.m_Colors.Count)
+                                m_ColorCounter = m_Menu.m_Colors.Count - 1;
                         }
 
-                        //m_ColorImage.color = m_Colors[m_ColorCounter];
-                        //Toolbox.Instance.m_Colors[m_PlayerNum] = m_Colors[m_ColorCounter];
+                        m_Image.color = m_Menu.m_Colors[m_ColorCounter];
+                        Toolbox.Instance.m_Colors[m_PlayerNum] = m_Menu.m_Colors[m_ColorCounter];
 
-                        m_Image.color = ControllerMenu.GetColor(m_ColorCounter);
-                        Toolbox.Instance.m_Colors[m_PlayerNum] = ControllerMenu.GetColor(m_ColorCounter);
-
-                        //ControllerMenu.RemoveColor(m_Image.color);
+                        //m_Menu.m_Colors.Remove(m_Image.color);
                     }
                 }
 

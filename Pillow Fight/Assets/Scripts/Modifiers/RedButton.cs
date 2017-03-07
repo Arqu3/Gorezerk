@@ -16,6 +16,7 @@ public class RedButton : MonoBehaviour
     //Timer vars
     private float m_CountdownTimer = 0.0f;
     private bool m_IsCountdown = false;
+    private Transform m_LastSpawn;
 
 	void Start()
     {
@@ -62,9 +63,7 @@ public class RedButton : MonoBehaviour
     {
         if (col.gameObject.GetComponent<ParryHitbox>())
         {
-            ControllerScene scene = FindObjectOfType<ControllerScene>();
-            int random = Random.Range(0, scene.GetSpawnPoints().Count);
-            transform.position = scene.GetSpawnPoints()[random].position;
+            SelectSpawnPosition();
 
             m_CountdownTimer = m_CountdownTime;
             m_SafePlayer = col.gameObject.GetComponent<ParryHitbox>().GetPlayer();
@@ -73,14 +72,34 @@ public class RedButton : MonoBehaviour
         }
         else if (col.gameObject.GetComponent<AttackHitbox>())
         {
-            ControllerScene scene = FindObjectOfType<ControllerScene>();
-            int random = Random.Range(0, scene.GetSpawnPoints().Count);
-            transform.position = scene.GetSpawnPoints()[random].position;
+            SelectSpawnPosition();
 
             m_CountdownTimer = m_CountdownTime;
             m_SafePlayer = col.gameObject.GetComponent<AttackHitbox>().GetPlayer();
             GetComponent<MeshRenderer>().material.color = m_SafePlayer.gameObject.GetComponent<MeshRenderer>().material.color;
             m_IsCountdown = true;
         }
+    }
+
+    void SelectSpawnPosition()
+    {
+        List<Transform> temp = new List<Transform>();
+
+        var scene = FindObjectOfType<ControllerScene>();
+        if (scene)
+        {
+            for (int i = 0; i < scene.GetSpawnPoints().Count; i++)
+            {
+                if (scene.GetSpawnPoints()[i] != m_LastSpawn)
+                {
+                    temp.Add(scene.GetSpawnPoints()[i]);
+                }
+            }
+        }
+
+        int random = Random.Range(0, temp.Count);
+        transform.position = temp[random].position;
+
+        m_LastSpawn = temp[random];
     }
 }

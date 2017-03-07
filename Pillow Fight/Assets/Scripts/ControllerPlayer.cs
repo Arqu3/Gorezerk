@@ -905,6 +905,10 @@ public class ControllerPlayer : MonoBehaviour
         if (m_DeathParticle)
             Instantiate(m_DeathParticle, transform.position, m_DeathParticle.transform.rotation);
 
+        var camerashake = FindObjectOfType<CameraScreenshake>();
+        if (camerashake)
+            camerashake.StartShake();
+
         gameObject.SetActive(false);
     }
 

@@ -36,6 +36,7 @@ public class ControllerScene : MonoBehaviour
 
     //Score vars
     private Text m_ScoreText;
+    private bool m_FirstRoundWon = false;
 
     //Bark vars
     private static string m_ScoreBark = "";
@@ -163,8 +164,6 @@ public class ControllerScene : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
                 StartRound();
 
-            CountdownUpdate();
-
             if (m_PlayerCount <= m_RestartNum)
             {
                 for (int i = 0; i < m_Players.Count; i++)
@@ -179,6 +178,7 @@ public class ControllerScene : MonoBehaviour
                 StartRound();
             }
 
+            CountdownUpdate();
             ScoreBarkUpdate();
         }
         if (m_UpdateText)
@@ -246,6 +246,7 @@ public class ControllerScene : MonoBehaviour
             {
                 m_Players[i].SetScore(0);
             }
+            m_FirstRoundWon = true;
             m_ResetScores = false;
         }
 
@@ -309,9 +310,12 @@ public class ControllerScene : MonoBehaviour
         }
 
         m_RoundNum++;
-        //Debug.Log("Current round: " + m_RoundNum);
-        if (m_ModController)
-            m_ModController.ChangeMods(m_RoundNum);
+
+        if (m_ModController && m_FirstRoundWon && m_RoundNum % m_ModController.m_RoundToChange == 0)
+        {
+            m_CountdownTimer = m_CountdownTime * 2.0f;
+            m_ModController.ChangeMods();
+        }
 
         m_PausePanel.SetActive(false);
         Cursor.visible = false;

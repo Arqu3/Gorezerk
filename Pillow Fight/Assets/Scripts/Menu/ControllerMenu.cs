@@ -59,8 +59,6 @@ public class ControllerMenu : MonoBehaviour
     public float m_CountdownTime = 10.0f;
     public List<Color> m_Colors;
 
-    private static List<Color> m_StaticColors = new List<Color>();
-
     private List<PlayerIndex> m_Controllers = new List<PlayerIndex>();
 
     //Player slot vars
@@ -141,10 +139,6 @@ public class ControllerMenu : MonoBehaviour
         for (int i = 0; i < Input.GetJoystickNames().Length; i++)
         {
             m_ControllerSlots.Add(false);
-        }
-        for (int i = 0; i < m_Colors.Count; i++)
-        {
-            m_StaticColors.Add(m_Colors[i]);
         }
 
         for (int i = 0; i < 4; i++)
@@ -291,33 +285,5 @@ public class ControllerMenu : MonoBehaviour
         }
 
         return ready;
-    }
-
-    public static void RemoveColor(Color col)
-    {
-        if (m_StaticColors.Contains(col))
-        {
-            //Debug.Log("Removed color: " + col);
-            m_StaticColors.Remove(col);
-        }
-    }
-
-    public static void InsertColor(int index, Color col)
-    {
-        if (!m_StaticColors.Contains(col))
-        {
-            //Debug.Log("Inserted color at: " + index);
-            m_StaticColors.Insert(index, col);
-        }
-    }
-
-    public static Color GetColor(int index)
-    {
-        return m_StaticColors[index];
-    }
-
-    public static int GetColorAmount()
-    {
-        return m_StaticColors.Count;
     }
 }

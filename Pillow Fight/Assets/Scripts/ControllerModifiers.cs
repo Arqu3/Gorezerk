@@ -68,42 +68,44 @@ public class ControllerModifiers : MonoBehaviour
             m_BarkText.gameObject.SetActive(false);
     }
 
-    public void ChangeMods(int currentRound)
+    public void ChangeMods()
     {
-        if (currentRound >= m_RoundToChange && currentRound % m_RoundToChange == 0)
+        var colortimers = FindObjectsOfType<ChangeColorTimer>();
+        for (int i = 0; i < colortimers.Length; i++)
         {
-            m_BarkString = "";
-            for (int i = 0; i < m_ModAmount; i++)
+            colortimers[i].enabled = true;
+        }
+        m_BarkString = "";
+        for (int i = 0; i < m_ModAmount; i++)
+        {
+            if (m_Available.Count > 0)
             {
-                if (m_Available.Count > 0)
-                {
-                    int random = Random.Range(0, m_Available.Count);
-                    //Debug.Log("Random index is: " + m_Available[random]);
+                int random = Random.Range(0, m_Available.Count);
+                //Debug.Log("Random index is: " + m_Available[random]);
 
-                    GameObject instance = (GameObject)Instantiate(m_Modifiers[m_Available[random]], Vector3.zero, Quaternion.identity);
-                    instance.transform.SetParent(transform);
-                    m_ActiveMods.Add(instance.GetComponent<Modifier>());
-                    m_ActiveIndex.Add(m_Available[random]);
-                    m_Available.Remove(m_Available[random]);
+                GameObject instance = (GameObject)Instantiate(m_Modifiers[m_Available[random]], Vector3.zero, Quaternion.identity);
+                instance.transform.SetParent(transform);
+                m_ActiveMods.Add(instance.GetComponent<Modifier>());
+                m_ActiveIndex.Add(m_Available[random]);
+                m_Available.Remove(m_Available[random]);
 
-                    m_BarkString += instance.GetComponent<Modifier>().GetName();
-                    if (i != m_ModAmount - 1)
-                        m_BarkString += "       ";
-                }
+                m_BarkString += instance.GetComponent<Modifier>().GetName();
+                if (i != m_ModAmount - 1)
+                    m_BarkString += "       ";
             }
+        }
 
-            StartCoroutine(StartCountdown());
+        StartCoroutine(StartCountdown());
 
-            if (m_ActiveMods.Count > m_ModAmount)
+        if (m_ActiveMods.Count > m_ModAmount)
+        {
+            for (int i = 0; i < m_ActiveMods.Count - m_ModAmount; i++)
             {
-                for (int i = 0; i < m_ActiveMods.Count - m_ModAmount; i++)
-                {
-                    Destroy(m_ActiveMods[i].gameObject);
-                    m_Available.Add(m_ActiveIndex[i]);
-                }
-                m_ActiveMods.RemoveRange(0, m_ModAmount);
-                m_ActiveIndex.RemoveRange(0, m_ModAmount);
+                Destroy(m_ActiveMods[i].gameObject);
+                m_Available.Add(m_ActiveIndex[i]);
             }
+            m_ActiveMods.RemoveRange(0, m_ModAmount);
+            m_ActiveIndex.RemoveRange(0, m_ModAmount);
         }
     }
 
