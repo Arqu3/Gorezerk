@@ -7,15 +7,18 @@ public class ControllerBodySnatchers : Modifier
     //Public vars
     public string m_ModName = "";
     public float m_CountdownTime = 5.0f;
+    public GameObject m_ParticlePrefab;
 
     //Timer vars
     private float m_CountdownTimer = 0.0f;
 
     //Player vars
     private List<ControllerPlayer> m_Players = new List<ControllerPlayer>();
+    private SFXManager m_SfxManager;
 
     protected override void Start()
     {
+        m_SfxManager = FindObjectOfType<SFXManager>();
         var players = FindObjectsOfType<ControllerPlayer>();
         for (int i = 0; i < players.Length; i++)
         {
@@ -26,22 +29,35 @@ public class ControllerBodySnatchers : Modifier
 
     void Update()
     {
-        m_CountdownTimer -= Time.deltaTime;
-        if (m_CountdownTimer <= 0.0f)
+        if (!ControllerScene.GetRoundStart())
         {
-            SwapPlayers();
-            m_CountdownTimer = m_CountdownTime;
+            m_CountdownTimer -= Time.deltaTime;
+            if (m_CountdownTimer <= 0.0f)
+            {
+                SwapPlayers();
+                m_CountdownTimer = m_CountdownTime;
+            }
         }
+        else
+            m_CountdownTimer = 0.0f;
     }
 
     void SwapPlayers()
     {
+        //if (m_SfxManager)
+        //    m_SfxManager.BodySnatchers();
+
         List<Transform> tempSpawn = new List<Transform>();
 
         for (int i = 0; i < m_Players.Count; i++)
         {
             if (m_Players[i].gameObject.activeSelf)
+            {
                 tempSpawn.Add(m_Players[i].transform);
+
+                if (m_ParticlePrefab)
+                    Instantiate(m_ParticlePrefab, m_Players[i].transform.position, m_ParticlePrefab.transform.rotation);
+            }
         }
 
         //for (int i = 0; i < tempSpawn.Count; i++)

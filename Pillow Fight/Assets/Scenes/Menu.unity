@@ -1093,7 +1093,6 @@ MonoBehaviour:
   - {r: 1, g: 0.68275857, b: 0, a: 1}
   - {r: 1, g: 1, b: 0, a: 1}
   - {r: 0, g: 1, b: 1, a: 1}
-  m_Controllers: 
 --- !u!4 &1805035177
 Transform:
   m_ObjectHideFlags: 0
