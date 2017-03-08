@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.08.00">
     <object class="Event" id="{95dfb2f3-1e5d-4e13-a84a-acd6a4cc80da}">
         <property name="name">
-            <value>BeesHit</value>
+            <value>BeesHit(3D)</value>
         </property>
         <property name="note">
             <value>Bees knockback sound.</value>

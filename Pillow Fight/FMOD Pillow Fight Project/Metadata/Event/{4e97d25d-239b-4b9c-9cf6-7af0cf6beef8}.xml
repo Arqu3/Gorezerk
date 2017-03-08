@@ -11,7 +11,7 @@
 2 = MatchWin</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>0</value>
         </property>
         <relationship name="mixer">
             <destination>{546b6320-080c-4f49-911e-1748f5a85a99}</destination>
@@ -155,7 +155,6 @@
     <object class="MixerBusEffectChain" id="{94e88cb8-50b3-476e-a87c-95df06405997}">
         <relationship name="effects">
             <destination>{3f6330a3-7190-47f0-9ccf-52110696fc49}</destination>
-            <destination>{cefca832-260b-448b-bcc7-7af4dc3152f3}</destination>
             <destination>{559c0a7b-2604-418d-a619-601375b53739}</destination>
         </relationship>
     </object>
@@ -180,10 +179,9 @@
     </object>
     <object class="MixerBusPanner" id="{9a200c68-8f07-4031-83a6-990c1c321609}"/>
     <object class="MixerBusFader" id="{3f6330a3-7190-47f0-9ccf-52110696fc49}"/>
-    <object class="SpatialiserEffect" id="{cefca832-260b-448b-bcc7-7af4dc3152f3}"/>
     <object class="MixerSend" id="{559c0a7b-2604-418d-a619-601375b53739}">
         <property name="inputFormat">
-            <value>2</value>
+            <value>0</value>
         </property>
         <relationship name="mixerReturn">
             <destination>{dc801420-cd89-465d-bb1a-454f48242d0f}</destination>

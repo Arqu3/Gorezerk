@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.08.00">
     <object class="Event" id="{125bd7e3-25fc-4c5d-b9f9-cac3307da44a}">
         <property name="name">
-            <value>Parry(unfinished)</value>
+            <value>Parry</value>
         </property>
         <property name="outputFormat">
             <value>1</value>

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AudioModifiers : MonoBehaviour {
 
+    public Vector3 playerPosition;
+
     [FMODUnity.EventRef]
     public string BeesEv;
     FMOD.Studio.EventInstance Bees;
@@ -41,6 +43,11 @@ public class AudioModifiers : MonoBehaviour {
 
     }
 
+    public void PlayerPos(Vector3 position)
+    {
+        position = playerPosition;
+    }
+
     public void ModBeesAmb()
     {
         Bees.start();
@@ -48,7 +55,7 @@ public class AudioModifiers : MonoBehaviour {
 
     public void ModBeesHit()
     {
-        FMODUnity.RuntimeManager.PlayOneShot(BodySnatchersEv);
+        FMODUnity.RuntimeManager.PlayOneShot(BeesHitEv, playerPosition);
     }
 
     public void ModBodySnatchers()
@@ -73,7 +80,7 @@ public class AudioModifiers : MonoBehaviour {
 
     public void ModTraps()
     {
-
+        Traps.start();
     }
 
     public void ModNoFeet()

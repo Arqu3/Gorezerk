@@ -8,7 +8,7 @@
             <value>Ambient loop playing while 'Bees' modifier is active.</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>0</value>
         </property>
         <relationship name="mixer">
             <destination>{566ddabe-6e86-40b4-a98a-a5571bed005d}</destination>
@@ -101,7 +101,6 @@
     <object class="MixerBusEffectChain" id="{5a250fc8-9b46-414b-9508-fbe6cecf5cd5}">
         <relationship name="effects">
             <destination>{bc0f9475-7198-42f8-925b-18791c881a0b}</destination>
-            <destination>{3e5b2580-28d7-4994-99f8-ee4116a632d9}</destination>
             <destination>{410e3908-eb50-48a2-bffc-216d9c26b99d}</destination>
         </relationship>
     </object>
@@ -114,10 +113,9 @@
     </object>
     <object class="MixerBusPanner" id="{aac6b76b-4164-4ebc-a7fb-63b0ea5a0629}"/>
     <object class="MixerBusFader" id="{bc0f9475-7198-42f8-925b-18791c881a0b}"/>
-    <object class="SpatialiserEffect" id="{3e5b2580-28d7-4994-99f8-ee4116a632d9}"/>
     <object class="MixerSend" id="{410e3908-eb50-48a2-bffc-216d9c26b99d}">
         <property name="inputFormat">
-            <value>2</value>
+            <value>0</value>
         </property>
         <relationship name="mixerReturn">
             <destination>{dc801420-cd89-465d-bb1a-454f48242d0f}</destination>

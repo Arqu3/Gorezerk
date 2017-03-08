@@ -28,7 +28,8 @@ public class SFXManager : MonoBehaviour {
     //Call these functions to play SFX
     public void PlayerPosition(Vector3 position)
     {
-        audioPlayerMovement.PlayerPos(position);
+        audioPlayerMovement.playerPosition = position;
+        audioModifiers.playerPosition = position;
     }
 
     public void PlayerRun(int material)

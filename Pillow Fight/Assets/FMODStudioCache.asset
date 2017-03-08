@@ -25,9 +25,12 @@ MonoBehaviour:
   - {fileID: 114165203949329440}
   - {fileID: 114715699549893050}
   - {fileID: 114196633642546046}
+  - {fileID: 114929420812598248}
+  - {fileID: 114540832636332682}
+  - {fileID: 114309443014581280}
   MasterBankRef: {fileID: 114020375388585542}
   StringsBankRef: {fileID: 114336523812897656}
-  stringsBankWriteTime: 636245099603258039
+  stringsBankWriteTime: 636245381619971609
   cacheVersion: 2
 --- !u!114 &114002188997585296
 MonoBehaviour:
@@ -108,11 +111,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: F:\Programs\Unity_Projects\Pillow Fight\Pillow Fight\FMOD Pillow Fight Project\Build\Desktop\Master
     Bank.bank
-  lastModified: 636245100928603845
+  lastModified: 636245381619841601
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 6027808
+    Value: 6030944
   Exists: 1
 --- !u!114 &114025772009775324
 MonoBehaviour:
@@ -163,7 +166,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114130910995051524}
+  - {fileID: 114274202977764478}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114038108342697954
@@ -300,6 +303,21 @@ MonoBehaviour:
   Name: Material
   Min: 0
   Max: 3
+  Default: 0
+--- !u!114 &114085587162339542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GamePause
+  Min: 0
+  Max: 1
   Default: 0
 --- !u!114 &114088021646608928
 MonoBehaviour:
@@ -1055,9 +1073,9 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114589615703808594}
-  - {fileID: 114960025107017504}
-  - {fileID: 114945011633211900}
+  - {fileID: 114262390630479210}
+  - {fileID: 114387081282248658}
+  - {fileID: 114085587162339542}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114252237917718776
@@ -1165,6 +1183,36 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114262390630479210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: MusicVolume
+  Min: 0
+  Max: 1
+  Default: 1
+--- !u!114 &114274202977764478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114275046283089890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1262,6 +1310,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114288339553921108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 2
+  Default: 0
 --- !u!114 &114302928448367026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1307,6 +1370,27 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114309443014581280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Modifiers/BeesHit
+  guid: f3b2df955d1e134ea84aacd6a4cc80da
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114311311517465284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,11 +1538,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: FMOD Pillow Fight Project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636245099603258039
+  lastModified: 636245381619971609
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1494
+    Value: 1642
   Exists: 1
 --- !u!114 &114336965671268808
 MonoBehaviour:
@@ -1655,6 +1739,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114387081282248658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114388351350013390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1689,7 +1788,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114604027444271886}
+  - {fileID: 114745274939940164}
   MinDistance: 1
   MaxDistance: 100
 --- !u!114 &114399642018461582
@@ -1822,7 +1921,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114760229023185210}
+  - {fileID: 114480241015285260}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114427694657989912
@@ -2004,6 +2103,21 @@ MonoBehaviour:
   Name: GamePause
   Min: 0
   Max: 1
+  Default: 0
+--- !u!114 &114480241015285260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
   Default: 0
 --- !u!114 &114485708940039072
 MonoBehaviour:
@@ -2212,6 +2326,27 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114540832636332682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Modifiers/BeesAmb
+  guid: a0844ad626927e4ab084d6b358317c9b
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114541188673554062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2995,6 +3130,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114745274939940164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114747625960593166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3744,6 +3894,28 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114929420812598248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Stingers/MatchStinger
+  guid: 5dd2974e9b239c4b9cf67af0cf6beef8
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 114288339553921108}
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114935984008286778
 MonoBehaviour:
   m_ObjectHideFlags: 0

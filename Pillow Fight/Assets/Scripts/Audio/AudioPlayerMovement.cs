@@ -5,7 +5,7 @@ using UnityEngine;
 public class AudioPlayerMovement : MonoBehaviour
 {
     public int material;
-    Vector3 playerPosition;
+    public Vector3 playerPosition;
     
     [FMODUnity.EventRef]
     public string FootstepsEv;

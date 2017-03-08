@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.08.00">
     <object class="Event" id="{d78125a3-01c4-4a41-b2ed-d41ad9b40875}">
         <property name="name">
-            <value>Grapple(unfinished)</value>
+            <value>Grapple</value>
         </property>
         <property name="outputFormat">
             <value>1</value>
@@ -261,7 +261,7 @@
             <value>-17</value>
         </property>
         <property name="name">
-            <value>Drag player</value>
+            <value>Drag player (Unused)</value>
         </property>
         <relationship name="effectChain">
             <destination>{88c732da-1a84-4f6a-9bcc-16c88eff80d5}</destination>
