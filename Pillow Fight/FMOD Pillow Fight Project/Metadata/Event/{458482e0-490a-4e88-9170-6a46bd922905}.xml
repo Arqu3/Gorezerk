@@ -36,6 +36,9 @@
             <destination>{2b8127fa-e83f-451f-ad81-66a48b64c992}</destination>
             <destination>{d7549427-0ff6-45e9-8ffa-fb36a6b99620}</destination>
         </relationship>
+        <relationship name="userProperties">
+            <destination>{31278311-82a8-40c6-9043-e5f90251596e}</destination>
+        </relationship>
         <relationship name="banks">
             <destination>{2f4d6ed1-135a-49e0-9dda-0df3e9e68acc}</destination>
         </relationship>
@@ -146,6 +149,14 @@
         <relationship name="automationCurves">
             <destination>{2f83a526-fb8b-454e-a39e-6fe10f2ae970}</destination>
         </relationship>
+    </object>
+    <object class="UserProperty" id="{31278311-82a8-40c6-9043-e5f90251596e}">
+        <property name="key">
+            <value>MusicVolume</value>
+        </property>
+        <property name="value">
+            <value>0</value>
+        </property>
     </object>
     <object class="EventMixerMaster" id="{295cb158-cebb-4548-b9e5-66499eaebd89}">
         <relationship name="effectChain">

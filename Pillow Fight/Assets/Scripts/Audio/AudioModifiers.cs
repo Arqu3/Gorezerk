@@ -8,6 +8,10 @@ public class AudioModifiers : MonoBehaviour {
     public string BeesEv;
     FMOD.Studio.EventInstance Bees;
 
+    [FMODUnity.BankRef]
+    public string BeesHitEv;
+    FMOD.Studio.EventInstance BeesHit;
+
     [FMODUnity.EventRef]
     public string BodySnatchersEv;
     FMOD.Studio.EventInstance BodySnatchers;
@@ -37,9 +41,14 @@ public class AudioModifiers : MonoBehaviour {
 
     }
 
-    public void ModBees()
+    public void ModBeesAmb()
     {
-        //Bees.start();
+        Bees.start();
+    }
+
+    public void ModBeesHit()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(BodySnatchersEv);
     }
 
     public void ModBodySnatchers()

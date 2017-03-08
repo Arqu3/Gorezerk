@@ -27,7 +27,7 @@ MonoBehaviour:
   - {fileID: 114196633642546046}
   MasterBankRef: {fileID: 114020375388585542}
   StringsBankRef: {fileID: 114336523812897656}
-  stringsBankWriteTime: 636245091132173521
+  stringsBankWriteTime: 636245099603258039
   cacheVersion: 2
 --- !u!114 &114002188997585296
 MonoBehaviour:
@@ -108,11 +108,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: F:\Programs\Unity_Projects\Pillow Fight\Pillow Fight\FMOD Pillow Fight Project\Build\Desktop\Master
     Bank.bank
-  lastModified: 636245091132163521
+  lastModified: 636245100928603845
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 6027360
+    Value: 6027808
   Exists: 1
 --- !u!114 &114025772009775324
 MonoBehaviour:
@@ -163,7 +163,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114554576880052852}
+  - {fileID: 114130910995051524}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114038108342697954
@@ -441,6 +441,21 @@ MonoBehaviour:
   Name: Material
   Min: 0
   Max: 1
+  Default: 0
+--- !u!114 &114130910995051524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 3
   Default: 0
 --- !u!114 &114136066370088236
 MonoBehaviour:
@@ -1040,8 +1055,9 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114449608955177230}
-  - {fileID: 114070429603399868}
+  - {fileID: 114589615703808594}
+  - {fileID: 114960025107017504}
+  - {fileID: 114945011633211900}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114252237917718776
@@ -1438,7 +1454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: FMOD Pillow Fight Project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636245091132173521
+  lastModified: 636245099603258039
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1673,7 +1689,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114860195506326268}
+  - {fileID: 114604027444271886}
   MinDistance: 1
   MaxDistance: 100
 --- !u!114 &114399642018461582
@@ -1806,7 +1822,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114196066753270548}
+  - {fileID: 114760229023185210}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114427694657989912
@@ -2418,6 +2434,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114589615703808594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: MusicVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114592661852656984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2464,6 +2495,21 @@ MonoBehaviour:
   Max: 3
   Default: 0
 --- !u!114 &114601378946284846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
+  Default: 0
+--- !u!114 &114604027444271886
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2982,6 +3028,21 @@ MonoBehaviour:
   Name: Intensity
   Min: 0
   Max: 1
+  Default: 0
+--- !u!114 &114760229023185210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
   Default: 0
 --- !u!114 &114765312955456932
 MonoBehaviour:
@@ -3720,6 +3781,21 @@ MonoBehaviour:
   - {fileID: 114187459106751094}
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114945011633211900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GamePause
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114945253820426290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3828,6 +3904,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: GamePause
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114960025107017504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Intensity
   Min: 0
   Max: 1
   Default: 0

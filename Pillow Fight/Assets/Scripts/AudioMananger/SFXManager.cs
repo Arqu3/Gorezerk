@@ -9,6 +9,7 @@ public class SFXManager : MonoBehaviour {
     Vector3 playerPosition;
     private AudioPlayerMovement audioPlayerMovement;
     private AudioModifiers audioModifiers;
+    private AudioStingers audioStingers;
 
     void Start()
     {
@@ -19,7 +20,7 @@ public class SFXManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         audioPlayerMovement = GetComponent<AudioPlayerMovement>();
         audioModifiers = GetComponent<AudioModifiers>();
-
+        audioStingers = GetComponent<AudioStingers>();
     }
 
     //::PLAYER::
@@ -87,4 +88,35 @@ public class SFXManager : MonoBehaviour {
     {
         audioModifiers.ModBodySnatchers();
     }
+
+    public void ModBeesAmb()
+    {
+        audioModifiers.ModBeesAmb();
+    }
+
+    public void ModBeesHit()
+    {
+        audioModifiers.ModBeesHit();
+    }
+
+    //::STINGERS;;
+
+    public void MatchStart()
+    {
+        audioStingers.MatchStart();
+    }
+
+    public void MatchWin()
+    {
+        audioStingers.MatchWin();
+    }
+
+    public void RoundWin()
+    {
+        audioStingers.RoundWin();
+    }
+
+    //::MENU SOUNDS::
+
+
 }
