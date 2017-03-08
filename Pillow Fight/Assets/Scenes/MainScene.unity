@@ -5560,8 +5560,8 @@ MonoBehaviour:
   m_CountdownTime: 3
   m_CountdownSpeed: 2
   m_BarkTime: 1
-  m_ScoreToWinRound: 10
-  m_RoundsToWin: 5
+  m_ScoreToWinRound: 1
+  m_RoundsToWin: 1
   m_PlayerPrefab: {fileID: 1882951712129200, guid: ed09a0441c5241e4e8927059f2c95405,
     type: 2}
 --- !u!4 &1570051525
@@ -5652,7 +5652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.684}
+  m_Color: {r: 0.44117647, g: 0.44117647, b: 0.44117647, a: 0.859}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

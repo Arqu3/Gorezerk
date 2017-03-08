@@ -190,6 +190,7 @@ public class ControllerMenu : MonoBehaviour
                     }
                     if (xbox || PS)
                     {
+                        Toolbox.Instance.m_Colors.Add(Color.white);
                         ControllerType type = ControllerType.Xbox;
                         m_PlayerSlots[m_SlotIndex].SetOpen(false);
                         m_PlayerSlots[m_SlotIndex].SetControllerNum(i);
@@ -206,7 +207,6 @@ public class ControllerMenu : MonoBehaviour
                             type = ControllerType.PS;
 
                         Toolbox.Instance.m_Information.Add(new PlayerInformation(type, i, addIndex));
-                        Toolbox.Instance.m_Colors.Add(Color.white);
                         break;
                     }
                 }
@@ -227,11 +227,11 @@ public class ControllerMenu : MonoBehaviour
             if (open)
             {
                 m_HasSetKeyboard = true;
+                Toolbox.Instance.m_Information.Add(new PlayerInformation(ControllerType.Keyboard, -1, PlayerIndex.One));
+                Toolbox.Instance.m_Colors.Add(Color.white);
                 m_PlayerSlots[m_SlotIndex].SetOpen(false);
                 m_PlayerSlots[m_SlotIndex].SetControllerNum(-1);
                 m_PlayerSlots[m_SlotIndex].SetKeyboard(true);
-                Toolbox.Instance.m_Information.Add(new PlayerInformation(ControllerType.Keyboard, -1, PlayerIndex.One));
-                Toolbox.Instance.m_Colors.Add(Color.white);
             }
         }
     }
