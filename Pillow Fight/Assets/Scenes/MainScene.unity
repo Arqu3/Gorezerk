@@ -600,6 +600,7 @@ GameObject:
   - component: {fileID: 237857706}
   - component: {fileID: 237857708}
   - component: {fileID: 237857707}
+  - component: {fileID: 237857709}
   m_Layer: 5
   m_Name: ScoreBarkText
   m_TagString: Untagged
@@ -664,6 +665,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 237857705}
+--- !u!114 &237857709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 237857705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &250118300
 Prefab:
   m_ObjectHideFlags: 0
@@ -2731,6 +2746,7 @@ GameObject:
   - component: {fileID: 916331471}
   - component: {fileID: 916331469}
   - component: {fileID: 916331468}
+  - component: {fileID: 916331472}
   m_Layer: 5
   m_Name: GameOverScore
   m_TagString: Untagged
@@ -2819,6 +2835,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e496085b4a0f76459a6bbe2aa15ffd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &916331472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 916331466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &921755115
 GameObject:
   m_ObjectHideFlags: 0
@@ -4397,6 +4427,7 @@ GameObject:
   - component: {fileID: 1308947360}
   - component: {fileID: 1308947359}
   - component: {fileID: 1308947358}
+  - component: {fileID: 1308947361}
   m_Layer: 5
   m_Name: ModifierBarkText
   m_TagString: Untagged
@@ -4474,6 +4505,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1308947356}
+--- !u!114 &1308947361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1308947356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1348203840
 GameObject:
   m_ObjectHideFlags: 0
@@ -4942,7 +4987,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Prototype v0.0.2
+  m_Text: Prototype v0.0.2a
 --- !u!222 &1419591994
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5780,6 +5825,7 @@ GameObject:
   - component: {fileID: 1608490653}
   - component: {fileID: 1608490652}
   - component: {fileID: 1608490654}
+  - component: {fileID: 1608490655}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -5857,6 +5903,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &1608490655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1608490650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1638194008
 GameObject:
   m_ObjectHideFlags: 0
