@@ -48,6 +48,59 @@ public struct PlayerInformation
     }
 }
 
+[System.Serializable]
+public struct SelectInformation
+{
+    public bool m_Selected;
+    public Color m_Color;
+    public GameObject m_Character;
+
+    public SelectInformation(bool selected, GameObject character, Color col)
+    {
+        m_Character = character;
+        m_Color = col;
+        m_Selected = selected;
+    }
+
+    public bool GetSelected()
+    {
+        return m_Selected;
+    }
+
+    public GameObject GetCharacter()
+    {
+        return m_Character;
+    }
+
+    public Color GetColor()
+    {
+        return m_Color;
+    }
+}
+
+[System.Serializable]
+public struct CharacterInformation
+{
+    public GameObject m_Character;
+    public Color m_Color;
+
+    public CharacterInformation(GameObject character, Color col)
+    {
+        m_Character = character;
+        m_Color = col;
+    }
+
+    public GameObject GetCharacter()
+    {
+        return m_Character;
+    }
+
+    public Color GetColor()
+    {
+        return m_Color;
+    }
+}
+
 /// <summary>
 /// This is the complete controller for the main-menu of the game, it handles menu-state logic, player lobby logic etc
 /// </summary>
@@ -57,7 +110,11 @@ public class ControllerMenu : MonoBehaviour
     public GameObject m_SfxPrefab;
     public GameObject m_MusicPrefab;
     public float m_CountdownTime = 10.0f;
-    public List<Color> m_Colors;
+    public List<CharacterInformation> m_Characters = new List<CharacterInformation>();
+    //public List<Color> m_Colors;
+
+    [HideInInspector]
+    public List<SelectInformation> m_SelectInformation = new List<SelectInformation>();
 
     private List<PlayerIndex> m_Controllers = new List<PlayerIndex>();
 
@@ -78,6 +135,11 @@ public class ControllerMenu : MonoBehaviour
 
 	void Start()
     {
+        for (int i = 0; i < m_Characters.Count; i++)
+        {
+            m_SelectInformation.Add(new SelectInformation(false, m_Characters[i].GetCharacter(), m_Characters[i].GetColor()));
+        }
+
         //Reset toolbox variables whenever main menu is loaded
         Toolbox.Instance.ClearInformation();
 
@@ -191,6 +253,7 @@ public class ControllerMenu : MonoBehaviour
                     if (xbox || PS)
                     {
                         Toolbox.Instance.m_Colors.Add(Color.white);
+                        Toolbox.Instance.m_Characters.Add(null);
                         ControllerType type = ControllerType.Xbox;
                         m_PlayerSlots[m_SlotIndex].SetOpen(false);
                         m_PlayerSlots[m_SlotIndex].SetControllerNum(i);
@@ -229,6 +292,7 @@ public class ControllerMenu : MonoBehaviour
                 m_HasSetKeyboard = true;
                 Toolbox.Instance.m_Information.Add(new PlayerInformation(ControllerType.Keyboard, -1, PlayerIndex.One));
                 Toolbox.Instance.m_Colors.Add(Color.white);
+                Toolbox.Instance.m_Characters.Add(null);
                 m_PlayerSlots[m_SlotIndex].SetOpen(false);
                 m_PlayerSlots[m_SlotIndex].SetControllerNum(-1);
                 m_PlayerSlots[m_SlotIndex].SetKeyboard(true);

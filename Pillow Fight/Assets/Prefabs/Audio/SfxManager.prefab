@@ -64,7 +64,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6df59b21a4cac641a435d105e452efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPosition: {x: 0, y: 0, z: 0}
   BeesEv: 
+  BeesHitEv: 
   BodySnatchersEv: event:/SFX/Modifiers/BodySnatchers
   MissileEv: 
   SanicEv: 
@@ -83,10 +85,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: 0
+  playerPosition: {x: 0, y: 0, z: 0}
   FootstepsEv: event:/SFX/Player/Footsteps
   JumpEv: event:/SFX/Player/Jump
   JumpLandEv: event:/SFX/Player/JumpLand
   WeaponSwingEv: event:/SFX/Player/Swing
   DeathEv: event:/SFX/Player/Death
-  GrappleEv: event:/SFX/Player/Grapple(unfinished)
-  ParryEv: event:/SFX/Player/Parry(unfinished)
+  GrappleEv: event:/SFX/Player/Grapple
+  ParryEv: event:/SFX/Player/Parry

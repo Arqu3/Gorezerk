@@ -67,7 +67,7 @@ public class RedButton : MonoBehaviour
 
             m_CountdownTimer = m_CountdownTime;
             m_SafePlayer = col.gameObject.GetComponent<ParryHitbox>().GetPlayer();
-            GetComponent<MeshRenderer>().material.color = m_SafePlayer.gameObject.GetComponent<MeshRenderer>().material.color;
+            GetComponent<MeshRenderer>().material.color = m_SafePlayer.GetColor();
             m_IsCountdown = true;
         }
         else if (col.gameObject.GetComponent<AttackHitbox>())
@@ -76,7 +76,7 @@ public class RedButton : MonoBehaviour
 
             m_CountdownTimer = m_CountdownTime;
             m_SafePlayer = col.gameObject.GetComponent<AttackHitbox>().GetPlayer();
-            GetComponent<MeshRenderer>().material.color = m_SafePlayer.gameObject.GetComponent<MeshRenderer>().material.color;
+            GetComponent<MeshRenderer>().material.color = m_SafePlayer.GetColor();
             m_IsCountdown = true;
         }
     }

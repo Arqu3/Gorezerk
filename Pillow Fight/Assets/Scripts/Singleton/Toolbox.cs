@@ -19,6 +19,7 @@ public class Toolbox : Singleton<Toolbox>
     public int m_PlayerCount = 0;
     public List<PlayerInformation> m_Information = new List<PlayerInformation>();
     public List<Color> m_Colors = new List<Color>();
+    public List<GameObject> m_Characters = new List<GameObject>();
     public float m_MusicVolume = 0.5f;
 
     //Modification variables
@@ -31,6 +32,7 @@ public class Toolbox : Singleton<Toolbox>
         m_MovementSpeed = 1.0f;
         m_CanMove = true;
 
+        m_Characters.Clear();
         m_Information.Clear();
         m_Colors.Clear();
         m_PlayerCount = 0;

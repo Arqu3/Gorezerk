@@ -54,6 +54,11 @@ public class ControllerPlayer : MonoBehaviour
     [Range(1f, 100f)]
     public float m_ParryForce = 20.0f;
 
+    [Header("Rotation vars")]
+    public float m_TiltAmount = 60.0f;
+    [Range(0.1f, 100.0f)]
+    public float m_RotationSpeed = 10.0f;
+
     [Header("Spawnable prefabs")]
     public GameObject m_HookPrefab;
     public GameObject m_DeathParticle;
@@ -79,11 +84,16 @@ public class ControllerPlayer : MonoBehaviour
 
     //General player vars
     private int m_PlayerNum = 1;
+    private Transform m_ModelTransform;
+    private Color m_Color;
 
     //Movement vars
     private float m_Horizontal = 0.0f;
     private bool m_StartedRunning = false;
     private bool m_StoppedRunning = false;
+
+    //Rotation vars
+    private Vector3 m_ToEuler = Vector3.zero;
 
     //Score vars
     private int m_RoundScore = 0;
@@ -155,6 +165,8 @@ public class ControllerPlayer : MonoBehaviour
         m_HookTimer = m_HookCooldown;
         m_SfxManager = FindObjectOfType<SFXManager>();
 
+        m_ModelTransform = transform.FindChild("ModelPosition");
+
         if (transform.FindChild("HeadCollider"))
             m_Head = transform.FindChild("HeadCollider").gameObject;
 
@@ -201,13 +213,15 @@ public class ControllerPlayer : MonoBehaviour
         //Assign input variable values from toolbox
         m_ControllerNum = Toolbox.Instance.m_Information[m_PlayerNum].GetControllerNum();
         m_ControllerIndex = Toolbox.Instance.m_Information[m_PlayerNum].GetPlayerIndex();
-        m_Renderer.material.color = Toolbox.Instance.m_Colors[m_PlayerNum];
-        if (m_Head)
-        {
-            if (m_Head.GetComponent<MeshRenderer>())
-                m_Head.GetComponent<MeshRenderer>().material.color = Toolbox.Instance.m_Colors[m_PlayerNum];
-        }
         m_ControllerType = Toolbox.Instance.m_Information[m_PlayerNum].GetCType();
+        m_Color = Toolbox.Instance.m_Colors[m_PlayerNum];
+
+        if (Toolbox.Instance.m_Characters[m_PlayerNum])
+        {
+            GameObject model = Instantiate(Toolbox.Instance.m_Characters[m_PlayerNum]);
+            model.transform.SetParent(m_ModelTransform);
+            model.transform.localPosition = Vector3.zero;
+        }
 
         //Setup xinput gamepad
         //PlayerIndex testIndex = (PlayerIndex)m_ControllerNum;
@@ -343,6 +357,16 @@ public class ControllerPlayer : MonoBehaviour
                     m_Horizontal = 0.0f;
             }
         }
+
+        float hori = Mathf.Round(m_Horizontal);
+        if (hori > 0)
+            m_ToEuler = new Vector3(0.0f, -m_TiltAmount, 0.0f);
+        else if (hori < 0)
+            m_ToEuler = new Vector3(0.0f, m_TiltAmount, 0.0f);
+        else
+            m_ToEuler = new Vector3(0.0f, 0.0f, 0.0f);
+
+        m_ModelTransform.localEulerAngles = m_ToEuler;//Vector3.Lerp(m_ModelTransform.localEulerAngles, m_ToEuler, m_RotationSpeed * Time.deltaTime);
 
         if (!m_IsAirMovement)
         {
@@ -930,7 +954,7 @@ public class ControllerPlayer : MonoBehaviour
     {
         if (score > 0)
         {
-            ControllerScene.SetScoreBark("Player" + (m_PlayerNum + 1), m_Renderer.material.color);
+            ControllerScene.SetScoreBark("Player" + (m_PlayerNum + 1), m_Color);
             ControllerScene.ToggleUpdateText();
         }
 
@@ -1045,6 +1069,6 @@ public class ControllerPlayer : MonoBehaviour
 
     public Color GetColor()
     {
-        return m_Renderer.material.color;
+        return m_Color;
     }
 }
