@@ -903,10 +903,15 @@ public class ControllerPlayer : MonoBehaviour
             Destroy(m_HookClone);
         m_CanShootHook = true;
         m_Aim = Vector2.zero;
+
+        //Jump/air vars
         m_FallGraceTimer = 0.0f;
         m_Jump = false;
         m_OnGround = false;
         m_AirJump = false;
+
+        //Rotation vars
+        m_ModelTransform.localEulerAngles = Vector3.zero;
 
         //Attack vars
         m_CanAttack = true;

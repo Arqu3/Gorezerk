@@ -71,9 +71,10 @@ public class ControllerModifiers : MonoBehaviour
     public void ChangeMods()
     {
         var colortimers = FindObjectsOfType<ChangeColorTimer>();
+        Color col = new Color(Random.value, Random.value, Random.value);
         for (int i = 0; i < colortimers.Length; i++)
         {
-            colortimers[i].enabled = true;
+            colortimers[i].ChangeColor(col);
         }
         m_BarkString = "";
         for (int i = 0; i < m_ModAmount; i++)

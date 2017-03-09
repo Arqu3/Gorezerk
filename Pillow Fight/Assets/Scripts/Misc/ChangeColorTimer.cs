@@ -19,22 +19,15 @@ public class ChangeColorTimer : MonoBehaviour
         m_BaseColor = m_Renderer.material.color;
     }
 
-    void Start()
+    public void ChangeColor(Color col)
     {
-        StartCoroutine(ChangeColor());
+        StartCoroutine(SetColor(col));
     }
 
-    void OnEnable()
+    private IEnumerator SetColor(Color col)
     {
-        StartCoroutine(ChangeColor());
-    }
-
-    private IEnumerator ChangeColor()
-    {
-        m_Renderer.material.color = new Color(Random.value, Random.value, Random.value);
+        m_Renderer.material.color = col;
         yield return new WaitForSeconds(m_Time);
-        //StartCoroutine(ChangeColor());
         m_Renderer.material.color = m_BaseColor;
-        enabled = false;
     }
 }

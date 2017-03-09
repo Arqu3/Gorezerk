@@ -49,6 +49,7 @@ public class ControllerScene : MonoBehaviour
     private GameObject m_PausePanel;
     private GameObject m_ModifierPanel;
     private GameObject m_GameOverPanel;
+    private GameObject m_ControllerSchemePanel;
 
     //Game over vars
     private static bool m_GameOver = false;
@@ -141,6 +142,10 @@ public class ControllerScene : MonoBehaviour
         m_PausePanel = GameObject.Find("PausePanel");
         m_ModifierPanel = GameObject.Find("ModifierPanel");
         m_GameOverPanel = GameObject.Find("GameOverPanel");
+        m_ControllerSchemePanel = GameObject.Find("ControllerScheme");
+
+        if (m_ControllerSchemePanel)
+            m_ControllerSchemePanel.SetActive(false);
 
         if (m_ModifierPanel)
             m_ModifierPanel.SetActive(false);
@@ -360,6 +365,8 @@ public class ControllerScene : MonoBehaviour
             Time.timeScale = 1.0f;
             if (m_ModifierPanel.activeSelf)
                 m_ModifierPanel.SetActive(m_IsPaused);
+            if (m_ControllerSchemePanel.activeSelf)
+                m_ControllerSchemePanel.SetActive(m_IsPaused);
         }
 
         Cursor.visible = m_IsPaused;
