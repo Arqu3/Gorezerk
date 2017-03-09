@@ -56,6 +56,7 @@ public class AudioPlayerMovement : MonoBehaviour
         playerPosition = position;
         Footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(playerPosition));
 
+
     }
 
     public void PlayerJumpLand(int material)
@@ -67,7 +68,7 @@ public class AudioPlayerMovement : MonoBehaviour
     public void PlayerRun(int material)
     {
         FMaterial.setValue(material);
-        Footsteps.start();
+                Footsteps.start();
 
         //FMODUnity.RuntimeManager.PlayOneShot(FootstepsEv, position);
     }
@@ -84,7 +85,7 @@ public class AudioPlayerMovement : MonoBehaviour
 
     public void PlayerSwing()
     {
-        FMODUnity.RuntimeManager.PlayOneShot(WeaponSwingEv);
+        FMODUnity.RuntimeManager.PlayOneShot(WeaponSwingEv, playerPosition);
 
     }
 
