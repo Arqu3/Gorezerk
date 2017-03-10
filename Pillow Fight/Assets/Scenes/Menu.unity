@@ -1990,7 +1990,7 @@ MonoBehaviour:
     type: 2}
   m_MusicPrefab: {fileID: 1622891633774120, guid: 2d53bf230738ac447bcea5d4442e148b,
     type: 2}
-  m_CountdownTime: 1
+  m_CountdownTime: 3
   m_Characters:
   - m_Character: {fileID: 1746042152012692, guid: 8ddd51f5d476ac548b892334136a72ef,
       type: 2}
