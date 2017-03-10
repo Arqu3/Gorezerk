@@ -970,6 +970,7 @@ public class ControllerPlayer : MonoBehaviour
             if (m_RoundScore >= scene.m_ScoreToWinRound)
             {
                 m_RoundsWon++;
+                m_RoundScore = 0;
                 ControllerScene.ResetScores();
                 if (m_RoundsWon >= scene.m_RoundsToWin)
                     ControllerScene.GameOver();

@@ -121,6 +121,10 @@ public class ControllerScene : MonoBehaviour
 
     void Start()
     {
+        //Reset necessary singleton values
+        Toolbox.Instance.m_CanMove = true;
+        Toolbox.Instance.m_MovementSpeed = 1.0f;
+
         m_CountdownText = GameObject.Find("CountdownText").GetComponent<Text>();
         m_CountdownTimer = m_CountdownTime;
 

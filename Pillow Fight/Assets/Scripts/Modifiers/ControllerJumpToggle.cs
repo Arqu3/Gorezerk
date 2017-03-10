@@ -5,6 +5,7 @@ using UnityEngine;
 public class ControllerJumpToggle : Modifier
 {
     public string m_ModName = "";
+    public int m_ID = 0;
 
     protected override void Start()
     {
@@ -29,5 +30,10 @@ public class ControllerJumpToggle : Modifier
     public override string GetName()
     {
         return m_ModName;
+    }
+
+    public override int GetID()
+    {
+        return m_ID;
     }
 }

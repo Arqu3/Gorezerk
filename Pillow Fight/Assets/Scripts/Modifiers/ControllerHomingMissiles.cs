@@ -11,6 +11,8 @@ public class ControllerHomingMissiles : Modifier
     public bool m_SpawnForEachPlayer = true;
     [Range(0, 100)]
     public int m_SpawnAmount = 1;
+    public bool m_SpawnOnlyOnStart = false;
+    public int m_ID = 0;
 
     //Round start vars
     private List<GameObject> m_Missiles = new List<GameObject>();
@@ -32,6 +34,9 @@ public class ControllerHomingMissiles : Modifier
         {
             m_Spawnpoints.Add(points[i]);
         }
+
+        if (m_SpawnOnlyOnStart)
+            SpawnMissiles();
     }
 
     void DestroyMissiles()
@@ -86,12 +91,14 @@ public class ControllerHomingMissiles : Modifier
 
     public override void OnRoundStart()
     {
-        SpawnMissiles();
+        if (!m_SpawnOnlyOnStart)
+            SpawnMissiles();
     }
 
     public override void OnRoundEnd()
     {
-        DestroyMissiles();
+        if (!m_SpawnOnlyOnStart)
+            DestroyMissiles();
     }
 
     protected override void OnDestroy()
@@ -109,5 +116,10 @@ public class ControllerHomingMissiles : Modifier
     public override string GetName()
     {
         return m_ModName;
+    }
+
+    public override int GetID()
+    {
+        return m_ID;
     }
 }

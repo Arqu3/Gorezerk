@@ -8,6 +8,7 @@ public class ControllerStats : Modifier
     //Public vars
     public string m_ModName = "";
     public float m_MoveSpeedMod = 1.0f;
+    public int m_ID = 0;
 
     protected override void Start()
     {
@@ -32,5 +33,10 @@ public class ControllerStats : Modifier
     public override string GetName()
     {
         return m_ModName;
+    }
+
+    public override int GetID()
+    {
+        return m_ID;
     }
 }

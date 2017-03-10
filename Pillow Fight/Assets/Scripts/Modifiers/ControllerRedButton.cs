@@ -7,6 +7,7 @@ public class ControllerRedButton : Modifier
     //Public vars
     public string m_ModName = "";
     public GameObject m_ButtonPrefab;
+    public int m_ID = 0;
 
     //Button vars
     private GameObject m_ButtonInstance;
@@ -51,5 +52,10 @@ public class ControllerRedButton : Modifier
     public override string GetName()
     {
         return m_ModName;
+    }
+
+    public override int GetID()
+    {
+        return m_ID;
     }
 }

@@ -13,4 +13,6 @@ public abstract class Modifier : MonoBehaviour
     protected abstract void OnDestroy();
 
     public abstract string GetName();
+
+    public abstract int GetID();
 }

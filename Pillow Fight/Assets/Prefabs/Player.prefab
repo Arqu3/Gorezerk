@@ -573,10 +573,10 @@ MonoBehaviour:
   m_FallGraceTime: 0.3
   m_IsAirMovement: 1
   m_DampXAmount: 0.8
-  m_HookTravelSpeed: 75
+  m_HookTravelSpeed: 100
   m_TravelToHookSpeed: 40
   m_HookBreakDistance: 1
-  m_HookCooldown: 0.75
+  m_HookCooldown: 0.5
   m_AttackTime: 0.2
   m_AttackCooldown: 1
   m_AttackRange: 1.7
