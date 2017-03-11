@@ -13,14 +13,20 @@ public class ControllerHomingMissiles : Modifier
     public int m_SpawnAmount = 1;
     public bool m_SpawnOnlyOnStart = false;
     public int m_ID = 0;
+    public List<GameObject> m_FilteredMods = new List<GameObject>();
 
     //Round start vars
     private List<GameObject> m_Missiles = new List<GameObject>();
     private List<Transform> m_Spawnpoints = new List<Transform>();
     private GameObject m_Spawns;
 
+    //Component vars
+    private ControllerScene m_Scene;
+
     protected override void Start()
     {
+        m_Scene = FindObjectOfType<ControllerScene>();
+
         if (!m_MissilePrefab)
         {
             Debug.Log("Homing missiles is missing its prefab!");
@@ -60,10 +66,10 @@ public class ControllerHomingMissiles : Modifier
         }
 
         List<Transform> tempPlayers = new List<Transform>();
-        int length = GetComponentInParent<ControllerScene>().GetPlayers().Count;
+        int length = m_Scene.GetPlayers().Count;
         for (int i = 0; i < length; i++)
         {
-            tempPlayers.Add(GetComponentInParent<ControllerScene>().GetPlayers()[i].transform);
+            tempPlayers.Add(m_Scene.GetPlayers()[i].transform);
         }
 
         int amount = 0;
@@ -121,5 +127,17 @@ public class ControllerHomingMissiles : Modifier
     public override int GetID()
     {
         return m_ID;
+    }
+
+    public override List<int> GetFilteredMods()
+    {
+        List<int> list = new List<int>();
+        for (int i = 0; i < m_FilteredMods.Count; i++)
+        {
+            Modifier mod = m_FilteredMods[i].GetComponent<Modifier>();
+            if (mod)
+                list.Add(mod.GetID());
+        }
+        return list;
     }
 }

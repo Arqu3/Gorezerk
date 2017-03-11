@@ -53,3 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ModName: Sanic Speed
   m_MoveSpeedMod: 1
+  m_ID: 6
+  m_FilteredMods:
+  - {fileID: 1841362109032504, guid: deee9e2c991bef747bce1712d122437f, type: 2}

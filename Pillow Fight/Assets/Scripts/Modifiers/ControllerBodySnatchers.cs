@@ -9,6 +9,7 @@ public class ControllerBodySnatchers : Modifier
     public float m_CountdownTime = 5.0f;
     public GameObject m_ParticlePrefab;
     public int m_ID = 0;
+    public List<GameObject> m_FilteredMods = new List<GameObject>();
 
     //Timer vars
     private float m_CountdownTimer = 0.0f;
@@ -127,5 +128,17 @@ public class ControllerBodySnatchers : Modifier
     public override int GetID()
     {
         return m_ID;
+    }
+
+    public override List<int> GetFilteredMods()
+    {
+        List<int> list = new List<int>();
+        for (int i = 0; i < m_FilteredMods.Count; i++)
+        {
+            Modifier mod = m_FilteredMods[i].GetComponent<Modifier>();
+            if (mod)
+                list.Add(mod.GetID());
+        }
+        return list;
     }
 }

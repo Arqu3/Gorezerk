@@ -77,20 +77,70 @@ public class ControllerModifiers : MonoBehaviour
             colortimers[i].ChangeColor(col);
         }
         m_BarkString = "";
+
+
         for (int i = 0; i < m_ModAmount; i++)
         {
+
+            List<int> temp = new List<int>();
+            for (int j = 0; j < m_Available.Count; j++)
+            {
+                temp.Add(m_Available[j]);
+            }
+
+
+            for (int k = 0; k < m_ActiveMods.Count; k++)
+            {
+                List<int> list = m_ActiveMods[k].GetFilteredMods();
+
+                for (int j = 0; j < list.Count; j++)
+                {
+                    temp.Remove(list[j]);
+                }
+            }
+
+            //Find avaliable mods
+            //for (int l = 0; l < m_Modifiers.Count; l++)
+            //{
+            //    if (m_ActiveIndex.Count > 0)
+            //    {
+            //        for (int j = 0; j < m_ActiveIndex.Count; j++)
+            //        {
+            //            if (l != m_ActiveIndex[j])
+            //            {
+            //                Modifier mod = m_Modifiers[l].GetComponent<Modifier>();
+            //                if (mod)
+            //                {
+            //                    List<int> filter = mod.GetFilteredMods();
+            //                    if (filter.Count > 0)
+            //                    {
+            //                        for (int k = 0; k < filter.Count; k++)
+            //                        {
+            //                            if (l != mod.GetFilteredMods()[k])
+            //                                temp.Add(l);
+            //                        }
+            //                    }
+            //                    else
+            //                        temp.Add(l);
+            //                }
+            //            }
+            //        }
+            //    }
+            //    else
+            //        temp.Add(l);
+            //}
+
             if (m_Available.Count > 0)
             {
-                int random = Random.Range(0, m_Available.Count);
-                //Debug.Log("Random index is: " + m_Available[random]);
-
-                GameObject instance = (GameObject)Instantiate(m_Modifiers[m_Available[random]], Vector3.zero, Quaternion.identity);
+                int random = Random.Range(0, temp.Count);
+                GameObject instance = Instantiate(m_Modifiers[temp[random]], Vector3.zero, Quaternion.identity);
+                Modifier mod = instance.GetComponent<Modifier>();
                 instance.transform.SetParent(transform);
-                m_ActiveMods.Add(instance.GetComponent<Modifier>());
-                m_ActiveIndex.Add(m_Available[random]);
-                m_Available.Remove(m_Available[random]);
+                m_ActiveMods.Add(mod);
+                m_ActiveIndex.Add(mod.GetID());
+                m_Available.Remove(mod.GetID());
 
-                m_BarkString += instance.GetComponent<Modifier>().GetName();
+                m_BarkString += mod.GetName();
                 if (i != m_ModAmount - 1)
                     m_BarkString += "       ";
             }
@@ -103,6 +153,7 @@ public class ControllerModifiers : MonoBehaviour
             for (int i = 0; i < m_ActiveMods.Count - m_ModAmount; i++)
             {
                 Destroy(m_ActiveMods[i].gameObject);
+
                 m_Available.Add(m_ActiveIndex[i]);
             }
             m_ActiveMods.RemoveRange(0, m_ModAmount);

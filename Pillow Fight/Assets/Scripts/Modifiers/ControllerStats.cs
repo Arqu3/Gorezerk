@@ -9,6 +9,7 @@ public class ControllerStats : Modifier
     public string m_ModName = "";
     public float m_MoveSpeedMod = 1.0f;
     public int m_ID = 0;
+    public List<GameObject> m_FilteredMods = new List<GameObject>();
 
     protected override void Start()
     {
@@ -38,5 +39,17 @@ public class ControllerStats : Modifier
     public override int GetID()
     {
         return m_ID;
+    }
+
+    public override List<int> GetFilteredMods()
+    {
+        List<int> list = new List<int>();
+        for (int i = 0; i < m_FilteredMods.Count; i++)
+        {
+            Modifier mod = m_FilteredMods[i].GetComponent<Modifier>();
+            if (mod)
+                list.Add(mod.GetID());
+        }
+        return list;
     }
 }

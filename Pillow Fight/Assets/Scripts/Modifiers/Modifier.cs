@@ -15,4 +15,6 @@ public abstract class Modifier : MonoBehaviour
     public abstract string GetName();
 
     public abstract int GetID();
+
+    public abstract List<int> GetFilteredMods();
 }
