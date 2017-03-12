@@ -8,6 +8,8 @@ public class ControllerStopMoving : Modifier
     [Header("Standing still timer")]
     [Range(0.0f, 10.0f)]
     public float m_StillTime = 1.0f;
+    public int m_ID = 0;
+    public List<GameObject> m_FilteredMods = new List<GameObject>();
 
     //Timer vars
     private List<float> m_Timers = new List<float>();
@@ -68,5 +70,22 @@ public class ControllerStopMoving : Modifier
     public override string GetName()
     {
         return m_ModName;
+    }
+
+    public override int GetID()
+    {
+        return m_ID;
+    }
+
+    public override List<int> GetFilteredMods()
+    {
+        List<int> list = new List<int>();
+        for (int i = 0; i < m_FilteredMods.Count; i++)
+        {
+            Modifier mod = m_FilteredMods[i].GetComponent<Modifier>();
+            if (mod)
+                list.Add(mod.GetID());
+        }
+        return list;
     }
 }

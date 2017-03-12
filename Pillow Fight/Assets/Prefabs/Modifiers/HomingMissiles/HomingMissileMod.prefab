@@ -58,3 +58,5 @@ MonoBehaviour:
     type: 2}
   m_SpawnForEachPlayer: 0
   m_SpawnAmount: 1
+  m_SpawnOnlyOnStart: 0
+  m_ID: 2

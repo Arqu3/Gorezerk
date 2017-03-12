@@ -70,7 +70,6 @@ public class ControllerPlayer : MonoBehaviour
 
     //Component vars
     private Rigidbody2D m_Rigidbody;
-    private MeshRenderer m_Renderer;
     private Collider2D m_Collider;
     private SFXManager m_SfxManager;
 
@@ -98,6 +97,7 @@ public class ControllerPlayer : MonoBehaviour
     //Score vars
     private int m_RoundScore = 0;
     private int m_RoundsWon = 0;
+    private int m_TotalScore = 0;
 
     //Grappling hook vars
     private bool m_IsGrapple = false;
@@ -159,7 +159,6 @@ public class ControllerPlayer : MonoBehaviour
 
     void Awake()
     {
-        m_Renderer = GetComponent<MeshRenderer>();
         m_Collider = GetComponent<Collider2D>();
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_HookTimer = m_HookCooldown;
@@ -964,12 +963,14 @@ public class ControllerPlayer : MonoBehaviour
         }
 
         m_RoundScore += score;
+        m_TotalScore += score;
         ControllerScene scene = FindObjectOfType<ControllerScene>();
         if (scene)
         {
             if (m_RoundScore >= scene.m_ScoreToWinRound)
             {
                 m_RoundsWon++;
+                m_RoundScore = 0;
                 ControllerScene.ResetScores();
                 if (m_RoundsWon >= scene.m_RoundsToWin)
                     ControllerScene.GameOver();
@@ -1075,5 +1076,10 @@ public class ControllerPlayer : MonoBehaviour
     public Color GetColor()
     {
         return m_Color;
+    }
+
+    public int GetTotalScore()
+    {
+        return m_TotalScore;
     }
 }

@@ -58,3 +58,7 @@ MonoBehaviour:
     type: 2}
   m_SpawnForEachPlayer: 0
   m_SpawnAmount: 5
+  m_SpawnOnlyOnStart: 1
+  m_ID: 3
+  m_FilteredMods:
+  - {fileID: 1841362109032504, guid: deee9e2c991bef747bce1712d122437f, type: 2}
