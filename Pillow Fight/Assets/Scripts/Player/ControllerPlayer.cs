@@ -70,7 +70,6 @@ public class ControllerPlayer : MonoBehaviour
 
     //Component vars
     private Rigidbody2D m_Rigidbody;
-    private MeshRenderer m_Renderer;
     private Collider2D m_Collider;
     private SFXManager m_SfxManager;
 
@@ -159,7 +158,6 @@ public class ControllerPlayer : MonoBehaviour
 
     void Awake()
     {
-        m_Renderer = GetComponent<MeshRenderer>();
         m_Collider = GetComponent<Collider2D>();
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_HookTimer = m_HookCooldown;

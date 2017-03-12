@@ -101,18 +101,32 @@ public struct CharacterInformation
     }
 }
 
+public enum MenuState
+{
+    Main,
+    CharacterSelect
+}
+
 /// <summary>
 /// This is the complete controller for the main-menu of the game, it handles menu-state logic, player lobby logic etc
 /// </summary>
 public class ControllerMenu : MonoBehaviour
 {
     //Public vars
+    [Header("Spawnable prefabs")]
     public GameObject m_SfxPrefab;
     public GameObject m_MusicPrefab;
-    public float m_CountdownTime = 10.0f;
-    public List<CharacterInformation> m_Characters = new List<CharacterInformation>();
-    //public List<Color> m_Colors;
 
+    [Header("Countdown")]
+    public float m_CountdownTime = 10.0f;
+
+    [Header("Current menu state (read only)")]
+    public MenuState m_State = MenuState.Main;
+
+    [Header("Selectable characters")]
+    public List<CharacterInformation> m_Characters = new List<CharacterInformation>();
+
+    //Player/selection vars
     [HideInInspector]
     public List<SelectInformation> m_SelectInformation = new List<SelectInformation>();
 
@@ -215,10 +229,13 @@ public class ControllerMenu : MonoBehaviour
 	void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
+            Exit();
 
-        InputUpdate();
-        CountdownUpdate();
+        if (m_State.Equals(MenuState.CharacterSelect))
+        {
+            InputUpdate();
+            CountdownUpdate();
+        }
     }
 
     void InputUpdate()
@@ -349,5 +366,15 @@ public class ControllerMenu : MonoBehaviour
         }
 
         return ready;
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
+    public void OnPlayButton()
+    {
+        m_State = MenuState.CharacterSelect;
     }
 }
