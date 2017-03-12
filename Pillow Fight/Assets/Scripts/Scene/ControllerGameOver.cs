@@ -66,7 +66,8 @@ public class ControllerGameOver : MonoBehaviour
                         break;
                 }
 
-                m_Text.text += "<color=#" + ColorToHex(players[i].GetColor()) + ">" + placement + "Player " + (players[i].GetPlayerNum() + 1) + ": " + players[i].GetRounds() + "</color>";
+                m_Text.text += "<color=#" + ColorToHex(players[i].GetColor()) + ">" + placement + "Player " + (players[i].GetPlayerNum() + 1) + ", rounds won: " + players[i].GetRounds() 
+                   + "\nTotal score earned: " + players[i].GetTotalScore() + "\n</color>";
                 if (i < players.Count - 1)
                     m_Text.text += "\n";
             }

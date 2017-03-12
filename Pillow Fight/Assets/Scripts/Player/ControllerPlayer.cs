@@ -97,6 +97,7 @@ public class ControllerPlayer : MonoBehaviour
     //Score vars
     private int m_RoundScore = 0;
     private int m_RoundsWon = 0;
+    private int m_TotalScore = 0;
 
     //Grappling hook vars
     private bool m_IsGrapple = false;
@@ -962,6 +963,7 @@ public class ControllerPlayer : MonoBehaviour
         }
 
         m_RoundScore += score;
+        m_TotalScore += score;
         ControllerScene scene = FindObjectOfType<ControllerScene>();
         if (scene)
         {
@@ -1074,5 +1076,10 @@ public class ControllerPlayer : MonoBehaviour
     public Color GetColor()
     {
         return m_Color;
+    }
+
+    public int GetTotalScore()
+    {
+        return m_TotalScore;
     }
 }
