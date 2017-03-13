@@ -12,7 +12,6 @@ public class ControllerHomingMissiles : Modifier
     [Range(0, 100)]
     public int m_SpawnAmount = 1;
     public bool m_SpawnOnlyOnStart = false;
-    public int m_ID = 0;
     public List<GameObject> m_FilteredMods = new List<GameObject>();
 
     //Round start vars
@@ -22,6 +21,9 @@ public class ControllerHomingMissiles : Modifier
 
     //Component vars
     private ControllerScene m_Scene;
+
+    //ID vars
+    public int m_ID = 0;
 
     protected override void Start()
     {
@@ -83,7 +85,7 @@ public class ControllerHomingMissiles : Modifier
             int random = Random.Range(0, tempSpawn.Count);
             int randomPlayer = Random.Range(0, tempPlayers.Count);
 
-            GameObject clone = (GameObject)Instantiate(m_MissilePrefab, tempSpawn[random].position, Quaternion.identity);
+            GameObject clone = (GameObject)Instantiate(m_MissilePrefab, tempSpawn[random].position, tempSpawn[random].rotation);
             if (clone.GetComponent<HomingMissile>())
                 clone.GetComponent<HomingMissile>().SetTarget(tempPlayers[randomPlayer]);
 
@@ -139,5 +141,10 @@ public class ControllerHomingMissiles : Modifier
                 list.Add(mod.GetID());
         }
         return list;
+    }
+
+    public override void SetID(int id)
+    {
+        m_ID = id;
     }
 }

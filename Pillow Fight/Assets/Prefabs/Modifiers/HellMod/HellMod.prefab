@@ -20,8 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4247933896679660}
   - component: {fileID: 114804467722268178}
+  - component: {fileID: 114462551749486020}
   m_Layer: 0
-  m_Name: TrapMod
+  m_Name: HellMod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,6 +41,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114462551749486020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1392490158278852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7774126cab6da944ac5d0fb197aa24f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114804467722268178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,15 +63,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb13d9de74bd51a43b0e5e2bc2175b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ModName: It's a Trap!
-  m_MissilePrefab: {fileID: 1054063889110828, guid: 633868dfcaf6b854bb3cf7d438b0fddd,
+  m_ModName: HELL
+  m_MissilePrefab: {fileID: 1054063889110828, guid: 845170499c59c664da3b3943ee29919c,
     type: 2}
-  m_SpawnpointPrefab: {fileID: 1089314475944258, guid: 04ebd21fff5c1d44cbb0a392614d8d21,
+  m_SpawnpointPrefab: {fileID: 1475292371691128, guid: 2424072a7ae41834c8043a1d10809bd3,
     type: 2}
   m_SpawnForEachPlayer: 0
-  m_SpawnAmount: 5
+  m_SpawnAmount: 4
   m_SpawnOnlyOnStart: 1
-  m_ID: 3
   m_FilteredMods:
   - {fileID: 1841362109032504, guid: deee9e2c991bef747bce1712d122437f, type: 2}
-  - {fileID: 1392490158278852, guid: aa8e2788a55c644499396a3c4c9f011c, type: 2}
+  - {fileID: 1392490158278852, guid: f6f5cee692dd5134ca5ac39a4c61c705, type: 2}
+  m_ID: 0

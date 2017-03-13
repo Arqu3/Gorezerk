@@ -7,11 +7,13 @@ public class ControllerRedButton : Modifier
     //Public vars
     public string m_ModName = "";
     public GameObject m_ButtonPrefab;
-    public int m_ID = 0;
     public List<GameObject> m_FilteredMods = new List<GameObject>();
 
     //Button vars
     private GameObject m_ButtonInstance;
+
+    //ID vars
+    public int m_ID = 0;
 
     protected override void Start()
     {
@@ -70,5 +72,10 @@ public class ControllerRedButton : Modifier
                 list.Add(mod.GetID());
         }
         return list;
+    }
+
+    public override void SetID(int id)
+    {
+        m_ID = id;
     }
 }

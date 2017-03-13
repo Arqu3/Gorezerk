@@ -12,6 +12,7 @@ public class ControllerHook : MonoBehaviour
     //Component vars
     private Rigidbody2D m_Rigidbody;
     private Collider2D m_Collider;
+    private ControllerPlayer m_PC;
 
     //Raycasting vars
     private float m_MinimumExtent = 0.0f;
@@ -25,6 +26,8 @@ public class ControllerHook : MonoBehaviour
     private GameObject m_IgnoreHead;
     private string m_HitTag1 = "";
     private string m_HitTag2 = "";
+    private bool m_DestroyHit = false;
+    private float m_DestroyTimer = 0.0f;
 
     void Awake()
     {
@@ -34,6 +37,20 @@ public class ControllerHook : MonoBehaviour
         m_MinimumExtent = Mathf.Min(m_Collider.bounds.extents.x, m_Collider.bounds.extents.y);
         m_PartialExtent = m_MinimumExtent * (1.0f - m_SkinWidth);
         m_sqrMinimumExtent = m_MinimumExtent * m_MinimumExtent;
+    }
+
+    void Update()
+    {
+        if (m_DestroyHit)
+        {
+            m_DestroyTimer += Time.deltaTime;
+            if (m_DestroyTimer >= 0.5f)
+            {
+                if (m_PC)
+                    m_PC.InterruptGrapple();
+                Destroy(gameObject);
+            }
+        }
     }
 
     void FixedUpdate()
@@ -50,15 +67,17 @@ public class ControllerHook : MonoBehaviour
                 {
                     m_Rigidbody.position = hit.point - (movementStep / movementMagnitude) * m_PartialExtent;
                     m_Rigidbody.velocity = Vector2.zero;
+                    if (!m_Hit)
+                    {
+                        if (hit.collider.gameObject.GetComponent<Trap>())
+                            m_DestroyHit = true;
+                    }
                     m_Hit = true;
 
                     if (hit.collider.gameObject.tag == m_HitTag1 || hit.collider.gameObject.tag == m_HitTag2)
                     {
-                        //m_HookClone.GetComponent<Rigidbody2D>().simulated = false;
                         m_Rigidbody.simulated = false;
-                        //m_HookClone.transform.SetParent(hit.collider.gameObject.transform);
                         transform.SetParent(hit.collider.gameObject.transform);
-                        //Debug.Log("parent set");
                     }
                 }
             }
@@ -75,6 +94,7 @@ public class ControllerHook : MonoBehaviour
     public void SetIgnores(GameObject player, GameObject head)
     {
         m_IgnorePlayer = player;
+        m_PC = player.GetComponent<ControllerPlayer>();
         m_IgnoreHead = head;
         m_HitTag1 = player.gameObject.tag;
         m_HitTag2 = head.gameObject.tag;

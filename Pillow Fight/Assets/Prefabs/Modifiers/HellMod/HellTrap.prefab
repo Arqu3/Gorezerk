@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 61476859047256162}
   - component: {fileID: 50945715425451540}
   m_Layer: 0
-  m_Name: Trap
+  m_Name: HellTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,8 +68,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1054063889110828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -56.35646, y: 385.21677, z: -541.75525}
-  m_LocalScale: {x: 2.1657999, y: 0.27444994, z: 1}
+  m_LocalPosition: {x: 0, y: -9.6, z: 0}
+  m_LocalScale: {x: 47.067566, y: 0.27444994, z: 1}
   m_Children:
   - {fileID: 4519287359377388}
   m_Father: {fileID: 0}
@@ -213,7 +213,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1225783885
+  randomSeed: 2084650664
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -672,7 +672,7 @@ ParticleSystem:
     radius: 1
     angle: 25
     length: 5
-    boxX: 2.1738272
+    boxX: 47.085594
     boxY: 1
     boxZ: 0.34046394
     arc: 360
@@ -692,7 +692,7 @@ ParticleSystem:
     enabled: 1
     serializedVersion: 3
     rateOverTime:
-      scalar: 20
+      scalar: 600
       maxCurve:
         serializedVersion: 2
         m_Curve:

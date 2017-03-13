@@ -8,11 +8,13 @@ public class ControllerBodySnatchers : Modifier
     public string m_ModName = "";
     public float m_CountdownTime = 5.0f;
     public GameObject m_ParticlePrefab;
-    public int m_ID = 0;
     public List<GameObject> m_FilteredMods = new List<GameObject>();
 
     //Timer vars
     private float m_CountdownTimer = 0.0f;
+
+    //ID vars
+    public int m_ID = 0;
 
     //Player vars
     private List<ControllerPlayer> m_Players = new List<ControllerPlayer>();
@@ -140,5 +142,10 @@ public class ControllerBodySnatchers : Modifier
                 list.Add(mod.GetID());
         }
         return list;
+    }
+
+    public override void SetID(int id)
+    {
+        m_ID = id;
     }
 }

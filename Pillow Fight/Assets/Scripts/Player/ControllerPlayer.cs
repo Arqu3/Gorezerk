@@ -864,7 +864,7 @@ public class ControllerPlayer : MonoBehaviour
     /// <summary>
     /// Regular grapple interrupt, this sets grapple on cooldown and multiplies the players velocity
     /// </summary>
-    void InterruptGrapple()
+    public void InterruptGrapple()
     {
         InterruptGrappleNoP();
         m_Rigidbody.velocity *= 0.4f;
@@ -873,7 +873,7 @@ public class ControllerPlayer : MonoBehaviour
     /// <summary>
     /// No-physics interrupt, sets grapple on cooldown but does not change the players velocity
     /// </summary>
-    void InterruptGrappleNoP()
+    public void InterruptGrappleNoP()
     {
         m_HasReachedHook = false;
         m_HasSetGrappleDir = false;

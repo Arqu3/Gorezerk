@@ -8,8 +8,10 @@ public class ControllerStats : Modifier
     //Public vars
     public string m_ModName = "";
     public float m_MoveSpeedMod = 1.0f;
-    public int m_ID = 0;
     public List<GameObject> m_FilteredMods = new List<GameObject>();
+
+    //ID vars
+    public int m_ID = 0;
 
     protected override void Start()
     {
@@ -51,5 +53,10 @@ public class ControllerStats : Modifier
                 list.Add(mod.GetID());
         }
         return list;
+    }
+
+    public override void SetID(int id)
+    {
+        m_ID = id;
     }
 }

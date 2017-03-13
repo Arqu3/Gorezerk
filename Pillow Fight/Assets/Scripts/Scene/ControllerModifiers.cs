@@ -47,6 +47,7 @@ public class ControllerModifiers : MonoBehaviour
                     enabled = false;
                     return;
                 }
+                mod.SetID(i);
                 m_Available.Add(i);
             }
         }

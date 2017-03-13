@@ -5,8 +5,10 @@ using UnityEngine;
 public class ControllerJumpToggle : Modifier
 {
     public string m_ModName = "";
-    public int m_ID = 0;
     public List<GameObject> m_FilteredMods = new List<GameObject>();
+
+    //ID vars
+    public int m_ID = 0;
 
     protected override void Start()
     {
@@ -48,5 +50,10 @@ public class ControllerJumpToggle : Modifier
                 list.Add(mod.GetID());
         }
         return list;
+    }
+
+    public override void SetID(int id)
+    {
+        m_ID = id;
     }
 }
