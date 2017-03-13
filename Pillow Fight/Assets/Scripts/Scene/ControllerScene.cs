@@ -167,11 +167,11 @@ public class ControllerScene : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape) && !m_IsRoundStart)
                 TogglePaused();
 
-            if (m_IsPaused && Input.GetKeyDown(KeyCode.F11))
-                m_ModifierPanel.SetActive(!m_ModifierPanel.activeSelf);
+            //if (m_IsPaused && Input.GetKeyDown(KeyCode.F11))
+            //    m_ModifierPanel.SetActive(!m_ModifierPanel.activeSelf);
 
-            if (Input.GetKeyDown(KeyCode.Return))
-                StartRound();
+            //if (Input.GetKeyDown(KeyCode.Return))
+            //    StartRound();
 
             if (m_PlayerCount <= m_RestartNum)
             {

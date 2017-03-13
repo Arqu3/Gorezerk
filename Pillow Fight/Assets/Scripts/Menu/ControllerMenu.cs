@@ -147,7 +147,7 @@ public class ControllerMenu : MonoBehaviour
     private MusicManager m_MusicManager;
     private SFXManager m_SfxManager;
 
-	void Start()
+    void Start()
     {
         for (int i = 0; i < m_Characters.Count; i++)
         {
@@ -224,9 +224,9 @@ public class ControllerMenu : MonoBehaviour
             if (state.IsConnected)
                 m_Controllers.Add(test);
         }
-	}
-	
-	void Update()
+    }
+
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Exit();
