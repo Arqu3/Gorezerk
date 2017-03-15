@@ -34,4 +34,15 @@ public class MusicManager : MonoBehaviour
         musicManager.SetParameter("GamePause", 0f);
     }
 
+    //:: VOLUME SETTINGS ::
+    public void MusicVolume(float volume)
+    {
+        musicManager.SetParameter("MusicVolume", volume);
+    }
+
+    //public void SFXVolume(float volume)
+    //{
+    //    musicManager.SetParameter("SFXVolume", volume);
+    //}
+
 }

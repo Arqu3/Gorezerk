@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.01.08.00">
     <object class="MixerGroup" id="{ef3902cc-c56c-4ddd-acfa-3687e0147184}">
+        <property name="color">
+            <value>Red</value>
+        </property>
         <property name="name">
             <value>MU</value>
         </property>

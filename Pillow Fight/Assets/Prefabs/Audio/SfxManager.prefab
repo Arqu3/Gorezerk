@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747135472c3a1f045ac64d99ca0c6392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxVolumeEv: event:/SFX/SFX_Volume
 --- !u!114 &114316445453942864
 MonoBehaviour:
   m_ObjectHideFlags: 1

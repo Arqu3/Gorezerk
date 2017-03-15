@@ -11,16 +11,31 @@ public class SFXManager : MonoBehaviour {
     private AudioModifiers audioModifiers;
     private AudioStingers audioStingers;
 
-    void Start()
-    {
+    [FMODUnity.EventRef]
+    public string sfxVolumeEv;
+    FMOD.Studio.EventInstance sfxVolume;
+    FMOD.Studio.ParameterInstance VolumeSettings;
 
-    }
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
         audioPlayerMovement = GetComponent<AudioPlayerMovement>();
         audioModifiers = GetComponent<AudioModifiers>();
         audioStingers = GetComponent<AudioStingers>();
+
+        sfxVolume = FMODUnity.RuntimeManager.CreateInstance(sfxVolumeEv);
+        sfxVolume.getParameter("SFXVolume", out VolumeSettings);
+
+    }
+    //::MASTER SETTINGS::
+
+    void Start()
+    {
+        sfxVolume.start();
+    }
+    public void SFXVolume(float volume)
+    {
+        VolumeSettings.setValue(volume);
     }
 
     //::PLAYER::
