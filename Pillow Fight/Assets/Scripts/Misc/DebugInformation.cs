@@ -10,6 +10,7 @@ public class DebugInformation : MonoBehaviour
     //Component vars
     private Text m_Text;
     private ControllerScene m_Scene;
+    private GameObject m_Panel;
 
 	void Start()
     {
@@ -22,16 +23,24 @@ public class DebugInformation : MonoBehaviour
         }
 
         m_Scene = FindObjectOfType<ControllerScene>();
+        m_Panel = transform.FindChild("Panel").gameObject;
 
         m_Text.gameObject.SetActive(false);
+        m_Panel.SetActive(false);
 	}
 	
 	void Update()
     {
         if (Input.GetKeyDown(KeyCode.F12))
-            m_Text.gameObject.SetActive(!m_Text.gameObject.activeSelf);
+        {
+            if (m_Text && m_Panel)
+            {
+                m_Panel.SetActive(!m_Panel.activeSelf);
+                m_Text.gameObject.SetActive(!m_Text.gameObject.activeSelf);
+            }
+        }
 
-		if (m_Text)
+        if (m_Text)
         {
             string info = "";
 

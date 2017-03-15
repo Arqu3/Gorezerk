@@ -1063,9 +1063,13 @@ public class ControllerPlayer : MonoBehaviour
 
     public string GetDebugInformation()
     {
-        string Controllers = m_ControllerType.ToString() + " " + m_ControllerNum.ToString() + " " + m_AttackInput + " " + m_GrappleInput + " " + CheckLeftTrigger() + " " + CheckRightTrigger();
+        string generalinfo = "PLAYER: " + m_PlayerNum + "\n";
 
-        return Controllers;
+        string controllers = "Controller information: " + m_ControllerType.ToString() + " " + m_ControllerNum.ToString() + " " + m_AttackInput + " " + m_GrappleInput + "\n";
+
+        string inputinfo = "Inputs: " + "LT: " + CheckLeftTrigger() + ", RT: " + CheckRightTrigger() + ", Horizontal: " + m_Horizontal + "\n";
+
+        return generalinfo + controllers + inputinfo;
     }
 
     public void SetPlayerNum(int num)
