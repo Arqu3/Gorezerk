@@ -589,8 +589,7 @@ public class ControllerPlayer : MonoBehaviour
                     //    }
                     //}
 
-                    bool hit = m_HookController.GetHit();
-                    if (hit)
+                    if (m_HookController.GetHit())
                     {
                         m_GrappleHit = true;
                         m_SfxManager.GrappleImpact();
@@ -651,7 +650,9 @@ public class ControllerPlayer : MonoBehaviour
                         if (Input.GetAxis(m_JumpInput) != 0.0f)
                         {
                             InterruptGrapple();
-                            Jump();
+
+                            if (!m_OnGround)
+                                Jump();
                         }
                     }
                     else
@@ -659,7 +660,9 @@ public class ControllerPlayer : MonoBehaviour
                         if (Input.GetKey(m_JumpInputK))
                         {
                             InterruptGrapple();
-                            Jump();
+
+                            if (!m_OnGround)
+                                Jump();
                         }
                     }
                 }
@@ -1085,5 +1088,11 @@ public class ControllerPlayer : MonoBehaviour
     public int GetTotalScore()
     {
         return m_TotalScore;
+    }
+
+    void OnDestroy()
+    {
+        if (m_SfxManager)
+            m_SfxManager.PlayerStop();
     }
 }
