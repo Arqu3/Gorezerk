@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour {
     }
     public void Volume(float volume)
     {
-        Setting.setValue(volume)
+        Setting.setValue(volume);
     }
 
     //::MAIN MENU::
