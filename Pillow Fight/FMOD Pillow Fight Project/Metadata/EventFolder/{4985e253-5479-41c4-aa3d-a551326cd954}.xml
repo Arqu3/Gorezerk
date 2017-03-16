@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="EventFolder" id="{4985e253-5479-41c4-aa3d-a551326cd954}">
+        <property name="name">
+            <value>Pause Menu</value>
+        </property>
+        <relationship name="folder">
+            <destination>{73ec19f4-bcfc-4785-9295-2636ac454d0b}</destination>
+        </relationship>
+    </object>
+</objects>

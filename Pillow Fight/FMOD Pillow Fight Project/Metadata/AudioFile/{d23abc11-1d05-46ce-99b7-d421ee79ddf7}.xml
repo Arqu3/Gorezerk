@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.08.00">
     <object class="AudioFile" id="{d23abc11-1d05-46ce-99b7-d421ee79ddf7}">
         <property name="assetPath">
-            <value>hit_wall_cubicle.wav</value>
+            <value>Player/hit_wall_cubicle.wav</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>

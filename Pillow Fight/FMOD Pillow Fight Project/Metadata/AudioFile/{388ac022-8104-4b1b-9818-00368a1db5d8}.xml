@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.08.00">
     <object class="AudioFile" id="{388ac022-8104-4b1b-9818-00368a1db5d8}">
         <property name="assetPath">
-            <value>Metals_1 - Trimmed (4).wav</value>
+            <value>Player/Metals_1 - Trimmed (4).wav</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>

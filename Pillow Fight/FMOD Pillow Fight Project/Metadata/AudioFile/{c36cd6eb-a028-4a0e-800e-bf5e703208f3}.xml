@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.08.00">
     <object class="AudioFile" id="{c36cd6eb-a028-4a0e-800e-bf5e703208f3}">
         <property name="assetPath">
-            <value>mediapaja2009__drawing-sword - Trimmed.wav</value>
+            <value>Player/mediapaja2009__drawing-sword - Trimmed.wav</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>

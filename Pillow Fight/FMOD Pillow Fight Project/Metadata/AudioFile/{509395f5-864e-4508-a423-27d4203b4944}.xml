@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.08.00">
     <object class="AudioFile" id="{509395f5-864e-4508-a423-27d4203b4944}">
         <property name="assetPath">
-            <value>ability_Dash.wav</value>
+            <value>Player/ability_Dash.wav</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>

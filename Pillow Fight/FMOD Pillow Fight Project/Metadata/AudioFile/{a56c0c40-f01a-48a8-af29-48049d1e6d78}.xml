@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.08.00">
     <object class="AudioFile" id="{a56c0c40-f01a-48a8-af29-48049d1e6d78}">
         <property name="assetPath">
-            <value>Velcro_04.ogg</value>
+            <value>Player/Velcro_04.ogg</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>

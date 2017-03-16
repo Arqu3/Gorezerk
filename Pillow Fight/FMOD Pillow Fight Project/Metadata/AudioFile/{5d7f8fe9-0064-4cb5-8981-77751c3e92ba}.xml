@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.08.00">
     <object class="AudioFile" id="{5d7f8fe9-0064-4cb5-8981-77751c3e92ba}">
         <property name="assetPath">
-            <value>mediapaja2009__drawing-sword.wav</value>
+            <value>Player/mediapaja2009__drawing-sword.wav</value>
         </property>
         <property name="isStreaming">
             <value>true</value>

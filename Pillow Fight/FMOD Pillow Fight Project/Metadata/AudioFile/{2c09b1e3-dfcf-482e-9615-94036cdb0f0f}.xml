@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.08.00">
     <object class="AudioFile" id="{2c09b1e3-dfcf-482e-9615-94036cdb0f0f}">
         <property name="assetPath">
-            <value>Mandolin_Slide_1.wav</value>
+            <value>Player/Mandolin_Slide_1.wav</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>

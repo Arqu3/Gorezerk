@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e8cf7ccce56d442b29391082da8a70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MusicSliderEv: event:/UI/Pause Menu/Music Slider
 --- !u!114 &114745937760474432
 MonoBehaviour:
   m_ObjectHideFlags: 1

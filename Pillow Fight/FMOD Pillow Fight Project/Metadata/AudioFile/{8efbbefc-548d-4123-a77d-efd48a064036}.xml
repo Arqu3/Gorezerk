@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.08.00">
     <object class="AudioFile" id="{8efbbefc-548d-4123-a77d-efd48a064036}">
         <property name="assetPath">
-            <value>SM_57_Thud_1.wav</value>
+            <value>Player/SM_57_Thud_1.wav</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>

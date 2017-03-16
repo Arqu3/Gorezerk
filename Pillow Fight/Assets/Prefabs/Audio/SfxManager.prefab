@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxVolumeEv: event:/SFX/SFX_Volume
+  sfxSliderEv: event:/UI/Pause Menu/SFX Slider
 --- !u!114 &114316445453942864
 MonoBehaviour:
   m_ObjectHideFlags: 1

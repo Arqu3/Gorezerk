@@ -16,6 +16,11 @@ public class SFXManager : MonoBehaviour {
     FMOD.Studio.EventInstance sfxVolume;
     FMOD.Studio.ParameterInstance VolumeSettings;
 
+    [FMODUnity.EventRef]
+    public string sfxSliderEv;
+    FMOD.Studio.EventInstance sfxSlider;
+    FMOD.Studio.ParameterInstance SliderPosition;
+
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -26,6 +31,8 @@ public class SFXManager : MonoBehaviour {
         sfxVolume = FMODUnity.RuntimeManager.CreateInstance(sfxVolumeEv);
         sfxVolume.getParameter("SFXVolume", out VolumeSettings);
 
+        sfxSlider = FMODUnity.RuntimeManager.CreateInstance(sfxSliderEv);
+        sfxSlider.getParameter("Volume", out SliderPosition);
     }
     //::MASTER SETTINGS::
 
@@ -36,6 +43,8 @@ public class SFXManager : MonoBehaviour {
     public void Volume(float volume)
     {
         VolumeSettings.setValue(volume);
+        SliderPosition.setValue(volume);
+        sfxSlider.start();
     }
 
     //::PLAYER::

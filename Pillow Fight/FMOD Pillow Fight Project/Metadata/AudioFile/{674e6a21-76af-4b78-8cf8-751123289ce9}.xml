@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.08.00">
     <object class="AudioFile" id="{674e6a21-76af-4b78-8cf8-751123289ce9}">
         <property name="assetPath">
-            <value>Velvet_Armaments_7.2.1_125BPM.ogg</value>
+            <value>Music/Velvet_Armaments_7.2.1_125BPM.ogg</value>
         </property>
         <property name="isStreaming">
             <value>true</value>

@@ -7,10 +7,18 @@ public class MusicManager : MonoBehaviour
 {
     private FMODUnity.StudioEventEmitter musicManager;
 
+    [FMODUnity.EventRef]
+    public string MusicSliderEv;
+    FMOD.Studio.EventInstance MusicSlider;
+    FMOD.Studio.ParameterInstance SliderPosition;
+
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
         musicManager = GetComponent<FMODUnity.StudioEventEmitter>();
+
+        MusicSlider = FMODUnity.RuntimeManager.CreateInstance(MusicSliderEv);
+        MusicSlider.getParameter("Volume", out SliderPosition);
     }
 
     //Call these functions to change music playback
@@ -38,6 +46,8 @@ public class MusicManager : MonoBehaviour
     public void Volume(float volume)
     {
         musicManager.SetParameter("MusicVolume", volume);
+        SliderPosition.setValue(volume);
+        MusicSlider.start();
     }
 
     //public void SFXVolume(float volume)
