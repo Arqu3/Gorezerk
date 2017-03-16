@@ -7,11 +7,28 @@ public class UIManager : MonoBehaviour {
     private AudioPauseMenu audioPauseMenu;
     private AudioMainMenu audioMainMenu;
 
+    [FMODUnity.EventRef]
+    public string UIVolumeEv;
+    FMOD.Studio.EventInstance UIVolume;
+    FMOD.Studio.ParameterInstance Setting;
+
     void Awake()
     {
         audioPauseMenu = FindObjectOfType<AudioPauseMenu>();
         audioMainMenu =  FindObjectOfType<AudioMainMenu>();
 
+        UIVolume = FMODUnity.RuntimeManager.CreateInstance(UIVolumeEv);
+        UIVolume.getParameter("Volume", out Setting);
+
+    }
+
+    void Start()
+    {
+        UIVolume.start();
+    }
+    public void Volume(float volume)
+    {
+        Setting.setValue(volume)
     }
 
     //::MAIN MENU::
@@ -25,7 +42,7 @@ public class UIManager : MonoBehaviour {
         audioMainMenu.Click();
     }
 
-    public void Start()
+    public void StartClick()
     {
         audioMainMenu.Start();
     }

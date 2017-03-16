@@ -32,10 +32,14 @@ MonoBehaviour:
   - {fileID: 114434513243712580}
   - {fileID: 114132531181137010}
   - {fileID: 114691317092956384}
-  - {fileID: 114684893009465090}
+  - {fileID: 114264811254140974}
+  - {fileID: 114587065277796088}
+  - {fileID: 114232000553927236}
+  - {fileID: 114302385986471390}
+  - {fileID: 114745577119776106}
   MasterBankRef: {fileID: 114020375388585542}
   StringsBankRef: {fileID: 114336523812897656}
-  stringsBankWriteTime: 636252266516976728
+  stringsBankWriteTime: 636252317139988793
   cacheVersion: 2
 --- !u!114 &114002188997585296
 MonoBehaviour:
@@ -161,11 +165,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: F:\Programs\Unity_Projects\Pillow Fight\Pillow Fight\FMOD Pillow Fight Project\Build\Desktop\Master
     Bank.bank
-  lastModified: 636252266516966727
+  lastModified: 636252317139978793
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 6073344
+    Value: 6105760
   Exists: 1
 --- !u!114 &114022327099962878
 MonoBehaviour:
@@ -257,6 +261,36 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114033309359980256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GamePause
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114035750527762772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114037345207611868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +327,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114038933567660134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114040653076688386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +447,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114052897742116804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114054628967852928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,7 +481,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114357315573565138}
+  - {fileID: 114853912181544810}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114059188198154498
@@ -507,6 +571,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: GamePause
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114074216439952554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
   Min: 0
   Max: 1
   Default: 0
@@ -690,6 +769,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114091620154556818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114093275539616878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -840,6 +934,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114117916874991370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114121215575207040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,7 +1049,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114317043499989462}
+  - {fileID: 114795878945322508}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114136066370088236
@@ -1234,6 +1343,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114177165102430096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: MusicVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114179617546939180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1376,6 +1500,21 @@ MonoBehaviour:
   Max: 3
   Default: 0
 --- !u!114 &114195469281938716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
+  Default: 0
+--- !u!114 &114195552678231448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1591,6 +1730,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114213854469667930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GamePause
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114215140756531426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1680,6 +1834,43 @@ MonoBehaviour:
   Name: Material
   Min: 0
   Max: 3
+  Default: 0
+--- !u!114 &114232000553927236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Main Menu/Button
+  guid: 3da9e3beb5c4cc4e9af50dc95ea70737
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 114239577513039798}
+  MinDistance: 1
+  MaxDistance: 20
+--- !u!114 &114232668413053038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
   Default: 0
 --- !u!114 &114233388794424574
 MonoBehaviour:
@@ -1771,6 +1962,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114239577513039798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 2
+  Default: 0
 --- !u!114 &114243467621858178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1841,10 +2047,10 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114146089561880316}
-  - {fileID: 114347816058317876}
-  - {fileID: 114128817937543786}
-  - {fileID: 114716393053083034}
+  - {fileID: 114909835807289310}
+  - {fileID: 114177165102430096}
+  - {fileID: 114738489913067220}
+  - {fileID: 114383239388743628}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114252237917718776
@@ -1891,6 +2097,21 @@ MonoBehaviour:
   Name: Material
   Min: 0
   Max: 3
+  Default: 0
+--- !u!114 &114257502511910986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 2
   Default: 0
 --- !u!114 &114258136700091142
 MonoBehaviour:
@@ -1982,6 +2203,27 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114264811254140974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Main Menu/Count-Down
+  guid: 915e1b2491af23448f2d837ca7c34084
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114269022726481436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2124,6 +2366,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114279026794633204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114280677680491194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2229,6 +2486,43 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114300536716380182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: MenuSound
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114302385986471390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/UI_Volume
+  guid: 07e337124f59b246806480e8c276a132
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114232668413053038}
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114302928448367026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2310,6 +2604,21 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+--- !u!114 &114309842857434356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114309958554884736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2400,6 +2709,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114314859688556452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GamePause
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114315612063353262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2475,6 +2799,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114328928761872492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GamePause
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114332025121116014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2517,11 +2856,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: FMOD Pillow Fight Project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636252266516976728
+  lastModified: 636252317139988793
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 2036
+    Value: 2240
   Exists: 1
 --- !u!114 &114336965671268808
 MonoBehaviour:
@@ -2703,6 +3042,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114360970336125626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 2
+  Default: 0
 --- !u!114 &114362041885071128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2883,6 +3237,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114383239388743628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: GamePause
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114383471229046358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3007,9 +3376,39 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114731495351740684}
+  - {fileID: 114985843847053764}
   MinDistance: 1
   MaxDistance: 100
+--- !u!114 &114393866243330668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
+--- !u!114 &114399179902870486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114399448749576178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3085,6 +3484,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114413700437221852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114414661004366542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3230,7 +3644,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114563910990960214}
+  - {fileID: 114986919353289796}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114427694657989912
@@ -3260,6 +3674,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: GamePause
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114428621791878454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Intensity
   Min: 0
   Max: 1
   Default: 0
@@ -3644,6 +4073,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114482266268220458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 2
+  Default: 0
 --- !u!114 &114485202537576722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3695,6 +4139,21 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114489380336459122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114490705539617596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4030,6 +4489,36 @@ MonoBehaviour:
   Name: Material
   Min: 0
   Max: 3
+  Default: 0
+--- !u!114 &114535032032023744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: MusicVolume
+  Min: 0
+  Max: 1
+  Default: 1
+--- !u!114 &114535426657350322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 1
   Default: 0
 --- !u!114 &114537367795760898
 MonoBehaviour:
@@ -4415,6 +4904,21 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+--- !u!114 &114583767074994902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: MenuSound
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114585242149971006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4430,6 +4934,28 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114587065277796088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Pause Menu/Button
+  guid: c9e4eb5b769e364d9c2162b4a02ef558
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 114623423401094188}
+  MinDistance: 0
+  MaxDistance: 0
 --- !u!114 &114588655860799592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4520,6 +5046,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114594722930268518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114595614440450264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4595,6 +5136,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114604918683303502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114605857592217210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4611,6 +5167,21 @@ MonoBehaviour:
   Max: 3
   Default: 0
 --- !u!114 &114606139645870670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
+  Default: 0
+--- !u!114 &114608281478355514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -4700,6 +5271,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114623423401094188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114623808533246636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4730,6 +5316,51 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114625631048230618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 2
+  Default: 0
+--- !u!114 &114627579848157898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
+--- !u!114 &114632031419648338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SFXVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114636735588138618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4790,6 +5421,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114646767360581926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114648622272021754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4835,6 +5481,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114653652845666906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114655578974322198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5013,14 +5674,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/UI/Main Menu/Main Menu
   guid: af44074660ba8347a11f3bf1b6b664f6
-  Banks:
-  - {fileID: 114020375388585542}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114688230510791066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114689288752158406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5070,7 +5745,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114819181306607224}
+  - {fileID: 114627579848157898}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114694942935751542
@@ -5498,6 +6173,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114738489913067220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114738842312911074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5558,6 +6248,27 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114745577119776106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: snapshot:/UIVolume
+  guid: 4139920f3446644eade6154512f157b3
+  Banks:
+  - {fileID: 114020375388585542}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
 --- !u!114 &114747625960593166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5592,6 +6303,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114754326133527304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114757284962508908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5622,6 +6348,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114760170338377964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: MenuSound
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114760229023185210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5637,6 +6378,36 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114761788402099134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 2
+  Default: 0
+--- !u!114 &114764334895492962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SFXVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114765312955456932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5772,6 +6543,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114787642432441884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: MusicVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114788608562262088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5832,6 +6618,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114795878945322508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114795972582719488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5881,7 +6682,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114936515719991808}
+  - {fileID: 114764334895492962}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114802445900818552
@@ -6094,6 +6895,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114826217693673342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: MusicVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114827719301547530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6184,6 +7000,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114833974217795900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114834647645220854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6304,6 +7135,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114847286631517026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: MusicVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114848213827952528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6379,6 +7225,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114853912181544810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114859914452953662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6484,6 +7345,26 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114877250308888116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Main Menu/Buttons
+  guid: 3da9e3beb5c4cc4e9af50dc95ea70737
+  Banks: []
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114877930427975198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6498,6 +7379,21 @@ MonoBehaviour:
   Name: State
   Min: 0
   Max: 3
+  Default: 0
+--- !u!114 &114878651141685724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: MenuSound
+  Min: 0
+  Max: 1
   Default: 0
 --- !u!114 &114879609385965372
 MonoBehaviour:
@@ -6649,6 +7545,21 @@ MonoBehaviour:
   Min: 0
   Max: 2
   Default: 0
+--- !u!114 &114893807061860144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114894145958075584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6694,6 +7605,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114896596135739702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SFXVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114896966391267108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6766,6 +7692,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: GamePause
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114909835807289310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: MenuSound
   Min: 0
   Max: 1
   Default: 0
@@ -6918,7 +7859,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114244710495570976}
+  - {fileID: 114994701024292698}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114933316898628306
@@ -6935,6 +7876,21 @@ MonoBehaviour:
   Name: Volume
   Min: 0
   Max: 1
+  Default: 0
+--- !u!114 &114933363091477634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 3
   Default: 0
 --- !u!114 &114935984008286778
 MonoBehaviour:
@@ -7078,6 +8034,21 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+--- !u!114 &114949158367119592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SFXVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114949386677185200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7129,6 +8100,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114958562748567396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114959864244293362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7174,6 +8160,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114964437008115720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114966108518623784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7330,6 +8331,36 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114985843847053764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
+  Default: 0
+--- !u!114 &114986919353289796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Material
+  Min: 0
+  Max: 3
+  Default: 0
 --- !u!114 &114988369307490832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7404,6 +8435,36 @@ MonoBehaviour:
   Name: Material
   Min: 0
   Max: 1
+  Default: 0
+--- !u!114 &114993311986235318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SFXVolume
+  Min: 0
+  Max: 1
+  Default: 1
+--- !u!114 &114994701024292698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 2
   Default: 0
 --- !u!114 &114997877578146878
 MonoBehaviour:
