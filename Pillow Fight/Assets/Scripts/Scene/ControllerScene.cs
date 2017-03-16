@@ -57,6 +57,7 @@ public class ControllerScene : MonoBehaviour
 
     //Component
     private MusicManager m_MusicManager;
+    private SFXManager m_SFXManager;
     private ControllerModifiers m_ModController;
 
     void Awake()
@@ -73,6 +74,7 @@ public class ControllerScene : MonoBehaviour
         m_RoundNum = 0;
 
         m_MusicManager = FindObjectOfType<MusicManager>();
+        m_SFXManager = FindObjectOfType<SFXManager>();
         m_MusicManager.MatchMusic();
 
         m_ModController = GetComponent<ControllerModifiers>();
@@ -453,5 +455,15 @@ public class ControllerScene : MonoBehaviour
     public List<ControllerPlayer> GetPlayers()
     {
         return m_Players;
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        m_MusicManager.Volume(volume);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        m_SFXManager.Volume(volume);
     }
 }

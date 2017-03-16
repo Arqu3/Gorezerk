@@ -35,7 +35,7 @@ public class MusicManager : MonoBehaviour
     }
 
     //:: VOLUME SETTINGS ::
-    public void MusicVolume(float volume)
+    public void Volume(float volume)
     {
         musicManager.SetParameter("MusicVolume", volume);
     }

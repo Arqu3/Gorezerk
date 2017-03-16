@@ -33,7 +33,7 @@ public class SFXManager : MonoBehaviour {
     {
         sfxVolume.start();
     }
-    public void SFXVolume(float volume)
+    public void Volume(float volume)
     {
         VolumeSettings.setValue(volume);
     }
