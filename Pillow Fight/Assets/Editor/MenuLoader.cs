@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
-public class MenuLoader : MonoBehaviour {
-
+public class MenuLoader : MonoBehaviour
+{
     [MenuItem("Edit/Play-Stop, But From Prelaunch Scene %0")]
     public static void PlayFromPrelaunchScene()
     {

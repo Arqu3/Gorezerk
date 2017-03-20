@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7774126cab6da944ac5d0fb197aa24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ToColor: {r: 1, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &114804467722268178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -74,4 +75,4 @@ MonoBehaviour:
   m_FilteredMods:
   - {fileID: 1841362109032504, guid: deee9e2c991bef747bce1712d122437f, type: 2}
   - {fileID: 1392490158278852, guid: f6f5cee692dd5134ca5ac39a4c61c705, type: 2}
-  m_ID: 0
+  m_ID: 8
