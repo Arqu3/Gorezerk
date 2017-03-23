@@ -56,8 +56,6 @@ public class ControllerScene : MonoBehaviour
     private static bool m_ResetScores = false;
 
     //Component
-    private MusicManager m_MusicManager;
-    private SFXManager m_SFXManager;
     private ControllerModifiers m_ModController;
 
     void Awake()
@@ -73,9 +71,7 @@ public class ControllerScene : MonoBehaviour
         m_UpdateText = true;
         m_RoundNum = 0;
 
-        m_MusicManager = FindObjectOfType<MusicManager>();
-        m_SFXManager = FindObjectOfType<SFXManager>();
-        m_MusicManager.MatchMusic();
+        Toolbox.Instance.m_MusicManager.MatchMusic();
 
         m_ModController = GetComponent<ControllerModifiers>();
 
@@ -343,8 +339,8 @@ public class ControllerScene : MonoBehaviour
     }
     public void LoadMenu()
     {
-        m_MusicManager.UnPauseMusic();
-        m_MusicManager.MenuMusic();
+        Toolbox.Instance.m_MusicManager.UnPauseMusic();
+        Toolbox.Instance.m_MusicManager.MenuMusic();
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(0);
     }
@@ -362,12 +358,12 @@ public class ControllerScene : MonoBehaviour
 
         if (GetPaused())
         {
-            m_MusicManager.PauseMusic();
+            Toolbox.Instance.m_MusicManager.PauseMusic();
             Time.timeScale = 0.0f;
         }
         else
         {
-            m_MusicManager.UnPauseMusic();
+            Toolbox.Instance.m_MusicManager.UnPauseMusic();
             Time.timeScale = 1.0f;
             if (m_ModifierPanel.activeSelf)
                 m_ModifierPanel.SetActive(m_IsPaused);
@@ -459,11 +455,11 @@ public class ControllerScene : MonoBehaviour
 
     public void SetMusicVolume(float volume)
     {
-        m_MusicManager.Volume(volume);
+        Toolbox.Instance.m_MusicManager.Volume(volume / 10.0f);
     }
 
     public void SetSFXVolume(float volume)
     {
-        m_SFXManager.Volume(volume);
+        Toolbox.Instance.m_SfxManager.Volume(volume / 10.0f);
     }
 }

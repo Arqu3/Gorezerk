@@ -71,7 +71,6 @@ public class ControllerPlayer : MonoBehaviour
     //Component vars
     private Rigidbody2D m_Rigidbody;
     private Collider2D m_Collider;
-    private SFXManager m_SfxManager;
 
     //Ground vars
     private bool m_OnGround = false;
@@ -162,7 +161,6 @@ public class ControllerPlayer : MonoBehaviour
         m_Collider = GetComponent<Collider2D>();
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_HookTimer = m_HookCooldown;
-        m_SfxManager = FindObjectOfType<SFXManager>();
 
         m_ModelTransform = transform.FindChild("ModelPosition");
 
@@ -297,13 +295,13 @@ public class ControllerPlayer : MonoBehaviour
         //Player footstep sounds
         if (m_OnGround && Toolbox.Instance.m_CanMove)
         {
-            m_SfxManager.PlayerPosition(transform.position);
+            Toolbox.Instance.m_SfxManager.PlayerPosition(transform.position);
 
             if (Mathf.Round(Mathf.Abs(m_Horizontal)) != 0)
             {
                 if (!m_StartedRunning)
                 {
-                    m_SfxManager.PlayerRun(0);
+                    Toolbox.Instance.m_SfxManager.PlayerRun(0);
                     m_StartedRunning = true;
                     m_StoppedRunning = false;
                 }
@@ -313,7 +311,7 @@ public class ControllerPlayer : MonoBehaviour
                 m_StartedRunning = false;
                 if (!m_StoppedRunning)
                 {
-                    m_SfxManager.PlayerStop();
+                    Toolbox.Instance.m_SfxManager.PlayerStop();
                     m_StoppedRunning = true;
                 }
             }
@@ -327,7 +325,7 @@ public class ControllerPlayer : MonoBehaviour
             {
                 m_StartedRunning = false;
                 m_StoppedRunning = false;
-                m_SfxManager.PlayerStop();
+                Toolbox.Instance.m_SfxManager.PlayerStop();
             }
         }
 
@@ -446,7 +444,7 @@ public class ControllerPlayer : MonoBehaviour
             m_Jump = true;
             m_FallGraceTimer = 0.0f;
             m_AirJump = false;
-            m_SfxManager.PlayerJump();
+            Toolbox.Instance.m_SfxManager.PlayerJump();
         }
     }
 
@@ -550,7 +548,7 @@ public class ControllerPlayer : MonoBehaviour
                 //Spawn hook prefab
                 if (m_HookPrefab && m_CanShootHook && !m_IsHookCD)
                 {
-                    m_SfxManager.GrappleFire();
+                    Toolbox.Instance.m_SfxManager.GrappleFire();
 
                     m_HookClone = (GameObject)Instantiate(m_HookPrefab, transform.position, Quaternion.identity);
                     if (m_HookClone.GetComponent<Rigidbody2D>())
@@ -592,7 +590,7 @@ public class ControllerPlayer : MonoBehaviour
                     if (m_HookController.GetHit())
                     {
                         m_GrappleHit = true;
-                        m_SfxManager.GrappleImpact();
+                        Toolbox.Instance.m_SfxManager.GrappleImpact();
                     }
                 }
             }
@@ -725,7 +723,7 @@ public class ControllerPlayer : MonoBehaviour
                 m_AttackBox.transform.localPosition = new Vector3(m_AttackBox.transform.localScale.x / 2.0f * m_AttackDirection, 0f, 0f);
                 m_AttackTimer = 0.0f;
                 m_CanAttack = false;
-                m_SfxManager.PlayerSwing();
+                Toolbox.Instance.m_SfxManager.PlayerSwing();
             }
         }
         else
@@ -774,7 +772,7 @@ public class ControllerPlayer : MonoBehaviour
             if (m_WasAir)
             {
                 m_WasAir = false;
-                m_SfxManager.PlayerJumpLand(0);
+                Toolbox.Instance.m_SfxManager.PlayerJumpLand(0);
             }
 
             onGround = true;
@@ -931,7 +929,7 @@ public class ControllerPlayer : MonoBehaviour
         if (m_HookClone)
             Destroy(m_HookClone);
         ControllerScene.ReducePlayerCount();
-        m_SfxManager.PlayerDeath();
+        Toolbox.Instance.m_SfxManager.PlayerDeath();
 
         if (m_DeathParticle)
             Instantiate(m_DeathParticle, transform.position, m_DeathParticle.transform.rotation);
@@ -1012,7 +1010,7 @@ public class ControllerPlayer : MonoBehaviour
         //Reset attack
         if (m_IsParry)
         {
-            m_SfxManager.PlayerParry();
+            Toolbox.Instance.m_SfxManager.PlayerParry();
             m_AttackTimer = 0.0f;
             m_AttackBox.gameObject.SetActive(false);
             m_CanAttack = false;
@@ -1092,7 +1090,7 @@ public class ControllerPlayer : MonoBehaviour
 
     void OnDestroy()
     {
-        if (m_SfxManager)
-            m_SfxManager.PlayerStop();
+        if (!Toolbox.Instance.m_IsApplicationQuit && Toolbox.Instance.m_SfxManager)
+            Toolbox.Instance.m_SfxManager.PlayerStop();
     }
 }

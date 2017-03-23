@@ -18,11 +18,9 @@ public class ControllerBodySnatchers : Modifier
 
     //Player vars
     private List<ControllerPlayer> m_Players = new List<ControllerPlayer>();
-    private SFXManager m_SfxManager;
 
     protected override void Start()
     {
-        m_SfxManager = FindObjectOfType<SFXManager>();
         var players = FindObjectsOfType<ControllerPlayer>();
         for (int i = 0; i < players.Length; i++)
         {
@@ -46,8 +44,7 @@ public class ControllerBodySnatchers : Modifier
 
     void SwapPlayers()
     {
-        if (m_SfxManager)
-            m_SfxManager.BodySnatchers();
+        Toolbox.Instance.m_SfxManager.BodySnatchers();
 
         List<Transform> tempSpawn = new List<Transform>();
 

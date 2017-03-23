@@ -143,10 +143,6 @@ public class ControllerMenu : MonoBehaviour
     private float m_CountdownTimer = 0.0f;
     private Text m_CountdownText;
 
-    //Music variables
-    private MusicManager m_MusicManager;
-    private SFXManager m_SfxManager;
-
     void Start()
     {
         for (int i = 0; i < m_Characters.Count; i++)
@@ -161,21 +157,19 @@ public class ControllerMenu : MonoBehaviour
         if (musics.Length == 0)
         {
             Debug.Log("Could not find any active music managers, creating one");
-            m_MusicManager = Instantiate(m_MusicPrefab, Vector3.zero, Quaternion.identity).GetComponent<MusicManager>();
+            Instantiate(m_MusicPrefab, Vector3.zero, Quaternion.identity);
         }
-        else if (!m_MusicManager)
-            m_MusicManager = FindObjectOfType<MusicManager>();
-
-        m_MusicManager.MenuMusic();
 
         var sfx = FindObjectsOfType<SFXManager>();
         if (sfx.Length == 0)
         {
             Debug.Log("Could not find any active sfx managers, creating one");
-            m_SfxManager = Instantiate(m_SfxPrefab, Vector3.zero, Quaternion.identity).GetComponent<SFXManager>();
+            Instantiate(m_SfxPrefab, Vector3.zero, Quaternion.identity);
         }
-        else if (!m_SfxManager)
-            m_SfxManager = FindObjectOfType<SFXManager>();
+
+        Toolbox.Instance.InitSound();
+
+        Toolbox.Instance.m_MusicManager.MenuMusic();
 
         //Set countdown vars
         m_CountdownTimer = m_CountdownTime;
