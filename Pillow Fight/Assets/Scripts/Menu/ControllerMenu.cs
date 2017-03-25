@@ -371,4 +371,9 @@ public class ControllerMenu : MonoBehaviour
     {
         m_State = MenuState.CharacterSelect;
     }
+
+    public void OnMenuButton()
+    {
+        m_State = MenuState.Main;
+    }
 }
