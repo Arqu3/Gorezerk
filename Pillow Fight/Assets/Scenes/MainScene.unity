@@ -9190,7 +9190,7 @@ MonoBehaviour:
   m_CountdownTime: 3
   m_CountdownSpeed: 2
   m_BarkTime: 1
-  m_ScoreToWinRound: 8
+  m_ScoreToWinRound: 10
   m_RoundsToWin: 3
   m_PlayerPrefab: {fileID: 1595523977117122, guid: ed09a0441c5241e4e8927059f2c95405,
     type: 2}

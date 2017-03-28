@@ -28,6 +28,21 @@ public class ControllerGameOver : MonoBehaviour
             m_Text.text = "";
             var players = FindObjectOfType<ControllerScene>().GetPlayers();
 
+            //Sort after total score first
+            for (int write = 0; write < players.Count; write++)
+            {
+                for (int sort = 0; sort < players.Count - 1; sort++)
+                {
+                    if (players[sort].GetTotalScore() < players[sort + 1].GetTotalScore())
+                    {
+                        ControllerPlayer temp = players[sort + 1];
+                        players[sort + 1] = players[sort];
+                        players[sort] = temp;
+                    }
+                }
+            }
+
+            //Sort after rounds
             for (int write = 0; write < players.Count; write++)
             {
                 for (int sort = 0; sort < players.Count - 1; sort++)

@@ -43,6 +43,8 @@ public class Toolbox : Singleton<Toolbox>
         m_Information.Clear();
         m_Colors.Clear();
         m_PlayerCount = 0;
+        if (m_SfxManager)
+            m_SfxManager.PlayerStop();
     }
 
     static public T RegisterComponent<T>() where T : Component

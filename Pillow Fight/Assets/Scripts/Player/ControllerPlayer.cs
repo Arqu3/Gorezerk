@@ -1087,10 +1087,4 @@ public class ControllerPlayer : MonoBehaviour
     {
         return m_TotalScore;
     }
-
-    void OnDestroy()
-    {
-        if (!Toolbox.Instance.m_IsApplicationQuit && Toolbox.Instance.m_SfxManager)
-            Toolbox.Instance.m_SfxManager.PlayerStop();
-    }
 }
