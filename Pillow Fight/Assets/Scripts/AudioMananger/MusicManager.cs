@@ -11,6 +11,7 @@ public class MusicManager : MonoBehaviour
     public string MusicSliderEv;
     FMOD.Studio.EventInstance MusicSlider;
     FMOD.Studio.ParameterInstance SliderPosition;
+    float lastVolume;
 
     void Awake()
     {
@@ -48,8 +49,18 @@ public class MusicManager : MonoBehaviour
         musicManager.SetParameter("MusicVolume", volume);
         SliderPosition.setValue(volume);
         MusicSlider.start();
+        lastVolume = volume;
     }
 
+    public void Mute()
+    {
+        musicManager.SetParameter("MusicVolume", 0);
+    }
+
+    public void Unmute ()
+    {
+        musicManager.SetParameter("MusicVolume", lastVolume);
+    }
     //public void SFXVolume(float volume)
     //{
     //    musicManager.SetParameter("SFXVolume", volume);

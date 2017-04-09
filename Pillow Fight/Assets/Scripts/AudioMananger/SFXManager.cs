@@ -20,6 +20,7 @@ public class SFXManager : MonoBehaviour {
     public string sfxSliderEv;
     FMOD.Studio.EventInstance sfxSlider;
     FMOD.Studio.ParameterInstance SliderPosition;
+    float lastVolume;
 
     void Awake()
     {
@@ -47,6 +48,15 @@ public class SFXManager : MonoBehaviour {
         sfxSlider.start();
     }
 
+    public void Mute()
+    {
+        VolumeSettings.setValue(0);
+    }
+
+    public void Unmute()
+    {
+        VolumeSettings.setValue(lastVolume);
+    }
     //::PLAYER::
 
     //Call these functions to play SFX
